@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+  --color-abyss: #020617;
+  --color-abyss-light: #0a1628;
+  --color-cyan-glow: #06b6d4;
+  --color-teal-deep: #0f766e;
+  --color-amber-mud: #92400e;
+  --color-turbid-water: #3b2f2f;
+
+  --font-family-display: "Fraunces", Georgia, serif;
+  --font-family-sans-tech: "Space Grotesk", system-ui, sans-serif;
+  --font-family-mono: "JetBrains Mono", "Courier New", monospace;
+
+  --tracking-widest: 0.25em;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Space Grotesk";
+    src: url("/fonts/Space_Grotesk/SpaceGrotesk-VariableFont_wght.ttf") format("truetype");
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Fraunces";
+    src: url("/fonts/Fraunces/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Fraunces";
+    src: url("/fonts/Fraunces/Fraunces-Italic-VariableFont_SOFT,WONK,opsz,wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis handles smooth scroll */
+  }
+
+  body {
+    background-color: var(--color-abyss);
+    color: #e2e8f0;
+    font-family: var(--font-family-sans-tech);
+    cursor: none;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: rgba(6, 182, 212, 0.25);
+    color: #ecfeff;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--color-abyss); }
+  ::-webkit-scrollbar-thumb {
+    background: #1e3a5f;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #1e6fa0; }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  /* ─── Corner HUD bracket ─── */
+  .corner-hud {
+    position: relative;
+    padding: 0.75rem 1rem;
+  }
+  .corner-hud::before,
+  .corner-hud::after {
+    content: "";
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    pointer-events: none;
+  }
+  .corner-hud::before {
+    top: 0;
+    left: 0;
+    border-top: 1px solid rgba(6, 182, 212, 0.6);
+    border-left: 1px solid rgba(6, 182, 212, 0.6);
+  }
+  .corner-hud::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 1px solid rgba(6, 182, 212, 0.6);
+    border-right: 1px solid rgba(6, 182, 212, 0.6);
+  }
+
+  /* Amber-toned HUD variant for danger sections */
+  .corner-hud-amber::before {
+    border-color: rgba(180, 83, 9, 0.8);
+  }
+  .corner-hud-amber::after {
+    border-color: rgba(180, 83, 9, 0.8);
+  }
+
+  /* ─── Glass panel ─── */
+  .glass-panel {
+    background: rgba(10, 22, 40, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* ─── Micro-label (section identifier) ─── */
+  .micro-label {
+    font-family: var(--font-family-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(6, 182, 212, 0.7);
+  }
+
+  /* ─── Scanline animation ─── */
+  .scanline-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .scanline-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.4), transparent);
+    animation: scanline 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes scanline {
+    0% { transform: translateY(0); opacity: 0; }
+    5% { opacity: 1; }
+    95% { opacity: 0.5; }
+    100% { transform: translateY(400px); opacity: 0; }
+  }
+
+  /* ─── Bioluminescent glow pulse ─── */
+  @keyframes bio-pulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+  }
+  .bio-pulse {
+    animation: bio-pulse 3s ease-in-out infinite;
+  }
+
+  /* ─── Depth layer labels ─── */
+  .depth-label {
+    font-family: var(--font-family-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(6, 182, 212, 0.5);
+  }
+
+  /* ─── Ping dot ─── */
+  @keyframes ping-slow {
+    0% { transform: scale(1); opacity: 1; }
+    70% { transform: scale(2.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 0; }
+  }
+  .ping-slow { animation: ping-slow 2s cubic-bezier(0,0,0.2,1) infinite; }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+}
