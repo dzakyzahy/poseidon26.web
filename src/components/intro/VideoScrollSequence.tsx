@@ -37,19 +37,15 @@ const VideoScrollSequence = () => {
         }
       }
 
-      // 2. Logo FLIP transition to Navbar (scrubbed)
-      // The logo starts large at center, then shrinks and moves to top left (Navbar)
+      // 2. Logo fades out as user scrolls
       gsap.to(logoContainerRef.current, {
-        top: "1.5rem",
-        left: "1.5rem",
-        x: "0%",
-        y: "0%",
-        scale: 0.3, // Make it small
+        opacity: 0,
+        scale: 1.5, // slightly zooms in as it fades
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "5% top", // Start animating down early
-          end: "20% top", // Settle into navbar quickly
+          start: "5% top",
+          end: "20% top",
           scrub: true,
         }
       });
