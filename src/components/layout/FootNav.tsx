@@ -1,35 +1,49 @@
 import { Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const FootNav = () => {
   return (
     <footer className="py-12 px-6 border-t border-white/10 glass-dark">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="font-serif font-bold text-2xl tracking-tighter">
-                POSEIDON <span className="text-bioluminescent-blue">2026</span>
-              </span>
-            </div>
-            <p className="text-white/60 max-w-sm leading-relaxed font-sans text-sm">
-              Program pengabdian masyarakat berkelanjutan oleh Himpunan Mahasiswa Oseanografi "TRITON" ITB. 
-              Melindungi laut dari ancaman sampah plastik.
+          {/* Tentang */}
+          <div>
+            <h4 className="font-bold mb-6 font-sans text-white">Tentang</h4>
+            <p className="text-white/60 leading-relaxed font-sans text-sm">
+              POSEIDON 2026 merupakan program pengabdian masyarakat berkelanjutan oleh Himpunan Mahasiswa Oseanografi "TRITON" ITB. 
+              Berdedikasi untuk melindungi ekosistem laut nusantara dari ancaman sampah plastik.
             </p>
           </div>
           
+          {/* Alamat */}
           <div>
-            <h4 className="font-bold mb-6 font-sans">Tautan Cepat</h4>
+            <h4 className="font-bold mb-6 font-sans text-white">Alamat</h4>
+            <p className="text-white/60 leading-relaxed font-sans text-sm mb-2">
+              <strong>Kampus ITB Ganesha</strong><br/>
+              Jl. Ganesa No.10, Lb. Siliwangi,<br/>
+              Coblong, Kota Bandung 40132
+            </p>
+            <p className="text-white/60 leading-relaxed font-sans text-sm">
+              <strong>Lokasi Pengmas</strong><br/>
+              Dusun Kalijaga,<br/>
+              Cirebon, Jawa Barat
+            </p>
+          </div>
+
+          {/* Kontak & Tautan */}
+          <div>
+            <h4 className="font-bold mb-6 font-sans text-white">Kontak & Navigasi</h4>
             <ul className="space-y-4 text-sm text-white/60 font-sans">
-              <li><a href="#" className="hover:text-bioluminescent-blue transition-colors">Kajian Umum</a></li>
-              <li><a href="#" className="hover:text-bioluminescent-blue transition-colors">Kajian Khusus</a></li>
-              <li><a href="#" className="hover:text-bioluminescent-blue transition-colors">Dokumentasi</a></li>
-              <li><a href="#" className="hover:text-bioluminescent-blue transition-colors">Tim POSEIDON</a></li>
-              <li><a href="#" className="hover:text-bioluminescent-blue transition-colors">Kontak</a></li>
+              <li><Link to="/kontak" className="hover:text-bioluminescent-blue transition-colors">Hubungi Kami</Link></li>
+              <li><Link to="/bergabung" className="hover:text-bioluminescent-blue transition-colors">Bergabung Bersama Kami</Link></li>
+              <li><Link to="/kajian-umum" className="hover:text-bioluminescent-blue transition-colors">Kajian Umum</Link></li>
+              <li><Link to="/tim" className="hover:text-bioluminescent-blue transition-colors">Tim POSEIDON</Link></li>
             </ul>
           </div>
 
+          {/* Ikuti Kami */}
           <div>
-            <h4 className="font-bold mb-6 font-sans">Ikuti Kami</h4>
+            <h4 className="font-bold mb-6 font-sans text-white">Ikuti Kami</h4>
             <div className="flex gap-4">
               <a href="#" className="p-3 glass rounded-xl hover:bg-bioluminescent-blue hover:text-ocean-900 transition-colors">
                 Ig
