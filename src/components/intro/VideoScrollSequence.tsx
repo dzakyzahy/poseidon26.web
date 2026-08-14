@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SponsorGrid } from './SponsorGrid';
+
 import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,26 +15,21 @@ const VideoScrollSequence = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // 1. Video Scrubbing
+      // 1. Video Scrubbing with high precision onUpdate
       const video = videoRef.current;
       if (video) {
-        // Wait for metadata to load before creating the animation
-        video.onloadedmetadata = () => {
-          gsap.to(video, {
-            currentTime: video.duration || 18,
-            ease: "none", // Linear scrub
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top top",
-              end: "bottom bottom",
-              scrub: 1.5, // 1.5 second smoothing to avoid heavy lag
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.1, // Minimal smoothing for responsiveness
+          onUpdate: (self) => {
+            if (video.duration) {
+              // Ensure we don't exceed duration or hit exactly 0 to avoid frame drops
+              video.currentTime = Math.max(0.01, Math.min(video.duration - 0.05, video.duration * self.progress));
             }
-          });
-        };
-        // Trigger manually in case it's already loaded
-        if (video.readyState >= 1) {
-          video.onloadedmetadata(new Event('loadedmetadata'));
-        }
+          }
+        });
       }
 
       // 2. Logo fades out as user scrolls
@@ -120,10 +115,7 @@ const VideoScrollSequence = () => {
         </div>
       </div>
       
-      {/* Sponsor Grid Area at the end of the scroll */}
-      <div className="absolute bottom-0 w-full bg-gradient-to-t from-ocean-900 to-transparent pt-32 pb-32 z-20">
-        <SponsorGrid />
-      </div>
+
     </section>
   );
 };

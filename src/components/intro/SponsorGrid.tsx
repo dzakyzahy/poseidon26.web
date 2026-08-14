@@ -43,6 +43,24 @@ export const SponsorGrid = () => {
             alt="PT Sorai Riang Dinamika" 
             className="h-16 md:h-24 object-contain mix-blend-screen opacity-90 hover:opacity-100 transition-opacity"
           />
+          <motion.img 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+            viewport={{ once: true }}
+            src="/sponsors/PLNlistrik.png" 
+            alt="PLN Listrik" 
+            className="h-16 md:h-24 object-contain mix-blend-screen opacity-90 hover:opacity-100 transition-opacity"
+          />
+          <motion.img 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+            viewport={{ once: true }}
+            src="/sponsors/pln mobile.png" 
+            alt="PLN Mobile" 
+            className="h-16 md:h-24 object-contain mix-blend-screen opacity-90 hover:opacity-100 transition-opacity"
+          />
         </div>
       </div>
     </div>
