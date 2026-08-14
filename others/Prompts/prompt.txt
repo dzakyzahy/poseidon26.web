@@ -1,0 +1,1230 @@
+perbaikan 
+video masih stuck dan kadang tidak sesua denga tempat lagi scroll dimana dan kadan gtiba tiba loncat
+jadikan yang tentang poseidon juga itu di dalam scene videonya tak pserlu ada extensi backgroun tambahan,
+buat agar nama web di bar website nya jadi POSEIDON ITB 2026
+lalu buat agar posedion 2026 di landing page juga jadi POSEIDON ITB 2026  dengan posisi jangan di tengah agar estetik
+sesuaikan di mobile navbar atas itu dibuat hilang jadi dropdown atau atur saja agar bagus, lihat juga semua mockup website nya it harusnya diatas di navbar itu ada tulisa POSEIDON ITB 2026
+lallu sperti terlihat di gambar sponsor harus diberi sedikit backgroundn bis ayang agak trasnparan agar terlihat, logo listrik yang pln dan pln mobile pindahkan ke platinum
+
+perbaiki web3 formsindex-K5_F-BWq.js:11 THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+J @ index-K5_F-BWq.js:11
+index-K5_F-BWq.js:11 THREE.WebGLRenderer: Context Lost.
+index-K5_F-BWq.js:11 THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+J @ index-K5_F-BWq.js:11
+api.js?onload=hCaptchaOnLoad&render=explicit&recaptchacompat=off&uj=false:4 recaptchacompat disabled
+index-K5_F-BWq.js:11 THREE.WebGLRenderer: Context Lost.
+index-K5_F-BWq.js:4151  POST https://api.web3forms.com/submit 400 (Bad Request)
+onSubmit @ index-K5_F-BWq.js:4151
+wd @ index-K5_F-BWq.js:8
+(anonymous) @ index-K5_F-BWq.js:8
+en @ index-K5_F-BWq.js:8
+Ad @ index-K5_F-BWq.js:8
+gp @ index-K5_F-BWq.js:9
+mp @ index-K5_F-BWq.js:9
+index-K5_F-BWq.js:11 THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+J @ index-K5_F-BWq.js:11
+kF @ index-K5_F-BWq.js:15
+(anonymous) @ index-K5_F-BWq.js:4118
+Xz @ index-K5_F-BWq.js:4118
+Zz @ index-K5_F-BWq.js:4118
+tB @ index-K5_F-BWq.js:4118
+nB @ index-K5_F-BWq.js:4118
+iV @ index-K5_F-BWq.js:4118
+nH @ index-K5_F-BWq.js:4129
+(anonymous) @ index-K5_F-BWq.js:4129
+Bc @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+Uu @ index-K5_F-BWq.js:8
+Vu @ index-K5_F-BWq.js:8
+xu @ index-K5_F-BWq.js:8
+bu @ index-K5_F-BWq.js:8
+pd @ index-K5_F-BWq.js:8
+D @ index-K5_F-BWq.js:1
+postMessage
+O @ index-K5_F-BWq.js:1
+e.unstable_scheduleCallback @ index-K5_F-BWq.js:1
+fd @ index-K5_F-BWq.js:8
+dd @ index-K5_F-BWq.js:8
+(anonymous) @ index-K5_F-BWq.js:8
+setTimeout
+(anonymous) @ index-K5_F-BWq.js:4129
+index-K5_F-BWq.js:11 THREE.WebGLRenderer: Context Lost.
+index-K5_F-BWq.js:11 THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+J @ index-K5_F-BWq.js:11
+kF @ index-K5_F-BWq.js:15
+(anonymous) @ index-K5_F-BWq.js:4118
+Xz @ index-K5_F-BWq.js:4118
+Zz @ index-K5_F-BWq.js:4118
+tB @ index-K5_F-BWq.js:4118
+nB @ index-K5_F-BWq.js:4118
+iV @ index-K5_F-BWq.js:4118
+nH @ index-K5_F-BWq.js:4129
+(anonymous) @ index-K5_F-BWq.js:4129
+Bc @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+yl @ index-K5_F-BWq.js:8
+il @ index-K5_F-BWq.js:8
+Uu @ index-K5_F-BWq.js:8
+Vu @ index-K5_F-BWq.js:8
+xu @ index-K5_F-BWq.js:8
+bu @ index-K5_F-BWq.js:8
+pd @ index-K5_F-BWq.js:8
+D @ index-K5_F-BWq.js:1
+postMessage
+O @ index-K5_F-BWq.js:1
+e.unstable_scheduleCallback @ index-K5_F-BWq.js:1
+fd @ index-K5_F-BWq.js:8
+dd @ index-K5_F-BWq.js:8
+(anonymous) @ index-K5_F-BWq.js:8
+setTimeout
+(anonymous) @ index-K5_F-BWq.js:4129
+
+CP ganti jadi - (belum tersedia)
+lalu seperti yang terlihat pada gambar kenap aikan nya tidak muncul ya? tolong segera perbaiki
+
+dokumentasi foto fotonya sudah bagus scroollnya tapi sedikit kejauhan dari atas, lalu untuk dimobile buat agar scroll baisa atas kebawah saja karena pusing kalau kanan kiri kalau di mobile
+Kontak, bergabung bersama kami --> ubah jadi Kontak Tim kami
+
+lalu tidak perlu ada menu bergabung
+Tim POSEIDON 2026 --> Tim POSEIDON ITB 2026
+
+untuk nav bar atas ketika sudah masuk selain landing page bisa ditambahkan saja seperti navbar backgroun tapi agak menggantung gitu (tidka nempel keatas) agar estetik bisa dibuat seperti aga rounded dansebagainya silahkan atur sendiri
+
+tambahkan juga produk produk poseidon di halaman baru di sebelum kajian umum serta progres nya seperti di gambar
+
+
+KAJIAN KONTEN MINGGU 5
+Tema: Solusi Pengelolaan Sampah Pesisir: Upaya Umum dan
+Penerapannya dalam POSEIDON ITB 2026
+Permasalahan sampah di wilayah pesisir tidak dapat diselesaikan hanya melalui kegiatan
+pembersihan pantai. Sampah dapat terus masuk dan terakumulasi melalui aktivitas
+masyarakat maupun aliran perairan sehingga diperlukan pengelolaan yang mencakup
+pencegahan, pemilahan, pengumpulan, pengolahan, dan pemantauan secara berkelanjutan.
+Dengan demikian, beach clean up menjadi salah satu bentuk penanganan sampah yang sudah
+berada di lingkungan, tetapi perlu didukung oleh sistem pengelolaan yang mencegah sampah
+kembali mencemari wilayah pesisir.
+Salah satu aspek penting dalam pengelolaan sampah adalah peningkatan pengetahuan dan
+kesadaran masyarakat. Edukasi diperlukan agar masyarakat memahami dampak sampah
+sekaligus mengetahui tindakan yang dapat dilakukan untuk mengurangi dan mengelolanya.
+Astuti dkk. (2023) menunjukkan bahwa pengetahuan dan sikap masyarakat merupakan aspek
+penting dalam memahami perilaku masyarakat pesisir terhadap sampah plastik. Hal ini
+menunjukkan bahwa perubahan perilaku perlu menjadi bagian dari strategi pengelolaan
+sampah di wilayah pesisir.
+Edukasi perlu disertai dengan fasilitas dan sistem yang memungkinkan masyarakat
+menerapkan perilaku tersebut. Salah satunya adalah pemilahan sampah sejak dari sumber.
+Pemilahan sampah berdasarkan jenisnya dapat mempermudah proses pengumpulan dan
+pengolahan pada tahap berikutnya. Putra dkk. (2020) menunjukkan bahwa edukasi pemilahan
+sampah dapat mendukung kemampuan masyarakat dalam mengelola sampah secara mandiri.
+Oleh karena itu, penyediaan sarana pemilahan perlu berjalan bersama dengan edukasi agar
+masyarakat memiliki fasilitas untuk menerapkan pengetahuan yang diperoleh.
+Pengelolaan sampah berbasis masyarakat juga menjadi pendekatan penting dalam menjaga
+keberlanjutan sistem pengelolaan. Masyarakat tidak hanya berperan sebagai penerima
+informasi, tetapi juga terlibat dalam proses penyadaran, pemilahan, pengumpulan, dan
+pengelolaan sampah sesuai dengan kondisi setempat. Ratumakin dkk. (2022) menunjukkan
+bahwa pendekatan berbasis komunitas dapat membantu masyarakat mengenali permasalahan
+sampah, kebutuhan fasilitas, serta sistem pengelolaan yang sesuai dengan kondisi lingkungan
+dan masyarakat.
+Di sisi lain, sampah yang telah berada di kawasan pesisir tetap perlu ditangani melalui
+kegiatan pembersihan. Beach clean up dapat mengurangi sampah yang telah terakumulasi
+sekaligus menjadi sarana untuk meningkatkan keterlibatan masyarakat. Fachruddin dkk.
+(2020) menunjukkan bahwa sosialisasi yang disertai partisipasi masyarakat dalam kegiatan
+pembersihan pantai dapat mendukung kesadaran masyarakat terhadap pencemaran laut.
+Namun, sampah hasil pembersihan tetap perlu masuk ke sistem pengumpulan dan
+pengelolaan agar tidak kembali mencemari lingkungan.
+Berdasarkan pendekatan tersebut, pengelolaan sampah pesisir dapat dipandang sebagai
+sebuah rangkaian yang saling terhubung: edukasi dan perubahan perilaku, pemilahan dari
+sumber, pengumpulan dan penanganan sampah, pengolahan, serta monitoring
+keberlanjutan. Keberadaan fasilitas, pembagian peran antara masyarakat dan pengelola
+lokal, serta mekanisme pemantauan menjadi penting agar sistem tidak berhenti ketika
+kegiatan intervensi selesai.
+Pendekatan tersebut diterapkan dalam POSEIDON ITB 2026 melalui lima program yang
+saling berkaitan. MITBEN (Mitigasi dan Pembenahan Lingkungan) berfokus pada
+peningkatan pengetahuan dan kepedulian masyarakat mengenai lingkungan pesisir dan
+pengelolaan sampah melalui kegiatan sosialisasi yang interaktif. Program ini menjadi tahap
+awal untuk mendorong perubahan perilaku dan meningkatkan keterlibatan masyarakat dalam
+pengelolaan lingkungan.
+Selanjutnya, KOMPOS (Koordinasi dan Manajemen Pengelolaan Sampah) diarahkan
+pada penyediaan sarana dan sistem pengelolaan sampah di lokasi. Sampah dipilah
+berdasarkan jenis, seperti organik dan anorganik, kemudian dikumpulkan dan disalurkan
+melalui sistem yang terstruktur untuk dikelola lebih lanjut oleh pihak terkait. Program ini
+melengkapi edukasi dengan menyediakan sarana yang memungkinkan masyarakat
+menerapkan praktik pemilahan dan pembuangan sampah secara lebih teratur.
+Sampah yang telah berada di kawasan pesisir ditangani melalui ARUS (Aksi Responsif
+Untuk Pesisir Bersih) dalam bentuk kegiatan beach clean up. Sampah yang dikumpulkan
+selanjutnya dipilah dan diarahkan ke sistem pengelolaan bersama pihak terkait. Dengan
+demikian, ARUS tidak hanya berfungsi sebagai kegiatan pembersihan, tetapi menjadi bagian
+dari rangkaian pengelolaan sampah yang terhubung dengan sistem pengumpulan di lokasi.
+Selanjutnya, TRANSED (Transformasi Sampah Desa) diarahkan pada pengembangan
+alternatif pengolahan sampah berbasis teknologi sederhana yang disesuaikan dengan kondisi
+dan kebutuhan masyarakat. Program ini melengkapi kegiatan pengumpulan dengan upaya
+mengurangi timbulan sampah yang harus berakhir pada tahap pembuangan. Bentuk teknologi
+atau metode pengolahan yang digunakan perlu disesuaikan dengan jenis sampah dan kondisi
+lokal agar dapat diterapkan secara realistis dan berkelanjutan.
+Aspek keberlanjutan dilakukan melalui PEMOD (Pelaporan dan Monitoring Dampak).
+Program ini dirancang untuk memantau kondisi dan keberlanjutan hasil intervensi setelah
+kegiatan POSEIDON selesai. Masyarakat yang bersedia akan dilibatkan dalam pelaporan
+kondisi program secara berkala selama satu tahun, dengan hasil monitoring yang kemudian
+dapat didokumentasikan dan dipublikasikan melalui media POSEIDON. Mekanisme tersebut
+diharapkan dapat memberikan gambaran mengenai keberlanjutan program sekaligus
+membantu mengidentifikasi kondisi yang perlu ditindaklanjuti.
+Kelima program tersebut membentuk satu rangkaian pengelolaan sampah. MITBEN
+membangun pengetahuan dan kesadaran, KOMPOS menyediakan sarana dan sistem
+pemilahan serta pengumpulan, ARUS menangani sampah yang telah berada di kawasan
+pesisir, TRANSED memberikan alternatif pengolahan, dan PEMOD memantau
+keberlanjutan hasil program. Dengan keterhubungan tersebut, intervensi POSEIDON tidak
+hanya berfokus pada pengurangan sampah yang sudah ada, tetapi juga pada pembentukan
+sistem yang memungkinkan pengelolaan sampah dilanjutkan oleh masyarakat dan pihak
+terkait di tingkat lokal.
+Dengan demikian, pengelolaan sampah di Pantai Imut Jongor membutuhkan pendekatan yang
+lebih luas daripada sekadar kegiatan bersih pantai. Upaya tersebut perlu mencakup
+peningkatan kesadaran, penyediaan fasilitas, pemilahan, pengumpulan, penanganan sampah
+pesisir, pengolahan, dan monitoring. POSEIDON ITB 2026 mencoba mengintegrasikan
+tahapan tersebut melalui MITBEN, KOMPOS, ARUS, TRANSED, dan PEMOD sebagai
+rangkaian intervensi yang saling mendukung. Pendekatan ini diharapkan dapat menjadikan
+kegiatan pengabdian tidak hanya menghasilkan kondisi lingkungan yang lebih bersih selama
+kegiatan berlangsung, tetapi juga menjadi langkah awal bagi terbentuknya sistem pengelolaan
+sampah yang dapat dipertahankan oleh masyarakat dan pihak terkait di Pantai Imut Jongor.
+DAFTAR PUSTAKA
+Astuti, A. D., Frimawaty, E., & Dwiyitno. (2023). Karakteristik sampah sungai dan perilaku
+masyarakat pesisir terhadap sampah plastik: Studi kasus di Sungai Pengarengan, Kabupaten
+Cirebon. Jurnal Ilmu Lingkungan, 21(1), 76–85. https://doi.org/10.14710/jil.21.1.76-85
+Fachruddin, I., Buswan, B., Malau, A. G., & Ariwibowo, T. (2020). Sosialisasi dan partisipasi
+penanggulangan pencemaran laut bagi masyarakat pesisir pantai di Desa Tanjung Pakis
+Kabupaten Karawang Barat. Jurnal Karya Abdi Masyarakat, 4(1), 177–182.
+https://doi.org/10.22437/jkam.v4i1.10122
+Putra, K. D. I. W., Suryantari, N. L. P. M., Larasati, E., & Ariana, I. K. A. (2020). Edukasi
+pemilahan sampah untuk menjadikan masyarakat mandiri kelola sampah di Desa Kaba-Kaba.
+LOGISTA – Jurnal Ilmiah Pengabdian kepada Masyarakat, 4(1), 110–115.
+https://doi.org/10.25077/logista.4.1.110-115.2020
+Ratumakin, P. A. K. L., Hornay, P. M. A., Agnesia, M., Raga, B. D., & Ethelbert, Y. K.
+(2022). Fasilitasi tata kelola sampah berbasis komunitas masyarakat pesisir. Jurnal
+Pendidikan dan Konseling, 4(6).
+jangan ai-slop, rombak dan ikuti guideline diabawah ini , bagi ke banyak commit sekaligus agar tidak banyak pekerjaan per sesi
+---
+name: anti-ai-slop
+description: Detect and eliminate "AI slop" aesthetics in websites, web apps, landing pages, dashboards, components, and any frontend UI Claude generates or reviews. Use this skill BEFORE writing any HTML, CSS, React, Tailwind, or frontend code, AND when the user asks to review, audit, redesign, "de-slop," critique, fix, or improve a website/app/UI/landing page/component for being generic, AI-generated, soulless, templated, or "looking AI-made." Trigger on phrases like "make this not look AI", "remove the AI feel", "looks like ChatGPT made it", "v0 vibes", "looks like every SaaS site", "Tailwind default look", "feels generic", "review my landing page", "build a landing page", "design a hero section", "make a dashboard", "build a SaaS site", or any frontend build/critique request. This skill is mandatory for all frontend output to prevent distributional convergence on the purple-gradient/glassmorphism/rounded-card mean.
+---
+
+# Anti-AI-Slop Skill
+
+## What "AI slop" actually is
+
+AI slop in UI is **distributional convergence**: models trained on millions of "modern SaaS" sites collapse to the statistical average — purple gradients, rounded-2xl cards, Inter at 64px, three-feature grids. The output is technically polished but has no opinion, no friction, no specificity. Real products have weird corners that betray actual users. AI output is smooth because it's averaged.
+
+The job of this skill is to **resist the average**. Every default the model wants to reach for is suspect.
+
+---
+
+## The 4 root causes (memorize these)
+
+Every slop tell traces back to one of these:
+
+1. **No hierarchy** — everything is the same weight, so nothing leads the eye
+2. **No specificity** — generic copy, generic visuals, no concrete numbers or named entities
+3. **No restraint** — gradients + glassmorphism + neon + emoji + 3D + animation, all at once
+4. **No opinion** — the design could belong to any company; no aesthetic risk taken
+
+If a fix doesn't address one of these four, it's cosmetic.
+
+---
+
+## The slop checklist (use BEFORE writing any frontend)
+
+Before generating any UI code, run this checklist mentally and consciously violate the defaults:
+
+### Visual defaults to refuse
+- [ ] Purple-to-blue / indigo-to-violet gradient anywhere
+- [ ] Glassmorphism (frosted card on gradient blob)
+- [ ] `rounded-2xl` on every element
+- [ ] Tailwind defaults untouched (`slate-900`, `indigo-500`, `emerald-400`, `from-purple-500 to-blue-500`)
+- [ ] Inter / Geist / Roboto as the only font choice
+- [ ] Centered hero: huge headline + subtitle + two buttons (primary gradient, secondary outline)
+- [ ] Stock 3D blob shapes, isometric illustrations, or generated abstract art
+- [ ] Lucide/Heroicons used identically with no custom touch
+- [ ] Emoji as section icons (🚀 ⚡ 🎯)
+- [ ] Drop shadow + scale-105 as the only hover state
+- [ ] Same fade-up animation on every element on scroll
+
+### Copy defaults to refuse
+- [ ] "Transform your workflow with AI-powered..."
+- [ ] "Seamlessly", "Unlock", "Revolutionize", "Empower", "Elevate", "Effortlessly", "Delve", "Unleash"
+- [ ] Parallel-structure feature triplets ("Build faster. Ship smarter. Scale further.")
+- [ ] "In the fast-paced digital landscape..."
+- [ ] Vague benefits with zero numbers, zero named users, zero specifics
+- [ ] Em-dashes used as rhetorical pauses (the ChatGPT signature)
+- [ ] Walls of perfectly grammatical, soulless paragraphs
+
+### Structural defaults to refuse
+- [ ] Standard SaaS skeleton: nav → hero → 3-feature grid → testimonials → pricing → CTA → footer
+- [ ] Fake testimonials with stock avatars and similar phrasing
+- [ ] "Trusted by" logo strip with placeholder logos
+- [ ] Free / Pro / Enterprise pricing with the middle tier highlighted
+- [ ] FAQ accordion with questions no one asked
+- [ ] Floating chatbot bubble in the bottom right
+
+### State/interaction defaults to refuse
+- [ ] Only the happy path renders — no empty states, error states, loading skeletons
+- [ ] Generic spinner instead of skeleton screen or contextual feedback
+- [ ] Buttons labeled "Submit" / "Click here" / "Learn more"
+- [ ] Forms with no validation feedback
+- [ ] Dashboards with fake "real-time" data and no empty/zero state
+
+### Motion & Interaction Slop
+- [ ] Generic `transition-all duration-300` on every hover state
+- [ ] Meaningless staggered fade-ups on scroll
+
+### Asset, Data & Code Slop
+- [ ] Using "Lorem Ipsum" or generic placeholder text
+- [ ] Generic Unsplash photos (e.g., people pointing at laptops)
+- [ ] Perfectly symmetrical 8-point grid layouts everywhere (`p-4`, `gap-8`)
+- [ ] Massive inline Tailwind strings and generic component names (`FeatureCardItem`)
+
+If 3+ of these slip into a draft, it's slop. Restart with deliberate violations.
+
+---
+
+## The deliberate-violation playbook
+
+For each slop default, there's a non-slop move. Pick one or more per project and commit hard.
+
+| Slop default | Deliberate violation |
+|---|---|
+| Purple/blue gradient | Single flat color with one accent (e.g., off-white + ink black + one ugly-on-purpose color: mustard, oxblood, neon green) |
+| Rounded-2xl everywhere | Sharp corners (0px radius) OR mixed radii with intent (pill buttons + square cards) |
+| Inter / Geist | Editorial serif (Tiempos, GT Sectra), monospace body (JetBrains Mono, IBM Plex Mono), or weird display face for headings only |
+| Centered hero with two buttons | Asymmetric layout, off-grid placement, headline that runs off the edge, single CTA, or no hero at all |
+| 3D blobs / abstract shapes | Real screenshots of the product, hand-drawn marks, photographs, charts of real numbers, raw text |
+| Lucide icons | Custom inline SVGs, dingbats, no icons at all, or text labels only |
+| Drop-shadow hover | Border thickening, color inversion, marginal offset (translate by 2-4px), background swap |
+| Fade-up scroll animation | No scroll animation, OR a single weird intentional one (e.g., text reveal, marquee, a pinned scroll moment) |
+| Vague benefit copy | Concrete numbers, named customers, specific use cases, dated claims ("Used by 1,247 teams since March") |
+| Three-feature grid | Long-form prose, a single big screenshot with annotations, a comparison table, or a manifesto |
+| Free/Pro/Enterprise | Honest single price, usage-based with calculator, "pay what you want," or a manifesto-style pricing page |
+| Soulless ChatGPT prose | First-person voice, contractions, opinions, jokes, dated references, the founder's name |
+| Motion/transition slop | Instantaneous cuts (0ms), spring physics, or cinematic slow reveals; no `transition-all` |
+| Asset/placeholder slop | Highly specific mock data (e.g., "Sarah Jenkins - Logistics"), CSS patterns, or ASCII art |
+| Symmetrical grid slop | Break the 8-pt grid: massive typographic scale contrast, asymmetrical padding |
+| Generic code architecture | Semantic HTML, hyper-specific component names (`OverdueInvoiceWarning` instead of `AlertBox`) |
+
+---
+
+## Aesthetic directions (pick one, don't blend)
+
+Slop happens when you blend everything. Premium happens when you commit. Pick ONE direction per project:
+
+- **Brutalist** — system fonts, 1-2px hard borders, no shadows, raw HTML feel, high contrast, ugly-on-purpose
+- **Editorial / magazine** — serif headlines, generous line-height, asymmetric grid, body text as a real column, actual paragraphs
+- **Swiss / functional** — Helvetica or Inter, strict grid, hairline rules, lots of negative space, one accent color, no rounded corners
+- **Terminal / monospace** — full mono stack, ASCII art, command-line aesthetic, green-on-black or amber-on-black optional
+- **Maximalist / Y2K** — clashing colors, layered images, marquees, deliberate visual noise, 2003 web energy
+- **Photographic / product-first** — large product photos or screenshots dominate, type plays a supporting role
+- **Documentary / data-dense** — tables, footnotes, citations, dates, source links — looks like a research report
+
+Whichever you pick: **commit at every level** (color, type, spacing, motion, copy, structure). Mixing brutalist hero + glassmorphic features + Y2K footer = slop.
+
+---
+
+## Copy rules (this is half the battle)
+
+Visual slop is easy to spot. Copy slop is what gives it away even when the design is clean.
+
+**Banned phrases** (instant slop tell):
+- "Seamlessly," "effortlessly," "seamless integration"
+- "Unlock the power of," "unleash your potential"
+- "Revolutionize," "transform," "elevate," "empower"
+- "In the fast-paced [anything]"
+- "Whether you're a [X] or a [Y]..."
+- "Take your [X] to the next level"
+- "The future of [X] is here"
+- Any sentence with three em-dashes
+- Parallel triplets: "Faster. Smarter. Better."
+
+**Replace with**:
+- Specific numbers: "Cuts onboarding from 6 weeks to 3 days for the 47 ops teams using it"
+- Named subjects: who uses it, who built it, what they did before
+- Concrete verbs: "imports," "exports," "splits," "merges," "queues" — not "leverages," "facilitates," "enables"
+- Opinions: "We think Jira is a productivity tax. This isn't that."
+- Dated claims: "As of March 2026..." beats vague present-tense claims
+
+**Voice test**: read the copy aloud. If it sounds like a press release or a LinkedIn post, it's slop. If it sounds like a person who has actually used the thing speaking to a friend, it's not.
+
+---
+
+## State coverage (the fastest non-slop signal)
+
+AI slop only renders the happy path. Real apps live in their states. When building a UI, always include:
+
+1. **Empty state** — what shows before any data exists. Specific, opinionated, useful. Not "No items yet ✨"
+2. **Loading state** — skeleton screens, not spinners. Match the layout of the loaded state.
+3. **Error state** — actual error copy that explains what happened and what to do next. Not "Something went wrong."
+4. **Edge state** — one item, 1000 items, very long names, missing fields, offline, partial permissions
+5. **Zero state vs empty state** — first-time-ever-user gets different copy than "you cleared your inbox"
+
+Including 2-3 of these instantly removes the slop signal even if the rest of the design is templated.
+
+---
+
+## When reviewing existing UI for slop
+
+Use this scoring rubric on a screenshot, URL, or code:
+
+**Score each 0-3 (0 = clean, 3 = pure slop):**
+
+1. Visual signature — gradients, glassmorphism, rounded everything, default Tailwind palette
+2. Typography — single Inter/Geist font, no hierarchy, walls of body text
+3. Hero pattern — centered headline, two buttons, vague subtitle
+4. Feature blocks — three-card grid with parallel headlines and emoji icons
+5. Copy register — buzzwords, no numbers, no named entities, em-dash overuse
+6. Structural skeleton — generic SaaS page anatomy in default order
+7. Social proof — fake testimonials, placeholder logos, no real evidence
+8. State coverage — only happy path, generic spinners, "Submit" buttons
+9. Specificity — would this design fit any company in any industry?
+10. Aesthetic commitment — clear direction, or a blend of trends?
+
+**Total**: 0-7 = strong; 8-15 = workable; 16-23 = slop; 24-30 = pure AI slop.
+
+Report the score, name the top 3 worst offenders, give the user one deliberate-violation move per offender. Don't dump the whole list — pick the highest-leverage fixes.
+
+---
+
+## Output format when generating UI
+
+When Claude is generating frontend code as part of a request, **before writing any code**:
+
+1. State the aesthetic direction in one line ("Going editorial: serif headlines, monospace body, single oxblood accent.")
+2. State the 2-3 deliberate violations being made ("No gradients. No rounded corners. No three-feature grid — using a single annotated screenshot instead.")
+3. Then write the code
+
+This forces commitment. It also lets the user redirect before 200 lines of slop get generated.
+
+---
+
+## When reviewing UI for slop
+
+Format the response as:
+
+1. **Slop score: X/30**
+2. **Top 3 offenders** — name the specific tell, not vague "feels generic"
+3. **One fix per offender** — concrete, copy-pasteable, from the deliberate-violation playbook
+4. **One question** — what aesthetic direction is the user actually going for? (Answers everything else.)
+
+Don't list all 30 things wrong. Pick the highest leverage. The user can ask for more.
+
+---
+
+## The meta-rule
+
+Every default the model wants to reach for is suspect. The "obvious" choice (gradient hero, three feature cards, Lucide icons, Inter font, rounded-2xl) is obvious **because the training data is full of it**. That's the definition of slop.
+
+Before shipping any frontend output, ask: **"What did I do here that another AI wouldn't have done by default?"** If the answer is nothing, restart.
+
+lihat skills di agents dan pakai semua untuk audit
+---
+name: uiux-designer
+description: "Use this skill when designing UI components, choosing color palettes, implementing responsive layouts, or reviewing code for UX issues. For landing pages, dashboards, e-commerce, SaaS, and mobile apps. Provides 50+ design styles, 97 color palettes, 57 font pairings, and stack-specific guidelines for React, Vue, Next.js, Flutter, SwiftUI, and more."
+---
+
+# UIUX Designer - Design Intelligence
+
+Comprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 12 technology stacks. Searchable database with priority-based recommendations.
+
+## Overview
+
+Reference these guidelines when:
+- Designing new UI components or pages
+- Choosing color palettes and typography
+- Reviewing code for UX issues
+- Building landing pages or dashboards
+- Implementing accessibility requirements
+
+## Rule Categories by Priority
+
+| Priority | Category | Impact | Domain |
+|----------|----------|--------|--------|
+| 1 | Accessibility | CRITICAL | `ux` |
+| 2 | Touch & Interaction | CRITICAL | `ux` |
+| 3 | Performance | HIGH | `ux` |
+| 4 | Layout & Responsive | HIGH | `ux` |
+| 5 | Typography & Color | MEDIUM | `typography`, `color` |
+| 6 | Animation | MEDIUM | `ux` |
+| 7 | Style Selection | MEDIUM | `style`, `product` |
+| 8 | Charts & Data | LOW | `chart` |
+
+## Quick Reference
+
+### 1. Accessibility (CRITICAL)
+
+- `color-contrast` - Minimum 4.5:1 ratio for normal text
+- `focus-states` - Visible focus rings on interactive elements
+- `alt-text` - Descriptive alt text for meaningful images
+- `aria-labels` - aria-label for icon-only buttons
+- `keyboard-nav` - Tab order matches visual order
+- `form-labels` - Use label with for attribute
+
+### 2. Touch & Interaction (CRITICAL)
+
+- `touch-target-size` - Minimum 44x44px touch targets
+- `hover-vs-tap` - Use click/tap for primary interactions
+- `loading-buttons` - Disable button during async operations
+- `error-feedback` - Clear error messages near problem
+- `cursor-pointer` - Add cursor-pointer to clickable elements
+
+### 3. Performance (HIGH)
+
+- `image-optimization` - Use WebP, srcset, lazy loading
+- `reduced-motion` - Check prefers-reduced-motion
+- `content-jumping` - Reserve space for async content
+
+### 4. Layout & Responsive (HIGH)
+
+- `viewport-meta` - width=device-width initial-scale=1
+- `readable-font-size` - Minimum 16px body text on mobile
+- `horizontal-scroll` - Ensure content fits viewport width
+- `z-index-management` - Define z-index scale (10, 20, 30, 50)
+
+### 5. Typography & Color (MEDIUM)
+
+- `line-height` - Use 1.5-1.75 for body text
+- `line-length` - Limit to 65-75 characters per line
+- `font-pairing` - Match heading/body font personalities
+
+### 6. Animation (MEDIUM)
+
+- `duration-timing` - Use 150-300ms for micro-interactions
+- `transform-performance` - Use transform/opacity, not width/height
+- `loading-states` - Skeleton screens or spinners
+
+### 7. Style Selection (MEDIUM)
+
+- `style-match` - Match style to product type
+- `consistency` - Use same style across all pages
+- `no-emoji-icons` - Use SVG icons, not emojis
+
+### 8. Charts & Data (LOW)
+
+- `chart-type` - Match chart type to data type
+- `color-guidance` - Use accessible color palettes
+- `data-table` - Provide table alternative for accessibility
+
+---
+
+## Prerequisites
+
+Check if Python is installed:
+
+```bash
+python3 --version || python --version
+```
+
+If Python is not installed, install it based on user's OS:
+
+**macOS:**
+```bash
+brew install python3
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt update && sudo apt install python3
+```
+
+**Windows:**
+```powershell
+winget install Python.Python.3.12
+```
+
+---
+
+## Protocols
+
+When user requests UI/UX work (design, build, create, implement, review, fix, improve), follow this workflow:
+
+### Step 1: Analyze User Requirements
+
+Extract key information from user request:
+- **Product type**: SaaS, e-commerce, portfolio, dashboard, landing page, etc.
+- **Style keywords**: minimal, playful, professional, elegant, dark mode, etc.
+- **Industry**: healthcare, fintech, gaming, education, etc.
+- **Stack**: React, Vue, Next.js, or default to `html-tailwind`
+
+### Step 2: Generate Design System (REQUIRED)
+
+**Always start with `--design-system`** to get comprehensive recommendations with reasoning:
+
+```bash
+python3 .agent/skills/uiux-designer/scripts/search.py "<product_type> <industry> <keywords>" --design-system [-p "Project Name"]
+```
+
+This command:
+1. Searches 5 domains in parallel (product, style, color, landing, typography)
+2. Applies reasoning rules from `ui-reasoning.csv` to select best matches
+3. Returns complete design system: pattern, style, colors, typography, effects
+4. Includes anti-patterns to avoid
+
+**Example:**
+```bash
+python3 .agent/skills/uiux-designer/scripts/search.py "beauty spa wellness service" --design-system -p "Serenity Spa"
+```
+
+### Step 3: Supplement with Detailed Searches (as needed)
+
+After getting the design system, use domain searches to get additional details:
+
+```bash
+python3 .agent/skills/uiux-designer/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
+```
+
+**When to use detailed searches:**
+
+| Need | Domain | Example |
+|------|--------|---------|
+| More style options | `style` | `--domain style "glassmorphism dark"` |
+| Chart recommendations | `chart` | `--domain chart "real-time dashboard"` |
+| UX best practices | `ux` | `--domain ux "animation accessibility"` |
+| Alternative fonts | `typography` | `--domain typography "elegant luxury"` |
+| Landing structure | `landing` | `--domain landing "hero social-proof"` |
+
+### Step 4: Stack Guidelines (Default: html-tailwind)
+
+Get implementation-specific best practices. If user doesn't specify a stack, **default to `html-tailwind`**.
+
+```bash
+python3 .agent/skills/uiux-designer/scripts/search.py "<keyword>" --stack html-tailwind
+```
+
+Available stacks: `html-tailwind`, `react`, `nextjs`, `vue`, `svelte`, `swiftui`, `react-native`, `flutter`, `shadcn`, `jetpack-compose`, `nuxtjs`, `nuxt-ui`
+
+---
+
+## Search Reference
+
+### Available Domains
+
+| Domain | Use For | Example Keywords |
+|--------|---------|------------------|
+| `product` | Product type recommendations | SaaS, e-commerce, portfolio, healthcare, beauty, service |
+| `style` | UI styles, colors, effects | glassmorphism, minimalism, dark mode, brutalism |
+| `typography` | Font pairings, Google Fonts | elegant, playful, professional, modern |
+| `color` | Color palettes by product type | saas, ecommerce, healthcare, beauty, fintech, service |
+| `landing` | Page structure, CTA strategies | hero, hero-centric, testimonial, pricing, social-proof |
+| `chart` | Chart types, library recommendations | trend, comparison, timeline, funnel, pie |
+| `ux` | Best practices, anti-patterns | animation, accessibility, z-index, loading |
+| `react` | React/Next.js performance | waterfall, bundle, suspense, memo, rerender, cache |
+| `web` | Web interface guidelines | aria, focus, keyboard, semantic, virtualize |
+| `prompt` | AI prompts, CSS keywords | (style name) |
+
+### Available Stacks
+
+| Stack | Focus |
+|-------|-------|
+| `html-tailwind` | Tailwind utilities, responsive, a11y (DEFAULT) |
+| `react` | State, hooks, performance, patterns |
+| `nextjs` | SSR, routing, images, API routes |
+| `vue` | Composition API, Pinia, Vue Router |
+| `svelte` | Runes, stores, SvelteKit |
+| `swiftui` | Views, State, Navigation, Animation |
+| `react-native` | Components, Navigation, Lists |
+| `flutter` | Widgets, State, Layout, Theming |
+| `shadcn` | shadcn/ui components, theming, forms, patterns |
+| `jetpack-compose` | Composables, Modifiers, State Hoisting, Recomposition |
+| `nuxtjs` | Nuxt 3, Nitro, composables, SEO |
+| `nuxt-ui` | Nuxt UI components, theming, forms |
+
+---
+
+## Example Workflow
+
+**User request:** "Build a landing page for a professional skincare service"
+
+### Step 1: Analyze Requirements
+- Product type: Beauty/Spa service
+- Style keywords: elegant, professional, soft
+- Industry: Beauty/Wellness
+- Stack: html-tailwind (default)
+
+### Step 2: Generate Design System (REQUIRED)
+
+```bash
+python3 .agent/skills/uiux-designer/scripts/search.py "beauty spa wellness service elegant" --design-system -p "Serenity Spa"
+```
+
+**Output:** Complete design system with pattern, style, colors, typography, effects, and anti-patterns.
+
+### Step 3: Supplement with Detailed Searches (as needed)
+
+```bash
+# Get UX guidelines for animation and accessibility
+python3 .agent/skills/uiux-designer/scripts/search.py "animation accessibility" --domain ux
+
+# Get alternative typography options if needed
+python3 .agent/skills/uiux-designer/scripts/search.py "elegant luxury serif" --domain typography
+```
+
+### Step 4: Stack Guidelines
+
+```bash
+python3 .agent/skills/uiux-designer/scripts/search.py "layout responsive form" --stack html-tailwind
+```
+
+**Then:** Synthesize design system + detailed searches and implement the design.
+
+---
+
+## Output Formats
+
+The `--design-system` flag supports two output formats:
+
+```bash
+# ASCII box (default) - best for terminal display
+python3 .agent/skills/uiux-designer/scripts/search.py "fintech crypto" --design-system
+
+# Markdown - best for documentation
+python3 .agent/skills/uiux-designer/scripts/search.py "fintech crypto" --design-system -f markdown
+```
+
+---
+
+## Tips for Better Results
+
+1. **Be specific with keywords** - "healthcare SaaS dashboard" > "app"
+2. **Search multiple times** - Different keywords reveal different insights
+3. **Combine domains** - Style + Typography + Color = Complete design system
+4. **Always check UX** - Search "animation", "z-index", "accessibility" for common issues
+5. **Use stack flag** - Get implementation-specific best practices
+6. **Iterate** - If first search doesn't match, try different keywords
+
+---
+
+## Common Rules for Professional UI
+
+These are frequently overlooked issues that make UI look unprofessional:
+
+### Icons & Visual Elements
+
+| Rule | Do | Don't |
+|------|----|----- |
+| **No emoji icons** | Use SVG icons (Heroicons, Lucide, Simple Icons) | Use emojis like 🎨 🚀 ⚙️ as UI icons |
+| **Stable hover states** | Use color/opacity transitions on hover | Use scale transforms that shift layout |
+| **Correct brand logos** | Research official SVG from Simple Icons | Guess or use incorrect logo paths |
+| **Consistent icon sizing** | Use fixed viewBox (24x24) with w-6 h-6 | Mix different icon sizes randomly |
+
+### Interaction & Cursor
+
+| Rule | Do | Don't |
+|------|----|----- |
+| **Cursor pointer** | Add `cursor-pointer` to all clickable/hoverable cards | Leave default cursor on interactive elements |
+| **Hover feedback** | Provide visual feedback (color, shadow, border) | No indication element is interactive |
+| **Smooth transitions** | Use `transition-colors duration-200` | Instant state changes or too slow (>500ms) |
+
+### Light/Dark Mode Contrast
+
+| Rule | Do | Don't |
+|------|----|----- |
+| **Glass card light mode** | Use `bg-white/80` or higher opacity | Use `bg-white/10` (too transparent) |
+| **Text contrast light** | Use `#0F172A` (slate-900) for text | Use `#94A3B8` (slate-400) for body text |
+| **Muted text light** | Use `#475569` (slate-600) minimum | Use gray-400 or lighter |
+| **Border visibility** | Use `border-gray-200` in light mode | Use `border-white/10` (invisible) |
+
+### Layout & Spacing
+
+| Rule | Do | Don't |
+|------|----|----- |
+| **Floating navbar** | Add `top-4 left-4 right-4` spacing | Stick navbar to `top-0 left-0 right-0` |
+| **Content padding** | Account for fixed navbar height | Let content hide behind fixed elements |
+| **Consistent max-width** | Use same `max-w-6xl` or `max-w-7xl` | Mix different container widths |
+
+---
+
+## Pre-Delivery Checklist
+
+Before delivering UI code, verify these items:
+
+### Visual Quality
+- [ ] No emojis used as icons (use SVG instead)
+- [ ] All icons from consistent icon set (Heroicons/Lucide)
+- [ ] Brand logos are correct (verified from Simple Icons)
+- [ ] Hover states don't cause layout shift
+- [ ] Use theme colors directly (bg-primary) not var() wrapper
+
+### Interaction
+- [ ] All clickable elements have `cursor-pointer`
+- [ ] Hover states provide clear visual feedback
+- [ ] Transitions are smooth (150-300ms)
+- [ ] Focus states visible for keyboard navigation
+
+### Light/Dark Mode
+- [ ] Light mode text has sufficient contrast (4.5:1 minimum)
+- [ ] Glass/transparent elements visible in light mode
+- [ ] Borders visible in both modes
+- [ ] Test both modes before delivery
+
+### Layout
+- [ ] Floating elements have proper spacing from edges
+- [ ] No content hidden behind fixed navbars
+- [ ] Responsive at 375px, 768px, 1024px, 1440px
+- [ ] No horizontal scroll on mobile
+
+### Accessibility
+- [ ] All images have alt text
+- [ ] Form inputs have labels
+- [ ] Color is not the only indicator
+- [ ] `prefers-reduced-motion` respected
+
+---
+name: 3d-web-experience
+description: Expert in building 3D experiences for the web - Three.js, React
+  Three Fiber, Spline, WebGL, and interactive 3D scenes. Covers product
+  configurators, 3D portfolios, immersive websites, and bringing depth to web
+  experiences.
+risk: unknown
+source: vibeship-spawner-skills (Apache 2.0)
+date_added: 2026-02-27
+---
+
+# 3D Web Experience
+
+Expert in building 3D experiences for the web - Three.js, React Three Fiber,
+Spline, WebGL, and interactive 3D scenes. Covers product configurators, 3D
+portfolios, immersive websites, and bringing depth to web experiences.
+
+**Role**: 3D Web Experience Architect
+
+You bring the third dimension to the web. You know when 3D enhances
+and when it's just showing off. You balance visual impact with
+performance. You make 3D accessible to users who've never touched
+a 3D app. You create moments of wonder without sacrificing usability.
+
+### Expertise
+
+- Three.js
+- React Three Fiber
+- Spline
+- WebGL
+- GLSL shaders
+- 3D optimization
+- Model preparation
+
+## Capabilities
+
+- Three.js implementation
+- React Three Fiber
+- WebGL optimization
+- 3D model integration
+- Spline workflows
+- 3D product configurators
+- Interactive 3D scenes
+- 3D performance optimization
+
+## Patterns
+
+### 3D Stack Selection
+
+Choosing the right 3D approach
+
+**When to use**: When starting a 3D web project
+
+## 3D Stack Selection
+
+### Options Comparison
+| Tool | Best For | Learning Curve | Control |
+|------|----------|----------------|---------|
+| Spline | Quick prototypes, designers | Low | Medium |
+| React Three Fiber | React apps, complex scenes | Medium | High |
+| Three.js vanilla | Max control, non-React | High | Maximum |
+| Babylon.js | Games, heavy 3D | High | Maximum |
+
+### Decision Tree
+```
+Need quick 3D element?
+└── Yes → Spline
+└── No → Continue
+
+Using React?
+└── Yes → React Three Fiber
+└── No → Continue
+
+Need max performance/control?
+└── Yes → Three.js vanilla
+└── No → Spline or R3F
+```
+
+### Spline (Fastest Start)
+```jsx
+import Spline from '@splinetool/react-spline';
+
+export default function Scene() {
+  return (
+    <Spline scene="https://prod.spline.design/xxx/scene.splinecode" />
+  );
+}
+```
+
+### React Three Fiber
+```jsx
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF } from '@react-three/drei';
+
+function Model() {
+  const { scene } = useGLTF('/model.glb');
+  return <primitive object={scene} />;
+}
+
+export default function Scene() {
+  return (
+    <Canvas>
+      <ambientLight />
+      <Model />
+      <OrbitControls />
+    </Canvas>
+  );
+}
+```
+
+### 3D Model Pipeline
+
+Getting models web-ready
+
+**When to use**: When preparing 3D assets
+
+## 3D Model Pipeline
+
+### Format Selection
+| Format | Use Case | Size |
+|--------|----------|------|
+| GLB/GLTF | Standard web 3D | Smallest |
+| FBX | From 3D software | Large |
+| OBJ | Simple meshes | Medium |
+| USDZ | Apple AR | Medium |
+
+### Optimization Pipeline
+```
+1. Model in Blender/etc
+2. Reduce poly count (< 100K for web)
+3. Bake textures (combine materials)
+4. Export as GLB
+5. Compress with gltf-transform
+6. Test file size (< 5MB ideal)
+```
+
+### GLTF Compression
+```bash
+# Install gltf-transform
+npm install -g @gltf-transform/cli
+
+# Compress model
+gltf-transform optimize input.glb output.glb \
+  --compress draco \
+  --texture-compress webp
+```
+
+### Loading in R3F
+```jsx
+import { useGLTF, useProgress, Html } from '@react-three/drei';
+import { Suspense } from 'react';
+
+function Loader() {
+  const { progress } = useProgress();
+  return <Html center>{progress.toFixed(0)}%</Html>;
+}
+
+export default function Scene() {
+  return (
+    <Canvas>
+      <Suspense fallback={<Loader />}>
+        <Model />
+      </Suspense>
+    </Canvas>
+  );
+}
+```
+
+### Scroll-Driven 3D
+
+3D that responds to scroll
+
+**When to use**: When integrating 3D with scroll
+
+## Scroll-Driven 3D
+
+### R3F + Scroll Controls
+```jsx
+import { ScrollControls, useScroll } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+
+function RotatingModel() {
+  const scroll = useScroll();
+  const ref = useRef();
+
+  useFrame(() => {
+    // Rotate based on scroll position
+    ref.current.rotation.y = scroll.offset * Math.PI * 2;
+  });
+
+  return <mesh ref={ref}>...</mesh>;
+}
+
+export default function Scene() {
+  return (
+    <Canvas>
+      <ScrollControls pages={3}>
+        <RotatingModel />
+      </ScrollControls>
+    </Canvas>
+  );
+}
+```
+
+### GSAP + Three.js
+```javascript
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.to(camera.position, {
+  scrollTrigger: {
+    trigger: '.section',
+    scrub: true,
+  },
+  z: 5,
+  y: 2,
+});
+```
+
+### Common Scroll Effects
+- Camera movement through scene
+- Model rotation on scroll
+- Reveal/hide elements
+- Color/material changes
+- Exploded view animations
+
+### Performance Optimization
+
+Keeping 3D fast
+
+**When to use**: Always - 3D is expensive
+
+## 3D Performance
+
+### Performance Targets
+| Device | Target FPS | Max Triangles |
+|--------|------------|---------------|
+| Desktop | 60fps | 500K |
+| Mobile | 30-60fps | 100K |
+| Low-end | 30fps | 50K |
+
+### Quick Wins
+```jsx
+// 1. Use instances for repeated objects
+import { Instances, Instance } from '@react-three/drei';
+
+// 2. Limit lights
+<ambientLight intensity={0.5} />
+<directionalLight /> // Just one
+
+// 3. Use LOD (Level of Detail)
+import { LOD } from 'three';
+
+// 4. Lazy load models
+const Model = lazy(() => import('./Model'));
+```
+
+### Mobile Detection
+```jsx
+const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+
+<Canvas
+  dpr={isMobile ? 1 : 2} // Lower resolution on mobile
+  performance={{ min: 0.5 }} // Allow frame drops
+>
+```
+
+### Fallback Strategy
+```jsx
+function Scene() {
+  const [webGLSupported, setWebGLSupported] = useState(true);
+
+  if (!webGLSupported) {
+    return <img src="/fallback.png" alt="3D preview" />;
+  }
+
+  return <Canvas onCreated={...} />;
+}
+```
+
+## Validation Checks
+
+### No 3D Loading Indicator
+
+Severity: HIGH
+
+Message: No loading indicator for 3D content.
+
+Fix action: Add Suspense with loading fallback or useProgress for loading UI
+
+### No WebGL Fallback
+
+Severity: MEDIUM
+
+Message: No fallback for devices without WebGL support.
+
+Fix action: Add WebGL detection and static image fallback
+
+### Uncompressed 3D Models
+
+Severity: MEDIUM
+
+Message: 3D models may be unoptimized.
+
+Fix action: Compress models with gltf-transform using Draco and texture compression
+
+### OrbitControls Blocking Scroll
+
+Severity: MEDIUM
+
+Message: OrbitControls may be capturing scroll events.
+
+Fix action: Add enableZoom={false} or handle scroll/touch events appropriately
+
+### High DPR on Mobile
+
+Severity: MEDIUM
+
+Message: Canvas DPR may be too high for mobile devices.
+
+Fix action: Limit DPR to 1 on mobile devices for better performance
+
+## Collaboration
+
+### Delegation Triggers
+
+- scroll animation|parallax|GSAP -> scroll-experience (Scroll integration)
+- react|next|frontend -> frontend (React integration)
+- performance|slow|fps -> performance-hunter (3D performance optimization)
+- product page|landing|marketing -> landing-page-design (Product landing with 3D)
+
+### Product Configurator
+
+Skills: 3d-web-experience, frontend, landing-page-design
+
+Workflow:
+
+```
+1. Prepare 3D product model
+2. Set up React Three Fiber scene
+3. Add interactivity (colors, variants)
+4. Integrate with product page
+5. Optimize for mobile
+6. Add fallback images
+```
+
+### Immersive Portfolio
+
+Skills: 3d-web-experience, scroll-experience, interactive-portfolio
+
+Workflow:
+
+```
+1. Design 3D scene concept
+2. Build scene in Spline or R3F
+3. Add scroll-driven animations
+4. Integrate with portfolio sections
+5. Ensure mobile fallback
+6. Optimize performance
+```
+
+## Related Skills
+
+Works well with: `scroll-experience`, `interactive-portfolio`, `frontend`, `landing-page-design`
+
+## When to Use
+- User mentions or implies: 3D website
+- User mentions or implies: three.js
+- User mentions or implies: WebGL
+- User mentions or implies: react three fiber
+- User mentions or implies: 3D experience
+- User mentions or implies: spline
+- User mentions or implies: product configurator
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+
+
+jangan dilakukan jika ada hal berbahaya,
+bagi tugas ke beberapa commit agar tidak terlalu banyak tugas dalam satu waktu
+
+jika aman dan sudah terpenuhi, maka bisa lngsung up saja agar terupdate di deploy

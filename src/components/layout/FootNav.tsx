@@ -34,10 +34,10 @@ export const FootNav = () => {
           <div>
             <h4 className="font-bold mb-6 font-sans text-white">Kontak & Navigasi</h4>
             <ul className="space-y-4 text-sm text-white/60 font-sans">
-              <li><Link to="/kontak" className="hover:text-bioluminescent-blue transition-colors">Hubungi Kami</Link></li>
-              <li><Link to="/bergabung" className="hover:text-bioluminescent-blue transition-colors">Bergabung Bersama Kami</Link></li>
+              <li><Link to="/program" className="hover:text-bioluminescent-blue transition-colors">Program & Progress</Link></li>
               <li><Link to="/kajian-umum" className="hover:text-bioluminescent-blue transition-colors">Kajian Umum</Link></li>
               <li><Link to="/tim" className="hover:text-bioluminescent-blue transition-colors">Tim POSEIDON</Link></li>
+              <li><Link to="/kontak" className="hover:text-bioluminescent-blue transition-colors">Hubungi Kami</Link></li>
             </ul>
           </div>
 

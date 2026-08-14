@@ -7,6 +7,7 @@ import KajianKhusus from './pages/KajianKhusus';
 import Dokumentasi from './pages/Dokumentasi';
 import Tim from './pages/Tim';
 import Kontak from './pages/Kontak';
+import Program from './pages/Program';
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -45,12 +46,12 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/program" element={<Program />} />
           <Route path="/kajian-umum" element={<KajianUmum />} />
           <Route path="/kajian-khusus" element={<KajianKhusus />} />
           <Route path="/dokumentasi" element={<Dokumentasi />} />
           <Route path="/tim" element={<Tim />} />
           <Route path="/kontak" element={<Kontak />} />
-          <Route path="/bergabung" element={<Kontak />} />
         </Routes>
         <FootNav />
       </div>
