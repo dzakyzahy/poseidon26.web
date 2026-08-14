@@ -50,58 +50,24 @@ const VideoScrollSequence = () => {
         }
       });
 
-      // 3. Text fading sequences
-      gsap.fromTo(text1Ref.current, 
-        { opacity: 0, y: 50 },
-        { 
-          opacity: 1, y: 0, 
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "30% top",
-            end: "40% top",
-            scrub: true
-          }
-        }
-      );
+      // 3. Text fading sequences - Using a timeline to prevent overlap
+      gsap.set([text1Ref.current, text2Ref.current], { y: 50 });
 
-      gsap.fromTo(text1Ref.current, 
-        { opacity: 1 },
-        { 
-          opacity: 0,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "45% top",
-            end: "50% top",
-            scrub: true
-          }
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "20% top",
+          end: "80% top",
+          scrub: true,
         }
-      );
+      });
 
-      gsap.fromTo(text2Ref.current, 
-        { opacity: 0, y: 50 },
-        { 
-          opacity: 1, y: 0, 
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "60% top",
-            end: "70% top",
-            scrub: true
-          }
-        }
-      );
-      
-      gsap.fromTo(text2Ref.current, 
-        { opacity: 1 },
-        { 
-          opacity: 0,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "75% top",
-            end: "80% top",
-            scrub: true
-          }
-        }
-      );
+      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 1 })
+        .to(text1Ref.current, { opacity: 1, duration: 0.5 }) // Hold
+        .to(text1Ref.current, { opacity: 0, y: -50, duration: 1 })
+        .to(text2Ref.current, { opacity: 1, y: 0, duration: 1 }, "+=0.5")
+        .to(text2Ref.current, { opacity: 1, duration: 0.5 }) // Hold
+        .to(text2Ref.current, { opacity: 0, y: -50, duration: 1 });
 
     }, containerRef);
 
