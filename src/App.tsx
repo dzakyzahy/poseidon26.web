@@ -50,6 +50,7 @@ function App() {
           <Route path="/dokumentasi" element={<Dokumentasi />} />
           <Route path="/tim" element={<Tim />} />
           <Route path="/kontak" element={<Kontak />} />
+          <Route path="/bergabung" element={<Kontak />} />
         </Routes>
         <FootNav />
       </div>
