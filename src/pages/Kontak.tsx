@@ -42,7 +42,7 @@ export default function Kontak() {
     setStatus('loading');
     
     const formData = new FormData(e.currentTarget);
-    formData.append('access_key', 'YOUR_WEB3FORMS_ACCESS_KEY');
+    formData.append('access_key', '812dd852-7910-4043-9f3d-44326c19056b');
     formData.append('h-captcha-response', captchaToken);
 
     try {
@@ -76,7 +76,7 @@ export default function Kontak() {
         <div>
           <span className="text-neutral-500 uppercase tracking-[0.15em] text-xs font-semibold mb-3 block">Sapa Kami</span>
           <h1 className="text-4xl md:text-5xl font-serif font-medium tracking-tight text-neutral-900 leading-tight">
-            Kontak, bergabung<br/>bersama kami
+            Kontak Tim kami
           </h1>
         </div>
         <img src="/logos/trident_small.png" alt="Trident" className="w-24 h-24 object-contain opacity-80" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
@@ -98,7 +98,7 @@ export default function Kontak() {
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-1">CP (Contact Person)</p>
-                <p className="text-xl font-sans font-medium text-neutral-900">081220178610</p>
+                <p className="text-xl font-sans font-medium text-neutral-900">- (belum tersedia)</p>
               </div>
             </div>
           </div>

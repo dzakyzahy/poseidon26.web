@@ -6,7 +6,7 @@ export default function Tim() {
     <main className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-screen bg-white text-neutral-900 transition-colors duration-300">
       <div className="text-center mb-20">
         <span className="text-neutral-500 uppercase tracking-[0.15em] text-xs font-semibold mb-3 block">Orang-Orang di Balik Layar</span>
-        <h1 className="text-4xl md:text-5xl font-serif font-medium tracking-tight text-neutral-900">Tim POSEIDON 2026</h1>
+        <h1 className="text-4xl md:text-5xl font-serif font-medium tracking-tight text-neutral-900">Tim POSEIDON ITB 2026</h1>
       </div>
 
       {/* Core Team */}
