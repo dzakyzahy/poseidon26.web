@@ -60,7 +60,7 @@ export const TrashSystem = ({ count = 200 }) => {
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
-  useFrame((state) => {
+  useFrame(() => {
     // Get scroll progress (0 to 1). Assuming this section is active from 0.5 to 1.0 of the whole page
     // For simplicity, let's use a dummy progress that oscillates for demonstration, 
     // or tie it to window.scrollY.
