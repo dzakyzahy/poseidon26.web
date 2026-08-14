@@ -109,10 +109,20 @@ export default function Hero3DScene() {
         </Canvas>
         
         {/* Foreground Content overlay */}
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-          <h2 className="heading-lg text-white/90 mix-blend-overlay">
-            Kebebasan <span className="font-hand text-bioluminescent-green">Berenang</span>
-          </h2>
+        <div className="absolute inset-0 pointer-events-none flex flex-col items-start justify-center p-8 md:p-16">
+          <div className="max-w-2xl bg-black/30 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
+            <h2 className="text-xl md:text-3xl font-sans text-white/90 font-medium leading-snug mb-6">
+              Selamat Datang di Website Persembahan Oseanografi untuk Indonesia (POSEIDON) 2026
+            </h2>
+            <h1 className="text-4xl md:text-6xl font-serif text-white font-bold mb-4">
+              Tentang <span className="text-bioluminescent-blue">POSEIDON ITB</span>
+            </h1>
+            <p className="text-lg text-white/80 leading-relaxed">
+              POSEIDON merupakan persembahan dari mahasiswa Oseanografi ITB untuk Indonesia.
+              Kami berdedikasi untuk memberikan kajian dan inovasi dalam melindungi lautan nusantara
+              dari ancaman sampah plastik dan kerusakan ekosistem laut.
+            </p>
+          </div>
         </div>
       </div>
     </section>
