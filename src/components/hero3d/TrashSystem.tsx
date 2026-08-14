@@ -23,7 +23,7 @@ interface TrashData {
 
 export const TrashSystem = ({ count = 200 }) => {
   // Load the model
-  const { nodes, materials } = useGLTF('/models/trash_and_debris.glb') as any;
+  const { nodes } = useGLTF('/models/trash_and_debris.glb') as any;
   const scroll = useScroll(); // Use scroll from drei if in ScrollControls, or we can use custom scroll progress
 
   // References to InstancedMesh for each type
@@ -61,7 +61,7 @@ export const TrashSystem = ({ count = 200 }) => {
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     // Get scroll progress (0 to 1). Assuming this section is active from 0.5 to 1.0 of the whole page
     // For simplicity, let's use a dummy progress that oscillates for demonstration, 
     // or tie it to window.scrollY.

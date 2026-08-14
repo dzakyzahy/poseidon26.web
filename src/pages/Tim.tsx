@@ -32,7 +32,7 @@ export default function Tim() {
 
       {/* Divisions */}
       <div className="space-y-24">
-        {divisions.map((div, divIdx) => (
+        {divisions.map((div) => (
           <section key={div.name} className="border-t border-white/10 pt-16">
             <h2 className="font-serif text-3xl mb-12 text-center text-white/90">{div.name}</h2>
             <div className="flex flex-wrap justify-center gap-8 md:gap-16">

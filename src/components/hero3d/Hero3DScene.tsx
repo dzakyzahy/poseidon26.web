@@ -1,6 +1,6 @@
 import { Suspense, useRef, useState, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, PerformanceMonitor, ScrollControls, useGLTF } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { PerformanceMonitor, ScrollControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useFishSwim } from '../../hooks/useFishSwim';
 import { useFishFollow } from '../../hooks/useFishFollow';

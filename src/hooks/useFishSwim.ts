@@ -1,6 +1,6 @@
-import { useRef, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+
 
 interface SwimConfig {
   speed?: number;

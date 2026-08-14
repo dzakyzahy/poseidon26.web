@@ -19,7 +19,7 @@ const VideoScrollSequence = () => {
       const video = videoRef.current;
       if (video) {
         // Use requestVideoFrameCallback for ultra-smooth scrubbing if available, else fallback
-        let rVFC: number;
+        
         
         ScrollTrigger.create({
           trigger: containerRef.current,

@@ -3,10 +3,10 @@ import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
-  const { viewport, camera, mouse } = useThree();
+  const { camera, mouse } = useThree();
   const targetPosition = useRef(new THREE.Vector3());
   const velocity = useRef(new THREE.Vector3());
-  const currentPosition = useRef(new THREE.Vector3());
+  
 
   useFrame((_, delta) => {
     if (!ref.current) return;
