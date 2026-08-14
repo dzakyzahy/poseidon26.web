@@ -1,6 +1,6 @@
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useGLTF, useScroll } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Define the trash geometries we want to instance
@@ -24,7 +24,6 @@ interface TrashData {
 export const TrashSystem = ({ count = 200 }) => {
   // Load the model
   const { nodes } = useGLTF('/models/trash_and_debris.glb') as any;
-  const scroll = useScroll(); // Use scroll from drei if in ScrollControls, or we can use custom scroll progress
 
   // References to InstancedMesh for each type
   const meshRefs = useRef<(THREE.InstancedMesh | null)[]>([]);
@@ -68,14 +67,15 @@ export const TrashSystem = ({ count = 200 }) => {
     // In a real implementation with ScrollControls, scroll.offset gives progress.
     // We'll calculate a scatterFactor from 0 (clustered) to 1 (scattered).
     
-    // We will use scroll.offset if available, else fallback
-    const offset = scroll ? scroll.offset : (Math.sin(state.clock.elapsedTime * 0.5) * 0.5 + 0.5);
+    // Fallback to window.scrollY to determine offset since ScrollControls is removed
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const offset = docHeight > 0 ? window.scrollY / docHeight : 0;
     
     // Smooth transition between clustered (0) and scattered (1)
-    // Let's say it scatters when offset > 0.6
+    // Let's say it scatters when offset > 0.4
     let targetScatter = 0;
-    if (offset > 0.6) {
-      targetScatter = Math.min((offset - 0.6) * 3, 1.0); // 0 to 1
+    if (offset > 0.4) {
+      targetScatter = Math.min((offset - 0.4) * 4, 1.0); // 0 to 1
     } else {
       targetScatter = 0;
     }

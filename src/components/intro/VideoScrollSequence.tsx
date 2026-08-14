@@ -18,29 +18,23 @@ const VideoScrollSequence = () => {
       // 1. Video Scrubbing
       const video = videoRef.current;
       if (video) {
-        // Use requestVideoFrameCallback for ultra-smooth scrubbing if available, else fallback
-        
-        
-        ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true,
-          onUpdate: (self) => {
-            if (video.readyState >= 2) { // HAVE_CURRENT_DATA
-              // Non-linear easing for scroll progress
-              // We want faster progress at the beginning, then slower
-              const p = self.progress;
-              const easedProgress = 1 - Math.pow(1 - p, 3); // cubic ease out
-              
-              if ('requestVideoFrameCallback' in video) {
-                (video as HTMLVideoElement).currentTime = (video as HTMLVideoElement).duration * easedProgress;
-              } else {
-                (video as HTMLVideoElement).currentTime = (video as HTMLVideoElement).duration * easedProgress;
-              }
+        // Wait for metadata to load before creating the animation
+        video.onloadedmetadata = () => {
+          gsap.to(video, {
+            currentTime: video.duration || 18,
+            ease: "none", // Linear scrub
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 1.5, // 1.5 second smoothing to avoid heavy lag
             }
-          }
-        });
+          });
+        };
+        // Trigger manually in case it's already loaded
+        if (video.readyState >= 1) {
+          video.onloadedmetadata(new Event('loadedmetadata'));
+        }
       }
 
       // 2. Logo FLIP transition to Navbar (scrubbed)

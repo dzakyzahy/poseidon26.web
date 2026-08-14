@@ -1,6 +1,6 @@
 import { Suspense, useRef, useState, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { PerformanceMonitor, ScrollControls, useGLTF } from '@react-three/drei';
+import { PerformanceMonitor, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useFishSwim } from '../../hooks/useFishSwim';
 import { useFishFollow } from '../../hooks/useFishFollow';
@@ -100,13 +100,11 @@ export default function Hero3DScene() {
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 10, 10]} intensity={1.5} />
             
-            <ScrollControls pages={2}>
               <Suspense fallback={null}>
                 <GreenFish centerTargetRef={mainFishRef} />
                 <OrangeFlock centerTargetRef={mainFishRef} />
-                <TrashSystem count={150} />
+                <TrashSystem count={50} />
               </Suspense>
-            </ScrollControls>
           </PerformanceMonitor>
         </Canvas>
         
