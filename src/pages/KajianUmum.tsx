@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
+import Background3D from '../components/hero3d/Background3D';
 
 export default function KajianUmum() {
   return (
-    <main className="pt-32 pb-32 px-6 max-w-4xl mx-auto min-h-screen text-neutral-200 font-sans bg-ocean-900 transition-colors duration-300">
+    <>
+      <Background3D />
+      <main className="pt-32 pb-32 px-6 max-w-4xl mx-auto min-h-screen text-neutral-200 font-sans bg-ocean-900 transition-colors duration-300 relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -101,5 +104,6 @@ export default function KajianUmum() {
         </article>
       </motion.div>
     </main>
+    </>
   );
 }

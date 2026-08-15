@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { coreTeam, divisions } from '../data/team';
+import Background3DSlow from '../components/hero3d/Background3DSlow';
 
 export default function Tim() {
   return (
-    <main className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-screen bg-white text-neutral-900 transition-colors duration-300">
+    <>
+      <Background3DSlow />
+      <main className="pt-32 pb-24 px-6 max-w-6xl mx-auto min-h-screen bg-white text-neutral-900 transition-colors duration-300 relative z-10 shadow-2xl">
       <div className="text-center mb-20">
         <span className="text-neutral-500 uppercase tracking-[0.15em] text-xs font-semibold mb-3 block">Orang-Orang di Balik Layar</span>
         <h1 className="text-4xl md:text-5xl font-serif font-medium tracking-tight text-neutral-900">Tim POSEIDON ITB 2026</h1>
@@ -56,5 +59,6 @@ export default function Tim() {
         ))}
       </div>
     </main>
+    </>
   );
 }

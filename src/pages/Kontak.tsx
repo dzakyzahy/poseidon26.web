@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, User, MessageSquare, Send, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import Background3DSlow from '../components/hero3d/Background3DSlow';
 
 const locations = [
   {
@@ -71,18 +72,20 @@ export default function Kontak() {
   };
 
   return (
-    <main className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-screen bg-white text-neutral-900 transition-colors duration-300">
-      <div className="flex flex-col md:flex-row items-center justify-between border-b border-neutral-200 pb-12 mb-16 gap-8">
-        <div>
-          <span className="text-neutral-500 uppercase tracking-[0.15em] text-xs font-semibold mb-3 block">Sapa Kami</span>
-          <h1 className="text-4xl md:text-5xl font-serif font-medium tracking-tight text-neutral-900 leading-tight">
-            Kontak Tim kami
-          </h1>
+    <>
+      <Background3DSlow />
+      <main className="pt-32 pb-24 px-4 md:px-6 max-w-6xl mx-auto min-h-screen bg-white text-neutral-900 transition-colors duration-300 relative z-10 shadow-2xl">
+        <div className="flex flex-col md:flex-row items-center justify-between border-b border-neutral-200 pb-12 mb-16 gap-8">
+          <div className="w-full text-center md:text-left">
+            <span className="text-neutral-500 uppercase tracking-[0.15em] text-xs font-semibold mb-3 block">Sapa Kami</span>
+            <h1 className="text-4xl md:text-5xl font-serif font-medium tracking-tight text-neutral-900 leading-tight">
+              Kontak Tim kami
+            </h1>
+          </div>
+          <img src="/logos/trident_small.png" alt="Trident" className="hidden md:block w-24 h-24 object-contain opacity-80" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
         </div>
-        <img src="/logos/trident_small.png" alt="Trident" className="w-24 h-24 object-contain opacity-80" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
-      </div>
 
-      <div className="grid lg:grid-cols-5 gap-16">
+        <div className="grid lg:grid-cols-5 gap-16 overflow-hidden">
         {/* Contact Info Sidebar */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -92,13 +95,13 @@ export default function Kontak() {
         >
           <div>
             <h2 className="font-serif text-2xl mb-6 text-neutral-900">Hubungi Langsung</h2>
-            <div className="bg-neutral-50 border border-neutral-200 p-6 rounded-xl flex items-center gap-4">
+            <div className="bg-neutral-50 border border-neutral-200 p-4 md:p-6 rounded-xl flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-white border border-neutral-200 flex items-center justify-center shrink-0">
                 <MessageSquare className="w-5 h-5 text-neutral-700" />
               </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-1">CP (Contact Person)</p>
-                <p className="text-xl font-sans font-medium text-neutral-900">- (belum tersedia)</p>
+              <div className="min-w-0">
+                <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-1 truncate">CP (Contact Person)</p>
+                <p className="text-lg md:text-xl font-sans font-medium text-neutral-900 truncate">- (belum tersedia)</p>
               </div>
             </div>
           </div>
@@ -237,5 +240,6 @@ export default function Kontak() {
         </motion.div>
       </div>
     </main>
+    </>
   );
 }

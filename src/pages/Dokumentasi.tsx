@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Background3DSlow from '../components/hero3d/Background3DSlow';
 
 // Mock images for the gallery
 const images = [
@@ -30,14 +31,16 @@ export default function Dokumentasi() {
   const x = useTransform(scrollYProgress, [0, 1], ["10%", "-80%"]);
 
   return (
-    <main className="bg-ocean-900 min-h-screen">
-      <div className="pt-24 px-6 max-w-7xl mx-auto">
-        <span className="text-bioluminescent-blue uppercase tracking-widest text-sm mb-2 block font-sans">Galeri</span>
-        <h1 className="heading-lg mb-6">Dokumentasi<br/>Kegiatan Lapangan</h1>
-        <p className="max-w-xl text-white/60 mb-12">
-          Jejak langkah nyata dalam mengabdi pada lingkungan pesisir dan masyarakat sekitar. Scroll ke bawah untuk melihat galeri.
-        </p>
-      </div>
+    <>
+      <Background3DSlow />
+      <main className="min-h-screen bg-white text-neutral-900 relative z-10 shadow-2xl overflow-hidden max-w-6xl mx-auto">
+        <div className="pt-32 px-4 md:px-6 w-full text-center md:text-left border-b border-neutral-200 pb-12 mb-16">
+          <span className="text-neutral-500 uppercase tracking-widest text-xs font-semibold mb-3 block font-sans">Galeri</span>
+          <h1 className="text-4xl md:text-5xl font-serif font-medium tracking-tight text-neutral-900 leading-tight mb-6">Dokumentasi<br/>Kegiatan Lapangan</h1>
+          <p className="max-w-xl text-neutral-600 mb-4 text-sm md:text-base md:mx-0 mx-auto">
+            Jejak langkah nyata dalam mengabdi pada lingkungan pesisir dan masyarakat sekitar. Scroll ke bawah untuk melihat galeri.
+          </p>
+        </div>
 
       <section ref={targetRef} className="md:h-[300vh] relative pb-24">
         <div className="md:sticky md:top-0 md:flex md:h-screen md:items-center overflow-hidden">
@@ -68,5 +71,6 @@ export default function Dokumentasi() {
         </div>
       </section>
     </main>
+    </>
   );
 }

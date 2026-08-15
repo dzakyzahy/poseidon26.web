@@ -97,12 +97,23 @@ const VideoScrollSequence = () => {
   return (
     <section ref={containerRef} className="h-[500vh] relative bg-ocean-900" id="video-sequence">
       {/* Fixed Logo (Left) and Title (Right) */}
-      <img 
+      <div 
         ref={logoRef}
-        src="/logos/logoPOSEIDON.png" 
-        alt="POSEIDON Logo" 
-        className="fixed top-1/4 left-[5%] md:left-[10%] w-32 h-32 md:w-48 md:h-48 object-contain z-50 pointer-events-none mix-blend-difference" 
-      />
+        className="fixed top-[20%] left-[5%] md:left-[10%] flex flex-col items-center gap-4 z-50 pointer-events-none mix-blend-difference"
+      >
+        <div className="flex gap-4 md:gap-8 items-center">
+          <img 
+            src="/Logo_ITB.png" 
+            alt="ITB Logo" 
+            className="w-24 h-24 md:w-40 md:h-40 object-contain" 
+          />
+          <img 
+            src="/logos/logoPOSEIDON.png" 
+            alt="POSEIDON Logo" 
+            className="w-32 h-32 md:w-56 md:h-56 object-contain" 
+          />
+        </div>
+      </div>
       <h1 
         ref={titleRef}
         className="fixed top-1/4 right-[5%] md:right-[10%] text-7xl md:text-[10rem] leading-none font-sans font-bold tracking-tighter text-white z-50 flex flex-col items-end text-right pointer-events-none mix-blend-difference"
