@@ -9,9 +9,7 @@ export default function KajianUmum() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <header className="mb-20 border-b border-white/20 pb-12">
-          <span className="text-white/50 uppercase tracking-widest text-xs font-bold mb-6 block font-mono">
-            Kajian Konten Minggu 5
-          </span>
+
           <h1 className="text-4xl md:text-6xl font-serif font-normal tracking-tight text-white leading-tight mb-8">
             Solusi Pengelolaan Sampah Pesisir: <br />
             <span className="text-white/70 italic">Upaya Umum dan Penerapannya dalam POSEIDON ITB 2026</span>

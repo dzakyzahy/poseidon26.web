@@ -29,13 +29,16 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
       {Object.values(nodes).map((node: any) => {
         if (node.isMesh) {
           return (
-            <mesh 
-              key={node.uuid} 
-              geometry={node.geometry} 
-              material={customMaterial} 
-              castShadow 
-              receiveShadow 
-            />
+              <mesh 
+                key={node.uuid} 
+                geometry={node.geometry} 
+                material={customMaterial} 
+                position={node.position}
+                rotation={node.rotation}
+                scale={node.scale}
+                castShadow 
+                receiveShadow 
+              />
           );
         }
         return null;
@@ -69,7 +72,9 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
                   key={node.uuid} 
                   geometry={node.geometry} 
                   material={customMaterial} 
-                  scale={0.5} // Make them smaller
+                  position={node.position}
+                  rotation={node.rotation}
+                  scale={node.scale ? [node.scale.x * 0.5, node.scale.y * 0.5, node.scale.z * 0.5] : 0.5}
                 />
               );
             }
@@ -107,23 +112,6 @@ export default function Hero3DScene() {
               </Suspense>
           </PerformanceMonitor>
         </Canvas>
-        
-        {/* Foreground Content overlay */}
-        <div className="absolute inset-0 pointer-events-none flex flex-col items-start justify-center p-8 md:p-16">
-          <div className="max-w-2xl bg-black/30 p-8 rounded-2xl backdrop-blur-sm border border-white/10">
-            <h2 className="text-xl md:text-3xl font-sans text-white/90 font-medium leading-snug mb-6">
-              Selamat Datang di Website Persembahan Oseanografi untuk Indonesia (POSEIDON) 2026
-            </h2>
-            <h1 className="text-4xl md:text-6xl font-serif text-white font-bold mb-4">
-              Tentang <span className="text-bioluminescent-blue">POSEIDON ITB</span>
-            </h1>
-            <p className="text-lg text-white/80 leading-relaxed">
-              POSEIDON merupakan persembahan dari mahasiswa Oseanografi ITB untuk Indonesia.
-              Kami berdedikasi untuk memberikan kajian dan inovasi dalam melindungi lautan nusantara
-              dari ancaman sampah plastik dan kerusakan ekosistem laut.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );

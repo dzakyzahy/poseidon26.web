@@ -11,7 +11,8 @@ const VideoScrollSequence = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const text1Ref = useRef<HTMLHeadingElement>(null);
   const text2Ref = useRef<HTMLHeadingElement>(null);
-  const logoContainerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLImageElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   const text3Ref = useRef<HTMLHeadingElement>(null);
   const text4Ref = useRef<HTMLDivElement>(null);
@@ -21,13 +22,17 @@ const VideoScrollSequence = () => {
       // 1. Video Scrubbing with high precision onUpdate
       const video = videoRef.current;
       if (video) {
+        video.pause();
+        const updateScroll = () => { ScrollTrigger.refresh(); };
+        video.addEventListener('loadedmetadata', updateScroll);
+
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: "top top",
           end: "bottom bottom",
           scrub: true, // Native scroll scrub
           onUpdate: (self) => {
-            if (video.readyState >= 1 && video.duration) {
+            if (video.readyState >= 1 && !Number.isNaN(video.duration) && video.duration > 0) {
               // Ensure we don't exceed duration or hit exactly 0 to avoid frame drops
               video.currentTime = Math.max(0.01, Math.min(video.duration - 0.05, video.duration * self.progress));
             }
@@ -35,10 +40,21 @@ const VideoScrollSequence = () => {
         });
       }
 
-      // 2. Logo fades out as user scrolls
-      gsap.to(logoContainerRef.current, {
+      // 2. Logo and Title fade out as user scrolls
+      gsap.to(logoRef.current, {
         opacity: 0,
         x: -50,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "1% top",
+          end: "15% top",
+          scrub: true,
+        }
+      });
+      gsap.to(titleRef.current, {
+        opacity: 0,
+        x: 50,
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: containerRef.current,
@@ -80,17 +96,20 @@ const VideoScrollSequence = () => {
 
   return (
     <section ref={containerRef} className="h-[500vh] relative bg-ocean-900" id="video-sequence">
-      {/* Fixed Logo that animates to Navbar */}
-      <div 
-        ref={logoContainerRef} 
-        className="fixed top-1/4 left-[10%] md:left-[15%] z-50 flex flex-col items-start origin-top-left pointer-events-none mix-blend-difference"
+      {/* Fixed Logo (Left) and Title (Right) */}
+      <img 
+        ref={logoRef}
+        src="/logos/logoPOSEIDON.png" 
+        alt="POSEIDON Logo" 
+        className="fixed top-1/4 left-[5%] md:left-[10%] w-32 h-32 md:w-48 md:h-48 object-contain z-50 pointer-events-none mix-blend-difference" 
+      />
+      <h1 
+        ref={titleRef}
+        className="fixed top-1/4 right-[5%] md:right-[10%] text-7xl md:text-[10rem] leading-none font-sans font-bold tracking-tighter text-white z-50 flex flex-col items-end text-right pointer-events-none mix-blend-difference"
       >
-        <img src="/logos/logoPOSEIDON.png" alt="POSEIDON Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain mb-6" />
-        <h1 className="text-4xl md:text-6xl font-sans font-bold tracking-tighter text-white">
-          POSEIDON<br />
-          <span className="text-bioluminescent-blue font-serif italic text-3xl md:text-5xl">ITB 2026</span>
-        </h1>
-      </div>
+        POSEIDON<br />
+        <span className="text-bioluminescent-blue font-serif italic text-5xl md:text-[7rem] mt-2">ITB 2026</span>
+      </h1>
 
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Video Background */}
@@ -106,13 +125,12 @@ const VideoScrollSequence = () => {
         {/* Overlay Content */}
         <div className="relative z-10 w-full h-full flex flex-col items-center justify-center pointer-events-none px-6">
           <motion.div 
-            className="absolute bottom-[10%] flex flex-col items-center"
+            className="absolute bottom-[8%] left-[5%] md:left-[10%] flex flex-col items-start"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <span className="font-sans text-[10px] md:text-xs tracking-[0.3em] uppercase mb-4 opacity-70">Scroll To Explore</span>
-            <div className="w-[1px] h-16 bg-gradient-to-b from-white/70 to-transparent animate-pulse" />
+            <span className="font-sans text-sm md:text-xl tracking-[0.3em] font-medium uppercase opacity-80 text-white mix-blend-difference">Scroll To Explore</span>
           </motion.div>
 
           <h2 ref={text1Ref} className="heading-lg absolute text-center font-serif text-white tracking-wide mix-blend-difference">

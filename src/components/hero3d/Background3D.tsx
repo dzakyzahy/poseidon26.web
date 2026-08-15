@@ -30,6 +30,9 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
               key={node.uuid} 
               geometry={node.geometry} 
               material={customMaterial} 
+              position={node.position}
+              rotation={node.rotation}
+              scale={node.scale}
               castShadow 
               receiveShadow 
             />
@@ -66,7 +69,9 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
                   key={node.uuid} 
                   geometry={node.geometry} 
                   material={customMaterial} 
-                  scale={0.5}
+                  position={node.position}
+                  rotation={node.rotation}
+                  scale={node.scale ? [node.scale.x * 0.5, node.scale.y * 0.5, node.scale.z * 0.5] : 0.5}
                 />
               );
             }

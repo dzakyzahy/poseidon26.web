@@ -87,15 +87,50 @@ export default function Program() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {programs.map((prog, idx) => (
+      <div className="flex flex-col gap-6 overflow-hidden w-full relative -mx-6 px-6 md:mx-0 md:px-0">
+        {/* Row 1: Top to Left (default) */}
+        <div className="flex w-full overflow-hidden group">
           <motion.div 
-            key={prog.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1, duration: 0.5 }}
-            className="group flex flex-col p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors"
+            className="flex gap-6 w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
           >
+            {[...programs.slice(0, 5), ...programs.slice(0, 5)].map((prog, idx) => (
+              <ProgramCard key={`row1-${prog.id}-${idx}`} prog={prog} idx={idx} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Row 2: Bottom to Right */}
+        <div className="flex w-full overflow-hidden group">
+          <motion.div 
+            className="flex gap-6 w-max"
+            animate={{ x: ["-50%", "0%"] }}
+            transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
+          >
+            {[...programs.slice(5, 9), ...programs.slice(5, 9), ...programs.slice(5, 9)].map((prog, idx) => (
+              <ProgramCard key={`row2-${prog.id}-${idx}`} prog={prog} idx={idx} />
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function ProgramCard({ prog, idx }: { prog: typeof programs[0], idx: number }) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: (idx % 5) * 0.1, duration: 0.5 }}
+      viewport={{ once: true }}
+      className={`group flex flex-col p-6 rounded-lg border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition-colors w-[320px] md:w-[380px] shrink-0 ${
+        prog.status === 'Selesai' ? 'border-l-4 border-l-emerald-500' :
+        prog.status === 'Sedang Berjalan' ? 'border-l-4 border-l-amber-500' :
+        'border-l-4 border-l-white/20'
+      }`}
+    >
             {/* Header */}
             <div className="flex justify-between items-start mb-6">
               <div className="flex flex-col">
@@ -136,9 +171,6 @@ export default function Program() {
                 />
               </div>
             </div>
-          </motion.div>
-        ))}
-      </div>
-    </main>
+    </motion.div>
   );
 }

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { useFrame } from '@react-three/fiber';
 
 
@@ -29,7 +29,7 @@ export function useFishSwim(config: SwimConfig = {}) {
     uniforms.uTime.value = state.clock.elapsedTime;
   });
 
-  const onBeforeCompile = (shader: any) => {
+  const onBeforeCompile = useCallback((shader: any) => {
     shader.uniforms.uTime = uniforms.uTime;
     shader.uniforms.uSpeed = uniforms.uSpeed;
     shader.uniforms.uAmplitude = uniforms.uAmplitude;
@@ -68,7 +68,7 @@ export function useFishSwim(config: SwimConfig = {}) {
       transformed.${swingAxis} += wave * attenuation;
       `
     );
-  };
+  }, [uniforms, spineAxis]);
 
   return { uniforms, onBeforeCompile };
 }
