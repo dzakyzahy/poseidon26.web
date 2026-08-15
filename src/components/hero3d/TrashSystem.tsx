@@ -21,7 +21,7 @@ interface TrashData {
   typeIndex: number;
 }
 
-export const TrashSystem = ({ count = 200 }) => {
+export const TrashSystem = ({ count = 3 }) => {
   // Load the model
   const { nodes } = useGLTF('/models/trash_and_debris.glb') as any;
 
@@ -32,26 +32,20 @@ export const TrashSystem = ({ count = 200 }) => {
   const trashData = useMemo(() => {
     const data: TrashData[] = [];
     for (let i = 0; i < count; i++) {
-      // Random clustered position
-      const radius = Math.random() * 3 + 1;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos((Math.random() * 2) - 1);
-      
-      const px = radius * Math.sin(phi) * Math.cos(theta);
-      const py = radius * Math.sin(phi) * Math.sin(theta);
-      const pz = radius * Math.cos(phi) - 5; // clustered around z=-5
+      // Random position across the screen
+      const px = (Math.random() - 0.5) * 12;
+      const py = Math.random() * 10 + 5; // Start high up
+      const pz = (Math.random() - 0.5) * 4 - 3; // depth -5 to -1
 
-      // Random scatter direction
-      const vx = (Math.random() - 0.5) * 15;
-      const vy = (Math.random() - 0.5) * 15;
-      const vz = (Math.random() - 0.5) * 15;
+      // Fall speed
+      const vy = -(Math.random() * 0.5 + 0.2); // slowly down
 
       data.push({
         position: new THREE.Vector3(px, py, pz),
-        velocity: new THREE.Vector3(vx, vy, vz),
+        velocity: new THREE.Vector3(0, vy, 0),
         rotation: new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
-        angularVelocity: new THREE.Euler((Math.random()-0.5)*0.1, (Math.random()-0.5)*0.1, (Math.random()-0.5)*0.1),
-        scale: Math.random() * 0.5 + 0.5,
+        angularVelocity: new THREE.Euler((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5),
+        scale: Math.random() * 0.4 + 0.6,
         typeIndex: Math.floor(Math.random() * trashTypes.length)
       });
     }
@@ -60,28 +54,7 @@ export const TrashSystem = ({ count = 200 }) => {
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
-  useFrame(() => {
-    // Get scroll progress (0 to 1). Assuming this section is active from 0.5 to 1.0 of the whole page
-    // For simplicity, let's use a dummy progress that oscillates for demonstration, 
-    // or tie it to window.scrollY.
-    // In a real implementation with ScrollControls, scroll.offset gives progress.
-    // We'll calculate a scatterFactor from 0 (clustered) to 1 (scattered).
-    
-    // Fallback to window.scrollY to determine offset since ScrollControls is removed
-    const docHeight = document.body.scrollHeight - window.innerHeight;
-    const offset = docHeight > 0 ? window.scrollY / docHeight : 0;
-    
-    // Smooth transition between clustered (0) and scattered (1)
-    // Let's say it scatters when offset > 0.4
-    let targetScatter = 0;
-    if (offset > 0.4) {
-      targetScatter = Math.min((offset - 0.4) * 4, 1.0); // 0 to 1
-    } else {
-      targetScatter = 0;
-    }
-
-    // Apply positions to InstancedMesh
-    // We update per type
+  useFrame((_, delta) => {
     const countsPerType = new Array(trashTypes.length).fill(0);
 
     for (let i = 0; i < trashData.length; i++) {
@@ -92,14 +65,21 @@ export const TrashSystem = ({ count = 200 }) => {
       const mesh = meshRefs.current[typeIdx];
       if (!mesh) continue;
 
-      // Calculate current position based on scatterFactor
-      // p = clusteredPos + velocity * scatterFactor
-      dummy.position.copy(data.position).addScaledVector(data.velocity, targetScatter);
+      // Update position falling down
+      data.position.y += data.velocity.y * delta;
+      
+      // Wrap around if it falls below the screen
+      if (data.position.y < -10) {
+        data.position.y = 10;
+        data.position.x = (Math.random() - 0.5) * 12;
+      }
+
+      dummy.position.copy(data.position);
       
       // Update rotation
-      data.rotation.x += data.angularVelocity.x * targetScatter;
-      data.rotation.y += data.angularVelocity.y * targetScatter;
-      data.rotation.z += data.angularVelocity.z * targetScatter;
+      data.rotation.x += data.angularVelocity.x * delta;
+      data.rotation.y += data.angularVelocity.y * delta;
+      data.rotation.z += data.angularVelocity.z * delta;
       dummy.rotation.copy(data.rotation);
       
       dummy.scale.set(data.scale, data.scale, data.scale);

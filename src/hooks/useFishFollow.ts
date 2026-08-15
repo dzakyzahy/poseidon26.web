@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
-  const { camera, mouse } = useThree();
+  const { camera } = useThree();
+  const globalMouse = useRef(new THREE.Vector2());
   const targetPosition = useRef(new THREE.Vector3());
   const velocity = useRef(new THREE.Vector3());
   const vector = useRef(new THREE.Vector3()).current;
@@ -12,11 +13,20 @@ export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
   const lookAtTarget = useRef(new THREE.Vector3()).current;
   const dummy = useRef(new THREE.Object3D()).current;
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      globalMouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      globalMouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   useFrame((_, delta) => {
     if (!ref.current) return;
 
-    // Raycast mouse position to a virtual plane in front of the camera
-    vector.set(mouse.x, mouse.y, 0.5);
+    // Raycast global mouse position to a virtual plane in front of the camera
+    vector.set(globalMouse.current.x, globalMouse.current.y, 0.5);
     vector.unproject(camera);
     dir.copy(vector).sub(camera.position).normalize();
     

@@ -105,7 +105,7 @@ export default function Background3DSlow() {
           <Suspense fallback={null}>
             <GreenFish centerTargetRef={mainFishRef} />
             <OrangeFlock centerTargetRef={mainFishRef} />
-            <TrashSystem count={20} />
+            <TrashSystem />
           </Suspense>
         </PerformanceMonitor>
       </Canvas>

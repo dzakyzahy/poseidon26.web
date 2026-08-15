@@ -1,16 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show navbar if scrolled down more than 100px OR if not on home page
+      if (!isHome || window.scrollY > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHome]);
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 pointer-events-none ${
+    <nav className={`fixed w-full z-50 transition-all duration-500 pointer-events-none ${
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+    } ${
       isHome 
         ? 'top-0 left-0 p-6 mix-blend-difference' 
-        : 'top-4 left-0 px-4 md:px-8 pointer-events-auto'
+        : 'top-4 left-0 px-4 md:px-8 pointer-events-auto opacity-100 translate-y-0'
     }`}>
       <div className={`mx-auto transition-all duration-300 ${
         isHome 

@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import Background3DSlow from '../components/hero3d/Background3DSlow';
 
 // Mock images for the gallery
@@ -13,7 +13,6 @@ const images = [
 ];
 
 export default function Dokumentasi() {
-  const targetRef = useRef<HTMLDivElement>(null);
   const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
@@ -22,13 +21,6 @@ export default function Dokumentasi() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
-  // Create horizontal scroll effect tied to vertical scroll
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["10%", "-80%"]);
 
   return (
     <>
@@ -42,13 +34,14 @@ export default function Dokumentasi() {
           </p>
         </div>
 
-      <section ref={targetRef} className="md:h-[300vh] relative pb-24">
-        <div className="md:sticky md:top-0 md:flex md:h-screen md:items-center overflow-hidden">
+      <section className="relative pb-24">
+        <div className="overflow-hidden w-full">
           <motion.div 
-            style={isDesktop ? { x } : {}} 
-            className="flex flex-col md:flex-row gap-8 px-6"
+            animate={isDesktop ? { x: ["0%", "-50%"] } : {}} 
+            transition={isDesktop ? { repeat: Infinity, duration: 40, ease: "linear" } : {}}
+            className="flex flex-col md:flex-row gap-8 px-6 w-full md:w-max"
           >
-            {images.map((src, index) => (
+            {(isDesktop ? [...images, ...images] : images).map((src, index) => (
               <div 
                 key={index}
                 className="w-full md:w-[40vw] h-[40vh] md:h-[60vh] shrink-0 rounded-2xl overflow-hidden relative group"
@@ -62,7 +55,7 @@ export default function Dokumentasi() {
                 />
                 <div className="absolute bottom-6 left-6 z-20">
                   <p className="font-hand text-2xl text-white text-glow opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0 duration-500">
-                    Momen {index + 1}
+                    Momen {(index % images.length) + 1}
                   </p>
                 </div>
               </div>

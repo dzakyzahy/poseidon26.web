@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { coreTeam, divisions } from '../data/team';
+import { coreTeam, divisions, strukturBidang } from '../data/team';
 import Background3DSlow from '../components/hero3d/Background3DSlow';
 
 export default function Tim() {
@@ -58,6 +58,35 @@ export default function Tim() {
           </section>
         ))}
       </div>
+
+      {/* Struktur Kepanitiaan */}
+      <section className="mt-24 border-t border-neutral-200 pt-16">
+        <h2 className="font-serif text-3xl mb-12 text-center text-neutral-900">Bidang & Divisi</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {strukturBidang.map((bidang, idx) => (
+            <motion.div
+              key={bidang.nama}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.05, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-neutral-50 border border-neutral-200 p-6 rounded-2xl hover:border-neutral-400 hover:shadow-md transition-all"
+            >
+              <h3 className="font-sans font-bold text-lg text-neutral-900 mb-4">{bidang.nama}</h3>
+              {bidang.divisi && bidang.divisi.length > 0 && (
+                <ul className="space-y-2">
+                  {bidang.divisi.map((div, i) => (
+                    <li key={i} className="text-sm font-sans text-neutral-600 flex items-start gap-2">
+                      <span className="text-bioluminescent-green mt-0.5">•</span>
+                      {div}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </main>
     </>
   );

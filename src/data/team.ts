@@ -38,3 +38,38 @@ export const divisions: Division[] = [
     ]
   }
 ];
+
+export const strukturBidang = [
+  {
+    nama: "Manajemen Inti",
+    divisi: ["Ketua Pelaksana", "Sekretaris Jendral", "Sekretaris", "Bendahara", "Perizinan", "MSDM"]
+  },
+  {
+    nama: "Bidang Research and Development",
+    divisi: ["Divisi Kajian", "Divisi IT"]
+  },
+  {
+    nama: "Bidang Acara",
+    divisi: []
+  },
+  {
+    nama: "Bidang Lapangan",
+    divisi: ["Divisi Keamanan", "Divisi Medik"]
+  },
+  {
+    nama: "Bidang Relasi",
+    divisi: ["Divisi Intrakampus", "Divisi Ekstrakampus"]
+  },
+  {
+    nama: "Bidang Operasional",
+    divisi: []
+  },
+  {
+    nama: "Bidang Fundraising",
+    divisi: ["Divisi Entrepreneurship", "Divisi Sponsorship"]
+  },
+  {
+    nama: "Bidang Kreatif",
+    divisi: ["Divisi Publikasi dan Dokumentasi", "Divisi Grafis"]
+  }
+];

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, User, MessageSquare, Send, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, User, MessageSquare, Send, MapPin, CheckCircle, AlertCircle, Instagram } from 'lucide-react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import Background3DSlow from '../components/hero3d/Background3DSlow';
 
@@ -95,15 +95,15 @@ export default function Kontak() {
         >
           <div>
             <h2 className="font-serif text-2xl mb-6 text-neutral-900">Hubungi Langsung</h2>
-            <div className="bg-neutral-50 border border-neutral-200 p-4 md:p-6 rounded-xl flex items-center gap-4">
+            <a href="https://www.instagram.com/poseidonitb/" target="_blank" rel="noreferrer" className="bg-neutral-50 border border-neutral-200 p-4 md:p-6 rounded-xl flex items-center gap-4 hover:bg-neutral-100 hover:border-neutral-300 transition-colors cursor-pointer w-full overflow-hidden">
               <div className="w-12 h-12 rounded-full bg-white border border-neutral-200 flex items-center justify-center shrink-0">
-                <MessageSquare className="w-5 h-5 text-neutral-700" />
+                <Instagram className="w-5 h-5 text-neutral-700" />
               </div>
-              <div className="min-w-0">
-                <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-1 truncate">CP (Contact Person)</p>
-                <p className="text-lg md:text-xl font-sans font-medium text-neutral-900 truncate">- (belum tersedia)</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-1 truncate">Instagram</p>
+                <p className="text-lg md:text-xl font-sans font-medium text-neutral-900 truncate">@poseidonitb</p>
               </div>
-            </div>
+            </a>
           </div>
 
           <div>
@@ -137,7 +137,7 @@ export default function Kontak() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-3 bg-neutral-50 p-8 md:p-10 rounded-2xl border border-neutral-200"
+          className="lg:col-span-3 bg-neutral-50 p-5 md:p-10 rounded-2xl border border-neutral-200 overflow-hidden w-full"
         >
           <h2 className="font-serif text-2xl mb-8 text-neutral-900">Kirim Pesan</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -183,7 +183,7 @@ export default function Kontak() {
               </div>
             </div>
 
-            <div className="flex justify-start py-2">
+            <div className="flex justify-start py-2 overflow-x-auto">
               <HCaptcha
                 sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
                 reCaptchaCompat={false}

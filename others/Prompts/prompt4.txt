@@ -1,0 +1,24 @@
+1. navbar di awal banget jangan diperlihatkan, mulai diperlihatkan saat mulai scroll kebawah, saama untuk keterangan scroll to explore nya perlahan dihilangkan saat Scroll
+2. transisi video selesainya agak di blur out kan agar bagus ke sponsornya, buat agar sponsornya itu bakcground page nya ( yang briu gelap itu) tidak mentuup seleuruh pagenya melainkan membuat kotak rounded sja untuk sponsor nya agr terlihatbagus dan esstetikk dan 3d ikan dapat terliaht dibelakang sedang berenang
+3. transisi video nya masih tersendat sendat, perlu kah kita mengaplikasikan image sequence?
+4. ig nya masukin linknya ini https://www.instagram.com/poseidonitb/ (yang di nav footer)
+5. aku ingin menambahkan update instagram automatis gitu dibawah program sama geser geser card gitu apakah bisa ya? misal untuk 5-10 postingan terkahir
+6. yang di foot nav cukup ig dan web saja ikon nya gausah tw, kalau bisa pakai icon ig yang mirip gitu kalau ga ada yaudah ig aja
+7. kajian khusus samakan  saja dengan yan gumum pakai backgroun dtulisan nya itu yang biru agak tua agar sama
+8. 3d nya yang ikan ngikutin cursor itu kadang suka berhenti ngikutin kalau cursor melewati garis tengah layar website coba perbaiki
+9. yan gdi cp di kontak kami buat aja tambahkan logo ig instead nomor dan arahkan ke link yang sama agar men dm massage https://www.instagram.com/poseidonitb/
+10. masih terpotong di mobile yang form kontak dan kotak CPnya, setelah perbaikan diatas mungkin bisa perbaiki si  responsivdness dari kotaknya agar menyesuaikan sekecil apanya gitu walaupun ada min nya tapi dikecilin
+11 lalu untuk logo Poseidon dan itb di landing page it masih nabrak boleh di sesuaikan di mobile (di web laaptop sudah bagus)
+
+---
+
+boleh ini link post postnya dari terbaru dan terlama
+https://www.instagram.com/p/DcEOprGmo-E/?img_index=1
+https://www.instagram.com/p/Db3V4V8Gltd/?img_index=1
+https://www.instagram.com/p/Dau1M2gmpHx/?img_index=1
+https://www.instagram.com/p/DaXmjnomsRP/?img_index=1
+https://www.instagram.com/p/DaXmejmM_7d/
+https://www.instagram.com/p/DaXmcv1M5G5/
+tambahkan juga ke implementation plan beberapa bidang dan divisi dan update terbaru (takperlu mengikuti hierarki yang penting terlihat saja bidang nya apa saja dan postingan terakhir juga latest update ya)
+ini juga trash 3d nya belum terlihat, mungkin coba perbaiki agar trash nya terlihat nya ya 1 atau 3 model saja ngaambang agak jatuh ke bawah tapi dibawah bisa terganggu oleh ikan kalau terlewati, tapi jangan mengorbanlan performa, performa webstie tetap nomor 1
+di dokumentasi scroll di website desktop itu masih double saat gambar, ubah saj ajadi seperti yang di program (bergeser otomatis gitu)tidak perlu pakai logik scroll ke kanan, tapi di mobile biarkan saja seperti sekarang yang normal

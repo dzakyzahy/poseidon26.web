@@ -5,7 +5,7 @@ export default function KajianKhusus() {
   return (
     <>
       <Background3D />
-      <main className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-screen relative z-10">
+      <main className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-screen relative z-10 bg-ocean-900/40 backdrop-blur-sm mt-16 rounded-[3rem] shadow-2xl">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -17,7 +17,7 @@ export default function KajianKhusus() {
         <div className="prose prose-invert prose-lg max-w-none font-sans text-white/80 leading-relaxed">
           
           <div className="grid md:grid-cols-2 gap-12 mb-20">
-            <section className="glass p-8 rounded-2xl border border-white/10">
+            <section className="bg-ocean-900/80 p-8 rounded-2xl border border-white/10">
               <h2 className="font-serif text-2xl mb-4 text-white">Geologi & Sedimentasi</h2>
               <p className="text-base text-white/70">
                 Pesisir utara Cirebon memiliki karakteristik sedimen yang didominasi oleh endapan lumpur (mud) dan pasir halus. 
@@ -26,7 +26,7 @@ export default function KajianKhusus() {
               </p>
             </section>
 
-            <section className="glass p-8 rounded-2xl border border-white/10">
+            <section className="bg-ocean-900/80 p-8 rounded-2xl border border-white/10">
               <h2 className="font-serif text-2xl mb-4 text-white">Dominasi Plastik Tipis</h2>
               <p className="text-base text-white/70">
                 Survei lapangan pada muara sungai dan garis pantai mengindikasikan bahwa sampah anorganik mendominasi profil 

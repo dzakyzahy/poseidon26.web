@@ -5,7 +5,7 @@ export default function KajianUmum() {
   return (
     <>
       <Background3D />
-      <main className="pt-32 pb-32 px-6 max-w-4xl mx-auto min-h-screen text-neutral-200 font-sans bg-ocean-900 transition-colors duration-300 relative z-10">
+      <main className="pt-32 pb-32 px-6 max-w-4xl mx-auto min-h-screen text-neutral-200 font-sans bg-ocean-900/40 backdrop-blur-sm transition-colors duration-300 relative z-10 rounded-[3rem] mt-16 shadow-2xl">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}

@@ -13,6 +13,7 @@ const VideoScrollSequence = () => {
   const text2Ref = useRef<HTMLHeadingElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const scrollTextRef = useRef<HTMLDivElement>(null);
 
   const text3Ref = useRef<HTMLHeadingElement>(null);
   const text4Ref = useRef<HTMLDivElement>(null);
@@ -63,6 +64,30 @@ const VideoScrollSequence = () => {
           scrub: true,
         }
       });
+      gsap.to(scrollTextRef.current, {
+        opacity: 0,
+        y: 20,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "1% top",
+          end: "10% top",
+          scrub: true,
+        }
+      });
+
+      // Video blur & fade out at the end of scroll
+      gsap.to(videoRef.current, {
+        opacity: 0,
+        filter: "blur(20px)",
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "85% top",
+          end: "100% top",
+          scrub: true,
+        }
+      });
 
       // 3. Text fading sequences - Using a timeline to prevent overlap
       gsap.set([text1Ref.current, text2Ref.current, text3Ref.current, text4Ref.current], { y: 50, opacity: 0 });
@@ -101,16 +126,16 @@ const VideoScrollSequence = () => {
         ref={logoRef}
         className="fixed top-[20%] left-[5%] md:left-[10%] flex flex-col items-center gap-4 z-50 pointer-events-none mix-blend-difference"
       >
-        <div className="flex gap-4 md:gap-8 items-center">
+        <div className="flex flex-col md:flex-row gap-2 md:gap-8 items-center">
           <img 
             src="/Logo_ITB.png" 
             alt="ITB Logo" 
-            className="w-24 h-24 md:w-40 md:h-40 object-contain" 
+            className="w-16 h-16 md:w-40 md:h-40 object-contain" 
           />
           <img 
             src="/logos/logoPOSEIDON.png" 
             alt="POSEIDON Logo" 
-            className="w-32 h-32 md:w-56 md:h-56 object-contain" 
+            className="w-20 h-20 md:w-56 md:h-56 object-contain" 
           />
         </div>
       </div>
@@ -135,14 +160,12 @@ const VideoScrollSequence = () => {
 
         {/* Overlay Content */}
         <div className="relative z-10 w-full h-full flex flex-col items-center justify-center pointer-events-none px-6">
-          <motion.div 
+          <div 
+            ref={scrollTextRef}
             className="absolute bottom-[8%] left-[5%] md:left-[10%] flex flex-col items-start"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
           >
-            <span className="font-sans text-sm md:text-xl tracking-[0.3em] font-medium uppercase opacity-80 text-white mix-blend-difference">Scroll To Explore</span>
-          </motion.div>
+            <span className="font-sans text-xs md:text-xl tracking-[0.3em] font-medium uppercase opacity-80 text-white mix-blend-difference">Scroll To Explore</span>
+          </div>
 
           <h2 ref={text1Ref} className="heading-lg absolute text-center font-serif text-white tracking-wide mix-blend-difference">
             Lautan..

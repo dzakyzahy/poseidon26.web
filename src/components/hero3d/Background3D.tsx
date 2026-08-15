@@ -105,7 +105,7 @@ export default function Background3D() {
           <Suspense fallback={null}>
             <GreenFish centerTargetRef={mainFishRef} />
             <OrangeFlock centerTargetRef={mainFishRef} />
-            <TrashSystem count={50} />
+            <TrashSystem />
           </Suspense>
         </PerformanceMonitor>
       </Canvas>
