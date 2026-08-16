@@ -296,7 +296,7 @@ function ProgramCard({ prog, idx, onClick }: { prog: typeof programs[0], idx: nu
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: (idx % 5) * 0.1, duration: 0.5 }}
       viewport={{ once: true }}
-      className={`group flex flex-col p-6 rounded-lg border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/30 hover:-translate-y-2 cursor-pointer transition-all duration-300 w-[320px] md:w-[380px] shrink-0 ${
+      className={`group flex flex-col p-6 rounded-lg border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/30 hover:-translate-y-2 cursor-pointer transition-all duration-300 w-[260px] md:w-[380px] shrink-0 ${
         prog.status === 'Selesai' ? 'border-l-4 border-l-emerald-500' :
         prog.status === 'Sedang Berjalan' ? 'border-l-4 border-l-amber-500' :
         'border-l-4 border-l-white/20'

@@ -32,7 +32,7 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
               material={customMaterial} 
               position={node.position}
               rotation={node.rotation}
-              scale={node.scale}
+              scale={node.scale ? [node.scale.x * 0.2, node.scale.y * 0.2, node.scale.z * 0.2] : 0.2}
               castShadow 
               receiveShadow 
             />
@@ -67,7 +67,7 @@ const OrangeFish = ({ boid }: { boid: any }) => {
               material={customMaterial} 
               position={node.position}
               rotation={node.rotation}
-              scale={node.scale ? [node.scale.x * 0.5, node.scale.y * 0.5, node.scale.z * 0.5] : 0.5}
+              scale={node.scale ? [node.scale.x * 0.15, node.scale.y * 0.15, node.scale.z * 0.15] : 0.15}
             />
           );
         }

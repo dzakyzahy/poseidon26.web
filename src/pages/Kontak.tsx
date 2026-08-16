@@ -65,6 +65,18 @@ export default function Kontak() {
       return;
     }
 
+    // Rate limiting statis sederhana (client-side)
+    const lastSubmissionTime = localStorage.getItem('lastContactSubmit');
+    if (lastSubmissionTime) {
+      const timeDiff = Date.now() - parseInt(lastSubmissionTime, 10);
+      if (timeDiff < 60000) { // 60 seconds limit
+        setStatus('error');
+        setMessage('Mohon tunggu beberapa saat sebelum mengirim pesan lagi.');
+        setTimeout(() => setStatus('idle'), 3000);
+        return;
+      }
+    }
+
     // Basic email validation regex
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setStatus('error');
@@ -96,6 +108,7 @@ export default function Kontak() {
         form.reset();
         captchaRef.current?.resetCaptcha();
         setCaptchaToken(null);
+        localStorage.setItem('lastContactSubmit', Date.now().toString());
         setTimeout(() => setStatus('idle'), 3000);
       } else {
         throw new Error(data.message);

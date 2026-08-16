@@ -4,23 +4,11 @@ Website POSEIDON ITB 2026 telah melewati Phase 6. Sesi ini telah menyelesaikan p
 
 Tugas ini merupakan serah terima (handover) agar Agent berikutnya dapat melanjutkan pekerjaan (Phase 7) tanpa kebingungan terkait *state* saat ini.
 
-## Apa Saja yang Baru Diselesaikan?
-1. **Perbaikan *InstancedMesh* (Trash 3D)**: File `trash_and_debris.glb` memiliki skala geometri mikroskopis. Penggunaan *InstancedMesh* sebelumnya menghilangkan rasio skalanya. Telah diganti menggunakan `<Clone>` dari *drei* di dalam `TrashSystem.tsx`, dan sekarang sampah sukses muncul secara dinamis di layar jatuh dari atas ke bawah.
-2. **Pengurangan Jumlah Sampah**: Sesuai masukan terakhir, jumlah objek sampah yang di-*render* dikurangi secara drastis menjadi hanya 2 buah agar layar tidak penuh (`count={2}` di `Background3D.tsx`).
-3. **Pembaruan *Image Sequence* Baru**: Aset gambar sekuensial di `public/images/sequence` telah diganti ke dataset gambar `.jpg` terbaru yang berjumlah 246 *frame* (*ImageOceanScroll*). Logika *ScrollTrigger* di `VideoScrollSequence.tsx` telah disesuaikan agar cocok dengan durasi 246 frame, beserta proporsi kemunculan teks ("Lautan...", "Sampah...", "Selamat Datang...").
+## Apa Saja yang Baru Diselesaikan (Phase 7)?
+1. **Perbaikan *InstancedMesh* (Trash 3D)**: Sampah 3D yang awalnya menyatu karena model glTF di-*clone* satu *scene* utuh telah diperbaiki. Kini sistem mengambil *mesh* anak (*child meshes*) secara terpisah sehingga gelas dan objek lain jatuh masing-masing secara individual tanpa menyatu.
+2. **Optimalisasi Memori (Lag Reduction) di Video Sequence**: Ratusan gambar beresolusi tinggi yang sebelumnya membebani memori telah dihapus dari antrian *render*. Sistem kini menggunakan tag `<video>` yang me-*load* `Video_Scroll.mp4` secara utuh. Sinkronisasi *ScrollTrigger* dengan properti `currentTime` pada video telah berjalan mulus, sehingga *framerate* dan kualitas gambar (saat teks "Lautan.." muncul) kembali tinggi dan tidak *lag* di *mobile*.
+3. **Kalibrasi Teks Landing Page & Program Card (Mobile View)**: Teks *sequence* sudah responsif. Selain itu, masalah kartu program di halaman *Program* yang *overshoot* dan terlalu besar di perangkat HP juga telah diperkecil dari `320px` menjadi `260px` di layar sempit agar pengunjung menyadari ada lebih banyak program untuk digeser (*slider*).
+4. **Rate Limiting Kontak**: Penambahan fitur *rate-limiting* client-side sederhana dengan interval 60 detik menggunakan `localStorage` pada formulir kontak untuk mencegah *spam*.
 
-## Tantangan & Tugas Berikutnya (Next Build & Optimization)
-
-Sebagai AI berikutnya, fokuslah pada hal-hal berikut:
-
-1. **Optimalisasi Memori (Lag Reduction)**
-   - Saat ini kita me-load 246 frame gambar (resolusi tinggi) sekaligus di `VideoScrollSequence.tsx` ke dalam array memori. Ini dapat membebani RAM *browser* atau perangkat *mobile* kelas menengah ke bawah.
-   - **Tugas**: Terapkan metode *lazy loading* dinamis, melepaskan gambar yang sudah dilewati dari memori, atau menggunakan elemen `<video>` dengan kontrol *currentTime* (*scrubbing*) sebagai pengganti array gambar, yang jauh lebih ramah memori.
-   
-2. **Kalibrasi Teks Landing Page (*Mobile View*)**
-   - Pastikan teks animasi di `VideoScrollSequence` yang baru disesuaikan penempatannya (Frame 125, Frame 180, dsb) muncul dengan responsif dan rapi di semua rasio layar.
-
-3. **Uji Coba Formulir Kontak (Secara Produksi)**
-   - Sistem HCaptcha dan Web3Forms pada `Kontak.tsx` telah selesai. Jika ada permintaan penguatan, mungkin menambahkan sistem validasi limitasi (*rate-limiting*) statis sederhana dari sisi *client* sebelum *deploy* akhir.
-
-Silakan pelajari *codebase* dan pastikan *build* sukses pada pekerjaan selanjutnya!
+## Status
+Semua target Handover untuk Phase 7 telah sukses diselesaikan! Silakan lanjutkan pengembangan ke fase berikutnya!

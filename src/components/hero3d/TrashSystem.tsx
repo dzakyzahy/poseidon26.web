@@ -9,10 +9,24 @@ interface TrashData {
   rotation: THREE.Euler;
   angularVelocity: THREE.Euler;
   scale: number;
+  meshIndex: number;
 }
 
 export const TrashSystem = ({ count = 3 }) => {
   const { scene } = useGLTF('/models/trash_and_debris.glb') as any;
+  
+  // Extract separate meshes from the scene
+  const meshes = useMemo(() => {
+    const m: THREE.Object3D[] = [];
+    if (scene) {
+      scene.traverse((child: any) => {
+        if (child.isMesh) {
+          m.push(child);
+        }
+      });
+    }
+    return m;
+  }, [scene]);
   
   // References to the wrapper groups for each clone
   const groupRefs = useRef<(THREE.Group | null)[]>([]);
@@ -36,11 +50,12 @@ export const TrashSystem = ({ count = 3 }) => {
         velocity: new THREE.Vector3(0, vy, 0),
         rotation: new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
         angularVelocity: new THREE.Euler((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5),
-        scale: (Math.random() * 0.4 + 0.6) * 10, // Scaled up to counteract internal geometry scales
+        scale: (Math.random() * 0.4 + 0.6) * 1.5, // Drastically reduced scale
+        meshIndex: meshes.length > 0 ? Math.floor(Math.random() * meshes.length) : 0,
       });
     }
     return data;
-  }, [count, scene]);
+  }, [count, meshes]);
 
   useFrame((_, delta) => {
     for (let i = 0; i < trashData.length; i++) {
@@ -69,15 +84,19 @@ export const TrashSystem = ({ count = 3 }) => {
     }
   });
 
-  if (!scene) return null;
+  if (!scene || meshes.length === 0) return null;
 
   return (
     <group>
-      {trashData.map((_, index) => (
-        <group key={index} ref={(el) => (groupRefs.current[index] = el)}>
-          <Clone object={scene} castShadow receiveShadow />
-        </group>
-      ))}
+      {trashData.map((data, index) => {
+        const mesh = meshes[data.meshIndex];
+        if (!mesh) return null;
+        return (
+          <group key={index} ref={(el) => (groupRefs.current[index] = el)}>
+            <Clone object={mesh} castShadow receiveShadow />
+          </group>
+        );
+      })}
     </group>
   );
 };

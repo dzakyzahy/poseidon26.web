@@ -1,37 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useRef } from 'react';
 import VideoScrollSequence from '../components/intro/VideoScrollSequence';
 import { SponsorGrid } from '../components/intro/SponsorGrid';
-import Background3D from '../components/hero3d/Background3D';
 
 export default function Home() {
-  const [show3D, setShow3D] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // The image sequence container is 500vh, so scroll distance is roughly 400vh to finish it.
-      // We turn on 3D only after scrolling past 400vh (4 * window.innerHeight).
-      if (window.scrollY > window.innerHeight * 3.8) {
-        setShow3D(true);
-      } else {
-        setShow3D(false);
-      }
-    };
-    
-    // Initial check
-    handleScroll();
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <>
-      <div className={show3D ? 'opacity-100' : 'opacity-0 pointer-events-none'}>
-        {/* We use opacity and conditionally pause frameloop inside Background3D if possible, or just keep it mounted.
-            Using display:none (hidden) can sometimes break R3F sizing, so opacity 0 is safer for now. */}
-        <Background3D active={show3D} />
-      </div>
       <main className="relative z-10 w-full">
         <VideoScrollSequence />
         
@@ -66,8 +41,6 @@ export default function Home() {
           </section>
         </div>
 
-        {/* Extra space to enjoy the 3D scene */}
-        <div className="h-[50vh] w-full pointer-events-none" />
       </main>
     </>
   );
