@@ -13,7 +13,6 @@ const VideoScrollSequence = () => {
   const logoRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollTextRef = useRef<HTMLDivElement>(null);
-  const text3Ref = useRef<HTMLHeadingElement>(null);
   const progressContainerRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const progressFishRef = useRef<HTMLImageElement>(null);
@@ -206,9 +205,6 @@ const VideoScrollSequence = () => {
       tl.to(text2Ref.current, { opacity: 1, y: 0, duration: 15 }, 160)
         .to(text2Ref.current, { opacity: 0, y: -50, duration: 10 }, 200);
 
-      // Frame 221: Selamat Datang..
-      tl.to(text3Ref.current, { opacity: 1, y: 0, duration: 10 }, 221);
-
 
     }, containerRef);
 
@@ -242,7 +238,7 @@ const VideoScrollSequence = () => {
       {/* Fixed Logo and Title */}
       <div 
         ref={logoRef}
-        className="fixed top-[42%] right-[5%] md:top-[20%] md:left-[10%] md:right-auto flex flex-row md:flex-col items-center justify-end md:justify-start gap-4 z-50 pointer-events-none mix-blend-difference"
+        className="fixed top-[55%] right-[5%] md:top-[20%] md:left-[10%] md:right-auto flex flex-row md:flex-col items-center justify-end md:justify-start gap-4 z-50 pointer-events-none mix-blend-difference"
       >
         <img 
           src="/Logo_ITB.png" 
@@ -287,11 +283,6 @@ const VideoScrollSequence = () => {
 
           <h2 ref={text2Ref} className="heading-lg absolute text-center font-serif text-white tracking-wide mix-blend-difference">
             Sampah mengancam..
-          </h2>
-
-          <h2 ref={text3Ref} className="heading-lg absolute text-center font-serif text-white tracking-wide mix-blend-difference flex flex-col items-center">
-            <span>Selamat Datang di</span>
-            <span className="font-sans text-bioluminescent-blue italic text-4xl md:text-7xl mt-4 block">Website POSEIDON ITB 2026</span>
           </h2>
         </div>
       </div>
