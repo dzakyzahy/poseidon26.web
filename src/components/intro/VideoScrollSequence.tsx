@@ -198,13 +198,13 @@ const VideoScrollSequence = () => {
       // Dummy tween to force timeline duration to match frameCount (246)
       tl.to({}, { duration: 246 });
 
-      // Frame 125: Lautan..
-      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 15 }, 125)
-        .to(text1Ref.current, { opacity: 0, y: -50, duration: 10 }, 155);
+      // Frame 91: Lautan..
+      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 15 }, 91)
+        .to(text1Ref.current, { opacity: 0, y: -50, duration: 10 }, 130);
 
-      // Frame 180: Sampah mengancam..
-      tl.to(text2Ref.current, { opacity: 1, y: 0, duration: 15 }, 180)
-        .to(text2Ref.current, { opacity: 0, y: -50, duration: 10 }, 210);
+      // Frame 160: Sampah mengancam..
+      tl.to(text2Ref.current, { opacity: 1, y: 0, duration: 15 }, 160)
+        .to(text2Ref.current, { opacity: 0, y: -50, duration: 10 }, 200);
 
       // Frame 221: Selamat Datang..
       tl.to(text3Ref.current, { opacity: 1, y: 0, duration: 10 }, 221);
