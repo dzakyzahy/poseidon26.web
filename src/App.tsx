@@ -7,6 +7,8 @@ import KajianKhusus from './pages/KajianKhusus';
 import Dokumentasi from './pages/Dokumentasi';
 import Tim from './pages/Tim';
 import Kontak from './pages/Kontak';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import Program from './pages/Program';
 import { useEffect } from 'react';
 import Lenis from 'lenis';
@@ -52,6 +54,8 @@ function App() {
           <Route path="/dokumentasi" element={<Dokumentasi />} />
           <Route path="/tim" element={<Tim />} />
           <Route path="/kontak" element={<Kontak />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
         </Routes>
         <FootNav />
       </div>

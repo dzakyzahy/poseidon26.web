@@ -34,9 +34,9 @@ export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
     const distance = (-5 - camera.position.z) / dir.z;
     targetPosition.current.copy(camera.position).add(dir.multiplyScalar(distance));
 
-    // Calculate spring physics for movement
-    const stiffness = 2.0;
-    const damping = 0.85; // Less than 1 for damping
+    // Calculate spring physics for movement (slowed down)
+    const stiffness = 0.5; // Reduced from 2.0
+    const damping = 0.90; // Increased slightly for smoother glide
 
     // Force = stiffness * (target - current)
     force.subVectors(targetPosition.current, ref.current.position).multiplyScalar(stiffness);
@@ -48,7 +48,8 @@ export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
     ref.current.position.add(velocity.current);
 
     // Calculate rotation to face the direction of movement
-    if (velocity.current.lengthSq() > 0.001) {
+    const velLength = velocity.current.length();
+    if (velLength > 0.001) {
       // Create a target rotation
       // The fish model faces Z, so we look at the velocity direction
       lookAtTarget.copy(ref.current.position).add(velocity.current);
@@ -58,7 +59,20 @@ export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
       dummy.lookAt(lookAtTarget);
       
       // Slerp for smooth rotation
-      ref.current.quaternion.slerp(dummy.quaternion, 0.1);
+      ref.current.quaternion.slerp(dummy.quaternion, 0.05);
+
+      // --- UNDULATION EFFECT ---
+      // Rotate around the local Y axis using a sine wave based on time and velocity
+      // The faster the fish, the stronger and faster the wiggle
+      const time = performance.now() * 0.001;
+      const wiggleSpeed = 15; // frequency
+      const wiggleMagnitude = Math.min(0.3, velLength * 2.0); // clamp max wiggle
+      
+      // We apply the wiggle directly to the rotation AFTER the slerp
+      // We do this by multiplying a temporary quaternion
+      const wiggleQuat = new THREE.Quaternion();
+      wiggleQuat.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.sin(time * wiggleSpeed) * wiggleMagnitude);
+      ref.current.quaternion.multiply(wiggleQuat);
     }
   });
 }

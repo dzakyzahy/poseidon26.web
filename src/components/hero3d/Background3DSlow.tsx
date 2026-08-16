@@ -83,6 +83,45 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
   );
 };
 
+const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
+  const { nodes, materials } = useGLTF('/models/FIX_fish.glb') as any;
+  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 3.0, speed: 3.0, amplitude: 0.08 });
+  
+  const customMaterial = useMemo(() => {
+    const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
+    if (!mat) return new THREE.MeshStandardMaterial();
+    const newMat = mat.clone();
+    newMat.onBeforeCompile = onBeforeCompile;
+    return newMat;
+  }, [materials, onBeforeCompile]);
+
+  const boids = useFlock(2, centerTargetRef); // less fish
+  
+  return (
+    <group>
+      {boids.map((boid, i) => (
+        <group key={i} ref={boid.meshRef}>
+          {Object.values(nodes).map((node: any) => {
+            if (node.isMesh) {
+              return (
+                <mesh 
+                  key={node.uuid} 
+                  geometry={node.geometry} 
+                  material={customMaterial} 
+                  position={node.position}
+                  rotation={node.rotation}
+                  scale={node.scale ? [node.scale.x * 0.4, node.scale.y * 0.4, node.scale.z * 0.4] : 0.4}
+                />
+              );
+            }
+            return null;
+          })}
+        </group>
+      ))}
+    </group>
+  );
+};
+
 export default function Background3DSlow() {
   const [dpr, setDpr] = useState(1.5);
   const mainFishRef = useRef<THREE.Group>(null);
@@ -105,6 +144,7 @@ export default function Background3DSlow() {
           <Suspense fallback={null}>
             <GreenFish centerTargetRef={mainFishRef} />
             <OrangeFlock centerTargetRef={mainFishRef} />
+            <FixFish centerTargetRef={mainFishRef} />
             <TrashSystem />
           </Suspense>
         </PerformanceMonitor>
@@ -115,3 +155,4 @@ export default function Background3DSlow() {
 
 useGLTF.preload('/models/green_fish.glb');
 useGLTF.preload('/models/orange_fish.glb');
+useGLTF.preload('/models/FIX_fish.glb');

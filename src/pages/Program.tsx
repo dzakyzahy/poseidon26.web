@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Camera } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { getInstagramUpdates } from '../utils/getInstagramUpdates';
 
 const programs = [
   {
@@ -122,7 +123,7 @@ export default function Program() {
           <div>
             <span className="text-bioluminescent-blue uppercase tracking-widest text-sm mb-4 block font-sans">Latest Updates</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white flex items-center gap-3">
-              <Camera className="w-8 h-8 text-bioluminescent-blue" />
+              <img src="/images/LogoIG.png" alt="Instagram" className="w-8 h-8 object-contain filter brightness-0 sepia hue-rotate-180 saturate-200" />
               @poseidonitb
             </h2>
           </div>
@@ -132,40 +133,9 @@ export default function Program() {
           </a>
         </div>
 
-        {/* IG Feed Slider (Manual) */}
+        {/* IG Feed Slider (Manual / Auto Generated) */}
         <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 hide-scrollbar">
-          {[
-            {
-              link: "https://www.instagram.com/p/DcEOprGmo-E/?img_index=1",
-              img: "https://picsum.photos/seed/ig1/600/600",
-              date: "Terbaru"
-            },
-            {
-              link: "https://www.instagram.com/p/Db3V4V8Gltd/?img_index=1",
-              img: "https://picsum.photos/seed/ig2/600/600",
-              date: "Update"
-            },
-            {
-              link: "https://www.instagram.com/p/Dau1M2gmpHx/?img_index=1",
-              img: "https://picsum.photos/seed/ig3/600/600",
-              date: "Update"
-            },
-            {
-              link: "https://www.instagram.com/p/DaXmjnomsRP/?img_index=1",
-              img: "https://picsum.photos/seed/ig4/600/600",
-              date: "Update"
-            },
-            {
-              link: "https://www.instagram.com/p/DaXmejmM_7d/",
-              img: "https://picsum.photos/seed/ig5/600/600",
-              date: "Update"
-            },
-            {
-              link: "https://www.instagram.com/p/DaXmcv1M5G5/",
-              img: "https://picsum.photos/seed/ig6/600/600",
-              date: "Update"
-            }
-          ].map((post, i) => (
+          {getInstagramUpdates().map((post, i) => (
             <a 
               key={i} 
               href={post.link} 
@@ -173,11 +143,10 @@ export default function Program() {
               rel="noreferrer"
               className="snap-start shrink-0 w-[280px] md:w-[320px] aspect-square rounded-2xl overflow-hidden relative group border border-white/10"
             >
-              {/* NOTE: Ganti link img (https://picsum.photos/...) dengan URL gambar asli atau letakkan file gambar di folder public/ dan panggil misal '/images/ig1.jpg' */}
-              <img src={post.img} alt={`IG Post ${i+1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <img src={post.img} alt={`IG Post ${i+1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 bg-neutral-900" />
               <div className="absolute inset-0 bg-gradient-to-t from-ocean-900/90 via-ocean-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
               <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
-                <Camera className="w-8 h-8 text-white mb-3 drop-shadow-md" />
+                <img src="/images/LogoIG.png" alt="Instagram" className="w-8 h-8 object-contain mb-3 drop-shadow-md" />
                 <p className="text-white font-sans text-sm font-medium">Buka di Instagram</p>
               </div>
               <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 text-xs text-white font-sans font-medium">

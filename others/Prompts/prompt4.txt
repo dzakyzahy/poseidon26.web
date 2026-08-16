@@ -12,7 +12,7 @@
 
 ---
 
-boleh ini link post postnya dari terbaru dan terlama
+boleh pakai opsi b, ini link post postnya dari terbaru dan terlama
 https://www.instagram.com/p/DcEOprGmo-E/?img_index=1
 https://www.instagram.com/p/Db3V4V8Gltd/?img_index=1
 https://www.instagram.com/p/Dau1M2gmpHx/?img_index=1
@@ -22,3 +22,182 @@ https://www.instagram.com/p/DaXmcv1M5G5/
 tambahkan juga ke implementation plan beberapa bidang dan divisi dan update terbaru (takperlu mengikuti hierarki yang penting terlihat saja bidang nya apa saja dan postingan terakhir juga latest update ya)
 ini juga trash 3d nya belum terlihat, mungkin coba perbaiki agar trash nya terlihat nya ya 1 atau 3 model saja ngaambang agak jatuh ke bawah tapi dibawah bisa terganggu oleh ikan kalau terlewati, tapi jangan mengorbanlan performa, performa webstie tetap nomor 1
 di dokumentasi scroll di website desktop itu masih double saat gambar, ubah saj ajadi seperti yang di program (bergeser otomatis gitu)tidak perlu pakai logik scroll ke kanan, tapi di mobile biarkan saja seperti sekarang yang normal
+
+--
+
+buat di mobile buat agar landing pagenya logonya dibawah tulisan poseidon, kiri kanan gitu jangan di pinggir tulisannya
+buat logo ig bisa pakai others\LogoInstagram\LogoIG.png (ini sudah logo white jadi tak perlu diatur tinggal dimasukan)
+karena video masih stuck coba dulu pakai image sequence (video hapus dulu dari call di sini iamgenya )
+others\ImageSequenceScroll\Image
+tolong fish satu lagi juga dipakai di akhir atau di awal juga yang others\3DFish\FIX_fish.glb, sekarang baru ada green fish sama orange fish
+laju green fish juga terlalu cepat saat mengitkuticursor dilambatkan lagi, laju orange fish juga terlalu cepat tolong lambatkan lagi dan buat aga ikannya lebih bergerak kay aikan lagi tapi tidak mengorbankan prerforma
+
+Main
+Portfolio
+Marketplace
+Articles
+Physics-Based Animation: Undulation
+August 4, 2026
+Physics-Based Animation: Undulation
+1. Overview
+Undulation is the wave-like follow-through you see in tails, ropes, antennae, hair chains, and similar setups. Instead of manually animating every bone, we can animate only the root and simulate the rest of the chain.
+In this example, every bone tip behaves like a small point mass attached to a spring. The spring pulls the tip toward where the bone would normally be if it followed its parent rigidly. The tip is then constrained back to the bone length, and the bone is rotated to point toward it.
+
+The whole system only needs a few things:
+
+The chain’s rest pose.
+A simulated tip position and velocity for each bone.
+A spring-damper.
+A length constraint.
+A rotation that aims each bone toward its simulated tip.
+The result is delayed motion, overshoot, and settling without needing a full physics solver.
+
+Input
+
+Simulation
+
+Output
+
+You can follow the tutorial by downloading and testing the script in 3ds Max to better understand the process.
+
+DOWNLOAD THE CODE HERE
+2. Chain Setup
+The example creates a chain using:
+
+_bone_num = 8
+_bone_len = 20
+chain = #()
+The root bone is animated manually in the setup_scene function, while the remaining bones are stored inside chain. The root is moved and rotated over a few frames
+
+3. Capturing the Rest Pose
+Before simulation starts, we store each bone’s transform relative to its parent. we call this rest pose and it is the state that the bone will try to get back to all the time but forces like gravity and the stiffness parameters will fight gainst it.
+
+This is done in initiate_data:
+
+_localRest = item.transform * inverse item.parent.transform
+append chain_rest _localRest
+The result is stored in:
+
+chain_rest
+Later, this lets us reconstruct where the bone would be if it followed its current parent without any simulation:
+
+rigidTM = chain_rest[i] * chain[i].parent.transform
+rigidTM is basically the bone’s rigid target transform. basically where the bone would be of it followed its parent perfectly without any delay or other forces fighting against it.
+
+4. Storing the Bone Tips
+We also need the tip of every bone. For most bones, the child’s position gives us the tip. We convert that position into the current bone’s local space:
+
+_tip = item.children[1].pos * inverse item.transform
+append chain_tips _tip
+These local tip offsets are stored in:
+
+chain_tips
+For the last bone, which has no child, the previous tip offset is reused. 
+Once we have chain_tips, the world-space tip of a bone can be calculated with:
+
+rigidTip = chain_tips[i] * rigidTM
+5. Simulation State
+Each bone has two values that persist between frames:
+
+simTips
+simVels
+simTips[i] is the simulated world-space tip position. 
+simVels[i] is its current velocity.
+
+They are initialized at frame 0:
+
+append simTips (chain_tips[i] * chain[i].transform)
+append simVels [0, 0, 0]
+That stored velocity simVels is what gives the chain momentum, overshoot, and follow-through. 
+
+6. The Spring-Damper
+The main simulation happens inside simulate function.
+
+For each bone, we first calculate its rigid target (again, just calculating where they would be in a perfect situation):
+
+rigidTM = chain_rest[i] * chain[i].parent.transform
+rigidTip = chain_tips[i] * rigidTM
+Then the simulated tip chases rigidTip:
+
+simVels[i] += (rigidTip - simTips[i]) * _stiffness
+simVels[i] *= _damping
+simTips[i] += simVels[i]
+If we don’t do anything to the simVels. the simTips stay where they are in the world space and don’t follow the parent, but we use this Spring-Damper to calculate velocity, which is a 3d vector that tells us how much and in what direction to move to reach the rigidTip, the velocity is effected by two main controls:
+
+_stiffness = .1
+_damping = .7
+_stiffness controls how strongly the tip is pulled toward rigidTip. 
+Higher stiffness makes the chain react faster. Lower stiffness gives more lag.
+
+_damping controls how much velocity survives each frame.
+Values closer to 1.0 keep the motion going longer, while lower values make it settle faster.
+
+7. Keeping the Bone Length Fixed
+The spring is free to move simTips[i] anywhere, which could stretch the bone.
+To prevent that, the tip is projected back to _bone_len from the bone position:
+
+simTips[i] = chain[i].pos + normalize(simTips[i] - chain[i].pos) * _bone_len
+This means the bone can rotate, but it cannot change length.
+The spring controls the direction of the motion, while the constraint keeps the skeleton rigid.
+
+8. Aiming the Bone
+Now we have two directions:
+
+rigidTip - chain[i].pos --> The direction of the rigid bone
+simTips[i] - chain[i].pos --> And the direction toward the simulated tip
+tsQuatFromTo calculates the rotation between those directions:
+
+q = tsQuatFromTo (rigidTip - chain[i].pos) (simTips[i] - chain[i].pos)
+The function uses the dot and cross products to build the shortest rotation from one direction to the other.
+
+local d = dot a b
+local ax = normalize (cross a b)
+local ang = acos (amin 1.0 (amax -1.0 d))
+It also handles the special cases where the directions are already aligned or point in opposite directions.
+
+The rotation is then applied around the bone’s own position:
+
+tm = tsRotateTMAboutPivot rigidTM q
+tm.pos = chain[i].pos
+chain[i].transform = tm
+tsRotateTMAboutPivot does this using:
+
+tm * (transMatrix -p) * (q as matrix3) * (transMatrix p)
+Starting from rigidTM also means we preserve the original bone orientation and only add the swing required by the simulation.
+
+This version does not simulate twist.
+
+9. Why the Chain Undulates
+The important part is the order of the loop:
+
+for i=1 to chain.count do
+The chain is evaluated from top to bottom. When bone 1 is simulated, bone 2 sees bone 1’s new transform. Bone 3 then sees bone 2’s new transform, and so on. Each bone adds a little spring delay and overshoot. As that delay accumulates down the hierarchy, the motion travels through the chain and forms a wave. There is no actual wave equation involved. The undulation appears naturally from each bone following the simulated result of the bone before it.
+
+10. The Core Loop
+The important part of the entire system is surprisingly small:
+
+rigidTM = chain_rest[i] * chain[i].parent.transform
+rigidTip = chain_tips[i] * rigidTM
+
+simVels[i] += (rigidTip - simTips[i]) * _stiffness
+simVels[i] *= _damping
+simTips[i] += simVels[i]
+
+simTips[i] = chain[i].pos + normalize(simTips[i] - chain[i].pos) * _bone_len
+
+q = tsQuatFromTo (rigidTip - chain[i].pos) (simTips[i] - chain[i].pos)
+
+tm = tsRotateTMAboutPivot rigidTM q
+tm.pos = chain[i].pos
+
+chain[i].transform = tm
+Everything else in the script is mostly setup.
+
+The bone finds where it should normally be, its simulated tip chases that position, the tip is constrained to the correct length, and the bone is rotated toward it. Repeating that process down the hierarchy is enough to produce convincing tail-style follow-through and undulation.
+
+
+pembuatna terms of service dnaprivacy polici itu giamana ya? mari kita buat diskusi dulu dan implementation plan
+buat agar yang di web yang foto ig nya di update dengan foto terbaru di folder :others\InstagramPostCoverImage (nomor 1 itu yang terlama dan terkahir yang terbesar nomorny ajadi tolong disesuaikan)
+permudah juga agar nanti developer mudah untuk memperbarui update instagram melalu apa gitu
+misal kalau developer masukan gambar ke 7 di githubnya maka  nanti otomatis terdeploy ke vercel dengan yang terbaruny adalah gamabr tersebut dan sebagainya
+

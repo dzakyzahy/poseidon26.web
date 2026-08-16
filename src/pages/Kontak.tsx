@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, User, MessageSquare, Send, MapPin, CheckCircle, AlertCircle, Camera } from 'lucide-react';
+import { Mail, User, MessageSquare, Send, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import Background3DSlow from '../components/hero3d/Background3DSlow';
 
@@ -96,8 +96,8 @@ export default function Kontak() {
           <div>
             <h2 className="font-serif text-2xl mb-6 text-neutral-900">Hubungi Langsung</h2>
             <a href="https://www.instagram.com/poseidonitb/" target="_blank" rel="noreferrer" className="bg-neutral-50 border border-neutral-200 p-4 md:p-6 rounded-xl flex items-center gap-4 hover:bg-neutral-100 hover:border-neutral-300 transition-colors cursor-pointer w-full overflow-hidden">
-              <div className="w-12 h-12 rounded-full bg-white border border-neutral-200 flex items-center justify-center shrink-0">
-                <Camera className="w-5 h-5 text-neutral-700" />
+              <div className="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center shrink-0">
+                <img src="/images/LogoIG.png" alt="Instagram" className="w-5 h-5 object-contain" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-1 truncate">Instagram</p>
