@@ -183,7 +183,7 @@ const VideoScrollSequence = () => {
       });
 
       // 3. Text fading sequences - Synced to exact frames
-      gsap.set([text1Ref.current, text2Ref.current, text3Ref.current], { y: 50, opacity: 0 });
+      gsap.set([text1Ref.current, text2Ref.current], { y: 50, opacity: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
