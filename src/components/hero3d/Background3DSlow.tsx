@@ -32,7 +32,7 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
               material={customMaterial} 
               position={node.position}
               rotation={node.rotation}
-              scale={node.scale ? [node.scale.x * 0.2, node.scale.y * 0.2, node.scale.z * 0.2] : 0.2}
+              scale={node.scale ? [node.scale.x * 0.1, node.scale.y * 0.1, node.scale.z * 0.1] : 0.1}
               castShadow 
               receiveShadow 
             />

@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const VideoScrollSequence = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const text1Ref = useRef<HTMLHeadingElement>(null);
   const text2Ref = useRef<HTMLHeadingElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
@@ -19,34 +19,76 @@ const VideoScrollSequence = () => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      // 1. Video Sequence Scrubbing
-      const video = videoRef.current;
-      
-      const setupVideoScrub = () => {
+      // 1. Image Sequence Scrubbing
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const context = canvas.getContext('2d');
+        const frameCount = 246;
+        const currentFrame = (index: number) => 
+          `/images/sequence/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
+        
+        const images: HTMLImageElement[] = [];
+        const imageObj = { frame: 0 };
+        
+        // Preload images
+        for (let i = 1; i <= frameCount; i++) {
+          const img = new Image();
+          img.src = currentFrame(i);
+          images.push(img);
+        }
+
+        const render = () => {
+          if (context && images[imageObj.frame]) {
+            // Draw image to fill canvas (cover)
+            const img = images[imageObj.frame];
+            if (img.complete) {
+              const canvasRatio = canvas.width / canvas.height;
+              const imgRatio = img.width / img.height;
+              let drawWidth = canvas.width;
+              let drawHeight = canvas.height;
+              let offsetX = 0;
+              let offsetY = 0;
+
+              if (canvasRatio > imgRatio) {
+                drawHeight = canvas.width / imgRatio;
+                offsetY = (canvas.height - drawHeight) / 2;
+              } else {
+                drawWidth = canvas.height * imgRatio;
+                offsetX = (canvas.width - drawWidth) / 2;
+              }
+
+              context.clearRect(0, 0, canvas.width, canvas.height);
+              context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+            }
+          }
+        };
+
+        // Resize canvas
+        const resize = () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          render();
+        };
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Ensure first frame renders on load
+        images[0].onload = render;
+
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: "top top",
           end: "bottom bottom",
           scrub: 1, // Add a bit of smoothing
           onUpdate: (self) => {
-            if (video && video.duration) {
-              // Ensure we don't try to seek past the end or before start
-              video.currentTime = Math.max(0, Math.min(video.duration - 0.1, self.progress * video.duration));
-            }
+            const frameIndex = Math.min(
+              frameCount - 1,
+              Math.floor(self.progress * frameCount)
+            );
+            imageObj.frame = frameIndex;
+            requestAnimationFrame(render);
           }
         });
-      };
-
-      if (video) {
-        // We must wait for metadata to know the duration
-        if (video.readyState >= 1) {
-          setupVideoScrub();
-        } else {
-          video.addEventListener('loadedmetadata', setupVideoScrub);
-        }
-        
-        // Pause the video initially to prevent auto-playing if some browsers try to
-        video.pause();
       }
 
       // 2. Logo and Title fade out as user scrolls
@@ -127,8 +169,8 @@ const VideoScrollSequence = () => {
         }
       );
 
-      // Video blur & fade out at the end of scroll
-      gsap.to(videoRef.current, {
+      // Video/Canvas blur & fade out at the end of scroll
+      gsap.to(canvasRef.current, {
         opacity: 0,
         filter: "blur(20px)",
         ease: "power2.inOut",
@@ -220,14 +262,10 @@ const VideoScrollSequence = () => {
       </h1>
 
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Video Background for Sequence */}
-        <video 
-          ref={videoRef}
-          src="/videos/Video_Scroll.mp4"
-          className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen"
-          muted
-          playsInline
-          preload="auto"
+        {/* Canvas Background for Image Sequence */}
+        <canvas 
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full opacity-60 mix-blend-screen"
         />
 
         {/* Overlay Content */}

@@ -50,7 +50,7 @@ export const TrashSystem = ({ count = 3 }) => {
         velocity: new THREE.Vector3(0, vy, 0),
         rotation: new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
         angularVelocity: new THREE.Euler((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5),
-        scale: (Math.random() * 0.4 + 0.6) * 1.5, // Drastically reduced scale
+        scale: (Math.random() * 0.4 + 0.6) * 10, // Restored scale
         meshIndex: meshes.length > 0 ? Math.floor(Math.random() * meshes.length) : 0,
       });
     }
