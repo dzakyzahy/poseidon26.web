@@ -12,15 +12,15 @@ export function useFishPatrol(ref: React.RefObject<THREE.Group | null>, active: 
   useFrame(({ clock }, delta) => {
     if (!ref.current || !active) return;
 
-    // Slow oscillation left and right
-    const time = clock.getElapsedTime() * 0.05; // very slow
-    const x = offsetX + Math.sin(time) * 5; // range offsetX-5 to offsetX+5
-    const z = -5 + Math.cos(time * 1.5) * 1; // slight depth variation
+    // Organic oscillation using combined sine waves
+    const time = clock.getElapsedTime() * 0.02; // very slow
+    const x = offsetX + Math.sin(time) * 3 + Math.sin(time * 2.3) * 2; 
+    const z = -5 + Math.cos(time * 1.5) * 1 + Math.sin(time * 0.8) * 1; 
     
     targetPosition.current.set(x, 0, z);
 
     // Calculate spring physics for movement
-    const stiffness = 0.05;
+    const stiffness = 0.01;
     const damping = 0.95;
 
     // Force = stiffness * (target - current)

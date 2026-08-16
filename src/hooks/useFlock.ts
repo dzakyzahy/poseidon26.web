@@ -36,9 +36,9 @@ export function useFlock(count: number, centerTargetRef: React.RefObject<THREE.G
     return list;
   }, [count]);
 
-  const separationRadius = options?.separationRadius ?? 2.0;
-  const maxSpeed = options?.maxSpeed ?? 3.0;
-  const maxForce = options?.maxForce ?? 0.05;
+  const separationRadius = options?.separationRadius ?? 4.0;
+  const maxSpeed = options?.maxSpeed ?? 1.0;
+  const maxForce = options?.maxForce ?? 0.02;
 
   useFrame((_, delta) => {
     const centerTarget = centerTargetRef.current?.position || new THREE.Vector3(0, 0, -5);
@@ -115,7 +115,7 @@ export function useFlock(count: number, centerTargetRef: React.RefObject<THREE.G
       boid.velocity.clampLength(0, maxSpeed);
       
       // Update position
-      boid.position.add(boid.velocity.clone().multiplyScalar(delta * 5)); // Slower movement
+      boid.position.add(boid.velocity.clone().multiplyScalar(delta * 2)); // Slower movement
 
       // Update mesh
       if (boid.meshRef.current) {

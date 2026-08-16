@@ -199,12 +199,12 @@ const VideoScrollSequence = () => {
       tl.to({}, { duration: 189 });
 
       // Frame 96: Lautan..
-      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 10 }, 96)
-        .to(text1Ref.current, { opacity: 0, y: -50, duration: 10 }, 116);
+      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 15 }, 96)
+        .to(text1Ref.current, { opacity: 0, y: -50, duration: 10 }, 125);
 
       // Frame 138: Sampah mengancam..
-      tl.to(text2Ref.current, { opacity: 1, y: 0, duration: 10 }, 138)
-        .to(text2Ref.current, { opacity: 0, y: -50, duration: 10 }, 158);
+      tl.to(text2Ref.current, { opacity: 1, y: 0, duration: 15 }, 138)
+        .to(text2Ref.current, { opacity: 0, y: -50, duration: 10 }, 160);
 
       // Frame 170: Selamat Datang..
       tl.to(text3Ref.current, { opacity: 1, y: 0, duration: 10 }, 170);
@@ -260,9 +260,9 @@ const VideoScrollSequence = () => {
         className="fixed top-[22%] md:top-1/4 right-[5%] md:right-[10%] text-3xl md:text-[4.5rem] leading-none font-sans font-bold tracking-tighter text-white z-50 flex flex-col items-end text-right pointer-events-none mix-blend-difference"
       >
         Persembahan<br />
-        <span className="text-bioluminescent-blue font-serif italic text-4xl md:text-[5.5rem] mt-2 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]">Oseanografi</span>
-        <span className="text-white">untuk</span>
-        <span className="text-bioluminescent-blue font-serif italic text-4xl md:text-[5.5rem] mt-1 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]">Indonesia</span>
+        <span className="text-bioluminescent-blue font-serif italic text-3xl md:text-[4.5rem] mt-2 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]">Oseanografi</span>
+        <span className="text-white text-2xl md:text-[3.5rem] my-2">untuk</span>
+        <span className="text-bioluminescent-blue font-serif italic text-3xl md:text-[4.5rem] mt-1 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]">Indonesia</span>
       </h1>
 
       <div className="sticky top-0 h-screen w-full overflow-hidden">

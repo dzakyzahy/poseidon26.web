@@ -24,3 +24,11 @@ buat handover untuk ai berikut nya di handover.md serta konteks dan kesalahan ya
 setelah itu build dan push 
 dan juga untuk ikan yang berenang bebas yang oren itu masih terlihat kaku gitu kayanya ada yang salah dalam pengukuran model atau dalam logikanya coba analisis kode kode yang berhubungan juga
 default yang logo ig agak kecil jadi dibesarkan terutam pada kontak CP, trus pada logo Ikuti kami di foot nav juga agak bearkan sedikit
+
+
+
+
+
+
+
+4

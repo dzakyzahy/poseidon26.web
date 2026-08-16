@@ -117,17 +117,15 @@ export default function Background3D({ active = true }: { active?: boolean }) {
         className="pointer-events-auto"
       >
         <PerformanceMonitor onDecline={() => setDpr(1)} onIncline={() => setDpr(1.5)}>
-          <color attach="background" args={['#061428']} />
-          <fog attach="fog" args={['#061428', 5, 25]} />
-          
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 10]} intensity={1.5} />
           
           <Suspense fallback={null}>
             <GreenFish centerTargetRef={mainFishRef} />
             <GreenFish centerTargetRef={dummyFreeFishRef} isFree={true} patrolOffsetX={freeFishOffsetX} />
+            <GreenFish centerTargetRef={useRef<THREE.Group>(null)} isFree={true} patrolOffsetX={-freeFishOffsetX} />
             <OrangeFlock />
-            <TrashSystem />
+            <TrashSystem count={15} />
           </Suspense>
         </PerformanceMonitor>
       </Canvas>

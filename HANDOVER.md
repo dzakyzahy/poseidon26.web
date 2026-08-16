@@ -3,38 +3,28 @@
 Dokumen ini berisi konteks dan daftar perbaikan (bug fixes & fitur) yang harus dieksekusi oleh agent selanjutnya. **Mohon jadikan daftar ini sebagai prioritas eksekusi utama Anda.**
 
 ## Konteks Saat Ini
-Website POSEIDON ITB 2026 telah mencapai Phase 5 dengan implementasi *Image Sequence* untuk animasi scroll, integrasi model 3D (Green Fish, Orange Fish, FIX_fish, dan Trash), serta slider Instagram dinamis yang memuat foto dari folder `public/images/instagram`.
+Website POSEIDON ITB 2026 telah mencapai Phase 6. Implementasi *Image Sequence* untuk animasi scroll, integrasi model 3D, serta slider Instagram dinamis yang memuat foto dari folder `public/images/instagram` beserta *mapping JSON* sudah berjalan dengan baik. Semua visual *bug* dan isu performa render 3D dari Phase 5 beserta `prompt6.txt` telah diperbaiki.
 
-Namun, masih terdapat beberapa *bug* visual dan penyesuaian logika yang perlu diperbaiki.
-
-## Daftar Tugas (To-Do List)
+## Daftar Tugas yang Telah Diselesaikan (Sesi Ini)
 
 1. **Perbaikan Image Sequence (Stuck di atas)**
-   - *Issue*: Frame *image sequence* pada landing page saat ini *stuck* di atas dan tidak mengikuti *scroll* ke bawah secara mulus.
-   - *Action*: Perbaiki CSS (misalnya `sticky`, `fixed`, atau `absolute`) atau logika `ScrollTrigger` di komponen `VideoScrollSequence.tsx` agar kanvas/gambar mengikuti layar (terkunci di *viewport*) selama pengguna melakukan *scroll*.
+   - *Status*: Selesai. Dihapus `overflow-x-clip` di komponen `Home.tsx` agar kanvas `VideoScrollSequence` mengikuti layar selama pengguna melakukan *scroll*. Waktu durasi teks juga telah disesuaikan agar tidak terlalu cepat.
 
 2. **Hapus Background Biru Gelap di Landing Page**
-   - *Action*: Cari elemen pembungkus (kemungkinan di `VideoScrollSequence.tsx` atau `Home.tsx`) yang memiliki warna background tersebut dan hapus agar transisi ke halaman bawah lebih bersih.
+   - *Status*: Selesai. Komponen `<color>` dan `<fog>` pada `Background3D.tsx` telah dihapus sehingga 3D canvas transparan.
 
-3. **Periksa Rendering 3D Trash**
-   - *Issue*: Sistem *Trash* (sampah) mungkin masih belum ter-render dengan sempurna atau posisinya salah.
-   - *Action*: Periksa komponen `TrashSystem.tsx`. Pastikan titik awal (*spawn point*) sampah berada dalam jangkauan kamera dan objek jatuh (*fall speed*) terkalibrasi dengan baik sehingga terlihat di layar.
+3. **Perbaikan Rendering 3D Trash**
+   - *Status*: Selesai. Koordinat Y spawn 3D Trash telah direndahkan agar langsung muncul dalam *viewport* kamera. Jumlah sampah ditingkatkan menjadi 15.
 
-4. **Trajektori Ikan (Boids/Flocking)**
-   - *Issue*: Saat ini trajektori/pergerakan semua ikan hampir sama sehingga terlihat monoton.
-   - *Action*: Bedakan logika pergerakan atau kecepatan dasar antara `GreenFish`, `OrangeFlock`, dan `FixFish`. Khususnya untuk `OrangeFlock` (ikan oranye), buat agar mereka lebih menyebar (*scattered*) dan tidak terlalu menumpuk. Anda bisa menyesuaikan parameter boids di `useFlock.ts` atau `useFishPatrol.ts`.
+4. **Trajektori Ikan & Pelambatan (Boids/Flocking & Patrol)**
+   - *Status*: Selesai. Radius sebaran ditingkatkan pada `OrangeFlock`. Kecepatan maksimal, gaya, serta stiffness pada *hooks* `useFlock`, `useFishPatrol`, dan `useFishFollow` diturunkan drastis agar pergerakan tidak "pusing" dan lebih organik. Ditambahkan 1 *GreenFish* berenang bebas.
 
-5. **Pelambatan Kecepatan Ikan**
-   - *Issue*: Kecepatan ikan masih dirasa terlalu cepat, baik yang berada di belakang layar (`Background3DSlow.tsx`) maupun yang mengikuti *cursor* (`Background3D.tsx` / `useFishFollow.ts`).
-   - *Action*: Turunkan drastis parameter *speed*, *velocity*, dan *stiffness* pada semua *hooks* pergerakan ikan agar ikan berenang jauh lebih lambat dan santai.
+5. **Penyesuaian Visual dan UI (Prompt 6)**
+   - *Status*: Selesai. Ukuran logo Instagram pada navigasi diperbesar. Teks *Persembahan Oseanografi untuk Indonesia* telah dikecilkan. Bug pembekuan (*freeze*) frame 3D saat *scroll up* telah ditangani dengan menonaktifkan transisi durasi panjang. Teks jabatan kepanitiaan "Wakil Ketua" diganti menjadi "Sekretaris Jendral".
 
-6. **Perubahan Teks Struktur Organisasi**
-   - *Issue*: Jabatan "Wakil Ketua" perlu direvisi.
-   - *Action*: Ubah teks "Wakil Ketua" menjadi "Sekretaris Jendral" di dalam file data kepanitiaan (kemungkinan di `team.ts` atau `Tim.tsx`).
+## Rencana Fase Lanjutan (Jika Ada)
 
-7. **Sistem Link Dinamis untuk IG Slider**
-   - *Issue*: Saat ini otomatisasi Instagram hanya membaca gambar dari folder `public/images/instagram`, namun *link* (URL) menuju post aslinya masih statis atau menggunakan *mapping* manual di kode.
-   - *Action*: Buat mekanisme agar *developer* juga dapat memasukkan/meng-update *link* IG terkait untuk masing-masing gambar. (Saran: developer dapat meletakkan file `.json` berdampingan dengan gambar, atau mengadopsi format penamaan file tertentu seperti `1___https-link.png`, atau membaca dari sebuah file `data/ig_posts.json` yang mudah diedit).
+
 
 ### Fitur Tambahan & Pembaruan (Phase 5 Lanjutan):
 1. **Perbaikan Build & Deploy**: Mengatasi kesalahan impor `useEffect` dan sisa variabel tidak terpakai yang memicu `npm run build` gagal di Cloudflare Pages.

@@ -27,12 +27,12 @@ export default function Home() {
 
   return (
     <>
-      <div className={`transition-opacity duration-1000 ${show3D ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <div className={show3D ? 'opacity-100' : 'opacity-0 pointer-events-none'}>
         {/* We use opacity and conditionally pause frameloop inside Background3D if possible, or just keep it mounted.
             Using display:none (hidden) can sometimes break R3F sizing, so opacity 0 is safer for now. */}
         <Background3D active={show3D} />
       </div>
-      <main className="relative z-10 w-full overflow-x-clip">
+      <main className="relative z-10 w-full">
         <VideoScrollSequence />
         
         <div ref={contentRef} id="content-section" className="relative z-20 w-full max-w-6xl mx-auto px-4 md:px-6 pt-32 pb-32 flex flex-col gap-12">

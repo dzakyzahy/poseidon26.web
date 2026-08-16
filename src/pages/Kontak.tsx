@@ -133,7 +133,7 @@ export default function Kontak() {
             <h2 className="font-serif text-2xl mb-6 text-neutral-900">Hubungi Langsung</h2>
             <a href="https://www.instagram.com/poseidonitb/" target="_blank" rel="noreferrer" className="bg-neutral-50 border border-neutral-200 p-4 md:p-6 rounded-xl flex items-center gap-4 hover:bg-neutral-100 hover:border-neutral-300 transition-colors cursor-pointer w-full overflow-hidden">
               <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center shrink-0">
-                <img src="/images/LogoIG.png" alt="Instagram" className="w-7 h-7 md:w-8 md:h-8 object-contain" />
+                <img src="/images/LogoIG.png" alt="Instagram" className="w-10 h-10 md:w-12 md:h-12 object-contain" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-1 truncate">Instagram</p>

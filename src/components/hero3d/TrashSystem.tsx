@@ -42,7 +42,7 @@ export const TrashSystem = ({ count = 3 }) => {
     for (let i = 0; i < count; i++) {
       // Random position across the screen
       const px = (Math.random() - 0.5) * 12;
-      const py = Math.random() * 10 + 5; // Start slightly above the screen [5, 15]
+      const py = Math.random() * 8 - 4; // Start within or slightly above the screen [-4, 4]
       const pz = (Math.random() - 0.5) * 4 - 3; // depth -5 to -1
 
       // Fall speed
@@ -77,8 +77,8 @@ export const TrashSystem = ({ count = 3 }) => {
       data.position.y += data.velocity.y * delta;
       
       // Wrap around if it falls below the screen
-      if (data.position.y < -10) {
-        data.position.y = 10;
+      if (data.position.y < -5) {
+        data.position.y = 5;
         data.position.x = (Math.random() - 0.5) * 12;
       }
 
