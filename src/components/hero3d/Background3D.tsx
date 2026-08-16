@@ -4,6 +4,7 @@ import { PerformanceMonitor, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useFishSwim } from '../../hooks/useFishSwim';
 import { useFishFollow } from '../../hooks/useFishFollow';
+import { useFishPatrol } from '../../hooks/useFishPatrol';
 import { useFlock } from '../../hooks/useFlock';
 import { TrashSystem } from './TrashSystem';
 
@@ -19,7 +20,14 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  useFishFollow(centerTargetRef);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  // Use patrol on mobile, follow on desktop
+  useFishFollow(centerTargetRef, !isMobile);
+  useFishPatrol(centerTargetRef, isMobile);
 
   return (
     <group ref={centerTargetRef}>
@@ -56,7 +64,7 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const boids = useFlock(8, centerTargetRef, { separationRadius: 5.0, maxSpeed: 2.5 });
+  const boids = useFlock(4, centerTargetRef, { separationRadius: 5.0, maxSpeed: 2.5 });
   
   return (
     <group>
@@ -95,7 +103,7 @@ const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.G
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const boids = useFlock(3, centerTargetRef, { maxSpeed: 2.0 });
+  const boids = useFlock(1, centerTargetRef, { maxSpeed: 2.0 });
   
   return (
     <group>
@@ -122,13 +130,22 @@ const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.G
   );
 };
 
-export default function Background3D() {
+export default function Background3D({ active = true }: { active?: boolean }) {
   const [dpr, setDpr] = useState(1.5);
   const mainFishRef = useRef<THREE.Group>(null);
+  
+  // Mobile detection
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
-      <Canvas frameloop="always"
+      <Canvas frameloop={active ? "always" : "never"}
         camera={{ position: [0, 0, 5], fov: 45 }}
         dpr={dpr}
         gl={{ antialias: false, powerPreference: "high-performance" }}

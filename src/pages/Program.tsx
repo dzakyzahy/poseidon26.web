@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { getInstagramUpdates } from '../utils/getInstagramUpdates';
 
@@ -78,6 +79,8 @@ const programs = [
 ];
 
 export default function Program() {
+  const [selectedProgram, setSelectedProgram] = useState<typeof programs[0] | null>(null);
+
   return (
     <main className="pt-32 pb-24 px-6 max-w-7xl mx-auto min-h-screen">
       <div className="mb-16">
@@ -98,7 +101,7 @@ export default function Program() {
             transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
           >
             {[...programs.slice(0, 5), ...programs.slice(0, 5)].map((prog, idx) => (
-              <ProgramCard key={`row1-${prog.id}-${idx}`} prog={prog} idx={idx} />
+              <ProgramCard key={`row1-${prog.id}-${idx}`} prog={prog} idx={idx} onClick={() => setSelectedProgram(prog)} />
             ))}
           </motion.div>
         </div>
@@ -111,7 +114,7 @@ export default function Program() {
             transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
           >
             {[...programs.slice(5, 9), ...programs.slice(5, 9), ...programs.slice(5, 9)].map((prog, idx) => (
-              <ProgramCard key={`row2-${prog.id}-${idx}`} prog={prog} idx={idx} />
+              <ProgramCard key={`row2-${prog.id}-${idx}`} prog={prog} idx={idx} onClick={() => setSelectedProgram(prog)} />
             ))}
           </motion.div>
         </div>
@@ -157,18 +160,89 @@ export default function Program() {
         </div>
       </section>
 
+      {/* Program Detail Modal */}
+      <AnimatePresence>
+        {selectedProgram && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setSelectedProgram(null)}
+            />
+            
+            {/* Modal Content */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-ocean-900/95 backdrop-blur-xl border border-white/20 p-8 rounded-[2rem] max-w-lg w-full shadow-2xl flex flex-col gap-6"
+            >
+              <button 
+                onClick={() => setSelectedProgram(null)}
+                className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div>
+                <span className="font-mono text-bioluminescent-green tracking-wider mb-2 block">{selectedProgram.id}</span>
+                <h3 className="font-sans font-bold text-2xl text-white mb-2">{selectedProgram.title}</h3>
+                <div className="flex items-center gap-3">
+                  <span className={`text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full border ${
+                    selectedProgram.status === 'Selesai' ? 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10' :
+                    selectedProgram.status === 'Sedang Berjalan' ? 'text-amber-400 border-amber-400/30 bg-amber-400/10' :
+                    'text-white/40 border-white/10 bg-white/5'
+                  }`}>
+                    {selectedProgram.status}
+                  </span>
+                  <span className="text-xs font-mono text-white/40">{selectedProgram.date}</span>
+                </div>
+              </div>
+
+              <p className="text-white/80 leading-relaxed font-sans">
+                {selectedProgram.description}
+              </p>
+
+              <div>
+                <div className="flex justify-between text-xs font-mono text-white/60 mb-2">
+                  <span>Progres Pelaksanaan</span>
+                  <span>{selectedProgram.progress}%</span>
+                </div>
+                <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${selectedProgram.progress}%` }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className={`h-full rounded-full ${
+                      selectedProgram.status === 'Selesai' ? 'bg-emerald-400' :
+                      selectedProgram.status === 'Sedang Berjalan' ? 'bg-amber-400' :
+                      'bg-white/20'
+                    }`}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
 
-function ProgramCard({ prog, idx }: { prog: typeof programs[0], idx: number }) {
+function ProgramCard({ prog, idx, onClick }: { prog: typeof programs[0], idx: number, onClick?: () => void }) {
   return (
     <motion.div 
+      onClick={onClick}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: (idx % 5) * 0.1, duration: 0.5 }}
       viewport={{ once: true }}
-      className={`group flex flex-col p-6 rounded-lg border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition-colors w-[320px] md:w-[380px] shrink-0 ${
+      className={`group flex flex-col p-6 rounded-lg border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/30 hover:-translate-y-2 cursor-pointer transition-all duration-300 w-[320px] md:w-[380px] shrink-0 ${
         prog.status === 'Selesai' ? 'border-l-4 border-l-emerald-500' :
         prog.status === 'Sedang Berjalan' ? 'border-l-4 border-l-amber-500' :
         'border-l-4 border-l-white/20'

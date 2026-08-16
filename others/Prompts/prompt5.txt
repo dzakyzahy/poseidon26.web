@@ -1,0 +1,9 @@
+3d nya tidak usah muncul saat image sequence
+lanjutkan selamat datang di: "website poseidon itb 2026"
+baru ke tentang poseidon itb itu pidnahkan saja sebelum logo lgo sponsor (di section yang ada 3d nya)
+trus ini mulai lag karena 3d ikannya kayanya, bisa dikurangi saja jumlah ikannya hingga setengahnya
+untuk di hape/mobil buat aagar tidak ada ikan yan gmengikuti cursor tapi ikan yang dibelakan saj aberenang 
+image sequence sudah aku update framenya kubanyakin di folder others\ImageSequenceScroll\Image(LotofFrame)tinum Sponsor(s) 
+untuk yang tentang poseidon itb juga kasih kotak yan gsama dengan sponsor
+audit kenap abisa ngelag karena mengutamakan performa, diksusikan terlebih daulu dan buat implementaionplan (audit-->anailisis-->diskusi-->implementation plan-->eksekusi/revisi)
+bua yang di program poseidon itu yang kotak kotak bis adipencet trus muncul popup keterangan nya gitu kotak

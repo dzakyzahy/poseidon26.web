@@ -15,7 +15,6 @@ const VideoScrollSequence = () => {
   const scrollTextRef = useRef<HTMLDivElement>(null);
 
   const text3Ref = useRef<HTMLHeadingElement>(null);
-  const text4Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -23,7 +22,7 @@ const VideoScrollSequence = () => {
       const canvas = canvasRef.current;
       if (canvas) {
         const context = canvas.getContext('2d');
-        const frameCount = 19;
+        const frameCount = 189;
         const currentFrame = (index: number) => 
           `/images/sequence/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
         
@@ -140,7 +139,7 @@ const VideoScrollSequence = () => {
       });
 
       // 3. Text fading sequences - Using a timeline to prevent overlap
-      gsap.set([text1Ref.current, text2Ref.current, text3Ref.current, text4Ref.current], { y: 50, opacity: 0 });
+      gsap.set([text1Ref.current, text2Ref.current, text3Ref.current], { y: 50, opacity: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -158,10 +157,7 @@ const VideoScrollSequence = () => {
         .to(text2Ref.current, { opacity: 1, duration: 0.5 }) // Hold
         .to(text2Ref.current, { opacity: 0, y: -50, duration: 1 })
         .to(text3Ref.current, { opacity: 1, y: 0, duration: 1 }, "+=0.2")
-        .to(text3Ref.current, { opacity: 1, duration: 0.5 }) // Hold
-        .to(text3Ref.current, { opacity: 0, y: -50, duration: 1 })
-        .to(text4Ref.current, { opacity: 1, y: 0, duration: 1.5 }, "+=0.2")
-        .to(text4Ref.current, { opacity: 1, duration: 2 }); // Hold until end
+        .to(text3Ref.current, { opacity: 1, duration: 2 }); // Hold until end
 
 
     }, containerRef);
@@ -219,18 +215,10 @@ const VideoScrollSequence = () => {
             Sampah mengancam..
           </h2>
 
-          <h2 ref={text3Ref} className="heading-lg absolute text-center font-serif text-white tracking-wide mix-blend-difference">
-            Selamat Datang di
+          <h2 ref={text3Ref} className="heading-lg absolute text-center font-serif text-white tracking-wide mix-blend-difference flex flex-col items-center">
+            <span>Selamat Datang di</span>
+            <span className="font-sans text-bioluminescent-blue italic text-4xl md:text-7xl mt-4 block">Website POSEIDON ITB 2026</span>
           </h2>
-
-          <div ref={text4Ref} className="absolute flex flex-col items-center text-center max-w-4xl mx-auto mix-blend-difference">
-            <h2 className="heading-lg font-sans font-bold mb-6">
-              TENTANG <span className="text-bioluminescent-blue font-serif italic">POSEIDON ITB</span>
-            </h2>
-            <p className="body-lg text-white/90 leading-relaxed font-sans font-light">
-              POSEIDON ITB 2026 adalah program Pengabdian Masyarakat inovatif yang berfokus pada restorasi ekologi pesisir dan pemberdayaan masyarakat di Pantai Imut Jongor, Cirebon. Kami hadir sebagai solusi berkelanjutan untuk menghadapi tantangan abrasi dan pencemaran laut.
-            </p>
-          </div>
         </div>
       </div>
       

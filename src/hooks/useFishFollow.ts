@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
-export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
+export function useFishFollow(ref: React.RefObject<THREE.Group | null>, active: boolean = true) {
   const { camera } = useThree();
   const globalMouse = useRef(new THREE.Vector2());
   const targetPosition = useRef(new THREE.Vector3());
@@ -23,7 +23,7 @@ export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
   }, []);
 
   useFrame((_, delta) => {
-    if (!ref.current) return;
+    if (!ref.current || !active) return;
 
     // Raycast global mouse position to a virtual plane in front of the camera
     vector.set(globalMouse.current.x, globalMouse.current.y, 0.5);

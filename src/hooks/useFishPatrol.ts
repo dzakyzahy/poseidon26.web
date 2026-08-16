@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-export function useFishPatrol(ref: React.RefObject<THREE.Group | null>) {
+export function useFishPatrol(ref: React.RefObject<THREE.Group | null>, active: boolean = true) {
   const targetPosition = useRef(new THREE.Vector3());
   const velocity = useRef(new THREE.Vector3());
   const force = useRef(new THREE.Vector3());
@@ -10,7 +10,7 @@ export function useFishPatrol(ref: React.RefObject<THREE.Group | null>) {
   const dummy = useRef(new THREE.Object3D());
 
   useFrame(({ clock }, delta) => {
-    if (!ref.current) return;
+    if (!ref.current || !active) return;
 
     // Slow oscillation left and right
     const time = clock.getElapsedTime() * 0.05; // very slow
