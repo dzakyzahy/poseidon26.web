@@ -1,10 +1,7 @@
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, Clone } from '@react-three/drei';
 import * as THREE from 'three';
-
-// Define the trash geometries we want to instance dynamically
-// The list will be populated inside the component
 
 interface TrashData {
   position: THREE.Vector3;
@@ -12,66 +9,44 @@ interface TrashData {
   rotation: THREE.Euler;
   angularVelocity: THREE.Euler;
   scale: number;
-  typeIndex: number;
 }
 
 export const TrashSystem = ({ count = 3 }) => {
   const { scene } = useGLTF('/models/trash_and_debris.glb') as any;
-
-  // References to InstancedMesh for each type
-  const meshRefs = useRef<(THREE.InstancedMesh | null)[]>([]);
-
-  // Extract actual mesh types from scene
-  const trashMeshes = useMemo(() => {
-    const meshes: THREE.Mesh[] = [];
-    if (scene) {
-      scene.traverse((child: any) => {
-        if (child.isMesh && child.geometry && child.material) {
-          meshes.push(child);
-        }
-      });
-    }
-    return meshes;
-  }, [scene]);
+  
+  // References to the wrapper groups for each clone
+  const groupRefs = useRef<(THREE.Group | null)[]>([]);
 
   // Generate trash data
   const trashData = useMemo(() => {
     const data: TrashData[] = [];
-    if (trashMeshes.length === 0) return data;
+    if (!scene) return data;
 
     for (let i = 0; i < count; i++) {
-      // Random position across the screen, clustered near center and in front of camera
-      const px = (Math.random() - 0.5) * 6;
-      const py = Math.random() * 4; // Start in view [0, 4]
-      const pz = 1; // depth 1 (closer to camera at z=5)
+      // Spread them across the screen
+      const px = (Math.random() - 0.5) * 12;
+      const py = Math.random() * 8 - 4; // Start in view [-4, 4]
+      const pz = (Math.random() - 0.5) * 4 - 2; // depth -4 to 0
 
       // Fall speed
-      const vy = -(Math.random() * 0.2 + 0.1); // slower fall
+      const vy = -(Math.random() * 0.2 + 0.1);
 
       data.push({
         position: new THREE.Vector3(px, py, pz),
         velocity: new THREE.Vector3(0, vy, 0),
         rotation: new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
         angularVelocity: new THREE.Euler((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5),
-        scale: (Math.random() * 0.4 + 0.6) * 10, // Increased scale 10x for debugging visibility
-        typeIndex: Math.floor(Math.random() * trashMeshes.length)
+        scale: (Math.random() * 0.4 + 0.6) * 10, // Scaled up to counteract internal geometry scales
       });
     }
     return data;
-  }, [count, trashMeshes]);
-
-  const dummy = useMemo(() => new THREE.Object3D(), []);
+  }, [count, scene]);
 
   useFrame((_, delta) => {
-    const countsPerType = new Array(trashMeshes.length).fill(0);
-
     for (let i = 0; i < trashData.length; i++) {
       const data = trashData[i];
-      const typeIdx = data.typeIndex;
-      const indexInType = countsPerType[typeIdx]++;
-      
-      const mesh = meshRefs.current[typeIdx];
-      if (!mesh) continue;
+      const group = groupRefs.current[i];
+      if (!group) continue;
 
       // Update position falling down
       data.position.y += data.velocity.y * delta;
@@ -81,50 +56,28 @@ export const TrashSystem = ({ count = 3 }) => {
         data.position.y = 5;
         data.position.x = (Math.random() - 0.5) * 12;
       }
-
-      dummy.position.copy(data.position);
       
       // Update rotation
       data.rotation.x += data.angularVelocity.x * delta;
       data.rotation.y += data.angularVelocity.y * delta;
       data.rotation.z += data.angularVelocity.z * delta;
-      dummy.rotation.copy(data.rotation);
       
-      dummy.scale.set(data.scale, data.scale, data.scale);
-      dummy.updateMatrix();
-      
-      mesh.setMatrixAt(indexInType, dummy.matrix);
+      // Apply to group
+      group.position.copy(data.position);
+      group.rotation.copy(data.rotation);
+      group.scale.set(data.scale, data.scale, data.scale);
     }
-
-    // Mark as needing update
-    meshRefs.current.forEach(mesh => {
-      if (mesh) mesh.instanceMatrix.needsUpdate = true;
-    });
   });
 
-  // Calculate instance counts per type
-  const counts = useMemo(() => {
-    const c = new Array(trashMeshes.length).fill(0);
-    trashData.forEach(d => c[d.typeIndex]++);
-    return c;
-  }, [trashData, trashMeshes]);
+  if (!scene) return null;
 
-  // Pre-load geometries and materials
   return (
     <group>
-      {trashMeshes.map((mesh, index) => {
-        return (
-          <instancedMesh 
-            key={index}
-            ref={(el) => (meshRefs.current[index] = el)}
-            args={[mesh.geometry, mesh.material, counts[index]]}
-            castShadow
-            receiveShadow
-          />
-        );
-      })}
-      {/* Fallback direct render to test if model is visible at all */}
-      {scene && <primitive object={scene.clone()} position={[0, 0, 1]} scale={10} />}
+      {trashData.map((_, index) => (
+        <group key={index} ref={(el) => (groupRefs.current[index] = el)}>
+          <Clone object={scene} castShadow receiveShadow />
+        </group>
+      ))}
     </group>
   );
 };
