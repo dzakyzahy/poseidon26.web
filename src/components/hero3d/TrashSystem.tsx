@@ -123,6 +123,8 @@ export const TrashSystem = ({ count = 3 }) => {
           />
         );
       })}
+      {/* Fallback direct render to test if model is visible at all */}
+      {scene && <primitive object={scene.clone()} position={[0, 0, 1]} scale={10} />}
     </group>
   );
 };
