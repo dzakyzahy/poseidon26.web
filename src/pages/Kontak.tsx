@@ -30,6 +30,16 @@ export default function Kontak() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const captchaRef = useRef<HCaptcha>(null);
 
+  const sanitizeInput = (input: string) => {
+    // Basic HTML escaping to prevent XSS injection
+    return input
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -40,9 +50,35 @@ export default function Kontak() {
       return;
     }
 
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    // Validate and sanitize inputs
+    const name = (formData.get('name') as string || '').trim();
+    const email = (formData.get('email') as string || '').trim();
+    const rawMessage = (formData.get('message') as string || '').trim();
+
+    if (!name || !email || !rawMessage) {
+      setStatus('error');
+      setMessage('Harap isi semua kolom dengan benar (tidak boleh kosong)');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+
+    // Basic email validation regex
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus('error');
+      setMessage('Format email tidak valid');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+
     setStatus('loading');
     
-    const formData = new FormData(e.currentTarget);
+    // Apply sanitized values back
+    formData.set('name', sanitizeInput(name));
+    formData.set('email', sanitizeInput(email));
+    formData.set('message', sanitizeInput(rawMessage));
     formData.append('access_key', '812dd852-7910-4043-9f3d-44326c19056b');
     formData.set('h-captcha-response', captchaToken);
 
@@ -57,7 +93,7 @@ export default function Kontak() {
       if (data.success) {
         setStatus('success');
         setMessage('Pesan Anda telah terkirim! Terima kasih.');
-        (e.target as HTMLFormElement).reset();
+        form.reset();
         captchaRef.current?.resetCaptcha();
         setCaptchaToken(null);
         setTimeout(() => setStatus('idle'), 3000);

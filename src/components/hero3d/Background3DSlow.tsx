@@ -2,7 +2,6 @@ import { Suspense, useRef, useState, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerformanceMonitor, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
-import { useFishSwim } from '../../hooks/useFishSwim';
 import { useFishPhysicsSwim } from '../../hooks/useFishPhysicsSwim';
 import { useFishPatrol } from '../../hooks/useFishPatrol';
 import { useFlock } from '../../hooks/useFlock';
@@ -10,7 +9,7 @@ import { TrashSystem } from './TrashSystem';
 
 const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
   const { nodes, materials } = useGLTF('/models/green_fish.glb') as any;
-  const { onBeforeCompile } = useFishPhysicsSwim(centerTargetRef, { stiffness: 0.08, damping: 0.8, boneNum: 8, boneLen: 0.25 });
+  const { onBeforeCompile } = useFishPhysicsSwim(centerTargetRef, { stiffness: 0.05, damping: 0.9, boneNum: 8, boneLen: 0.25 });
   
   const customMaterial = useMemo(() => {
     const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
@@ -45,10 +44,10 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
   );
 };
 
-const OrangeFlock = () => {
+const OrangeFish = ({ boid }: { boid: any }) => {
   const { nodes, materials } = useGLTF('/models/orange_fish.glb') as any;
-  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 1.5, speed: 1.5, amplitude: 0.08 });
-  
+  const { onBeforeCompile } = useFishPhysicsSwim(boid.meshRef, { stiffness: 0.05, damping: 0.9, boneNum: 6, boneLen: 0.2 });
+
   const customMaterial = useMemo(() => {
     const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
     if (!mat) return new THREE.MeshStandardMaterial();
@@ -57,69 +56,35 @@ const OrangeFlock = () => {
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const dummyRef = useRef(null);
-  const boids = useFlock(5, dummyRef, { separationRadius: 4.0, maxSpeed: 1.5 }); // less fish to not be overwhelming
-  
   return (
-    <group>
-      {boids.map((boid, i) => (
-        <group key={i} ref={boid.meshRef}>
-          {Object.values(nodes).map((node: any) => {
-            if (node.isMesh) {
-              return (
-                <mesh 
-                  key={node.uuid} 
-                  geometry={node.geometry} 
-                  material={customMaterial} 
-                  position={node.position}
-                  rotation={node.rotation}
-                  scale={node.scale ? [node.scale.x * 0.5, node.scale.y * 0.5, node.scale.z * 0.5] : 0.5}
-                />
-              );
-            }
-            return null;
-          })}
-        </group>
-      ))}
+    <group ref={boid.meshRef}>
+      {Object.values(nodes).map((node: any) => {
+        if (node.isMesh) {
+          return (
+            <mesh 
+              key={node.uuid} 
+              geometry={node.geometry} 
+              material={customMaterial} 
+              position={node.position}
+              rotation={node.rotation}
+              scale={node.scale ? [node.scale.x * 0.5, node.scale.y * 0.5, node.scale.z * 0.5] : 0.5}
+            />
+          );
+        }
+        return null;
+      })}
     </group>
   );
 };
 
-const FixFish = () => {
-  const { nodes, materials } = useGLTF('/models/FIX_fish.glb') as any;
-  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 1.5, speed: 1.5, amplitude: 0.08 });
-  
-  const customMaterial = useMemo(() => {
-    const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
-    if (!mat) return new THREE.MeshStandardMaterial();
-    const newMat = mat.clone();
-    newMat.onBeforeCompile = onBeforeCompile;
-    return newMat;
-  }, [materials, onBeforeCompile]);
-
+const OrangeFlock = () => {
   const dummyRef = useRef(null);
-  const boids = useFlock(2, dummyRef, { maxSpeed: 1.5 }); // less fish
+  const boids = useFlock(4, dummyRef, { separationRadius: 12.0, maxSpeed: 0.8 }); // scattered & very slow
   
   return (
     <group>
       {boids.map((boid, i) => (
-        <group key={i} ref={boid.meshRef}>
-          {Object.values(nodes).map((node: any) => {
-            if (node.isMesh) {
-              return (
-                <mesh 
-                  key={node.uuid} 
-                  geometry={node.geometry} 
-                  material={customMaterial} 
-                  position={node.position}
-                  rotation={node.rotation}
-                  scale={node.scale ? [node.scale.x * 0.4, node.scale.y * 0.4, node.scale.z * 0.4] : 0.4}
-                />
-              );
-            }
-            return null;
-          })}
-        </group>
+        <OrangeFish key={i} boid={boid} />
       ))}
     </group>
   );
@@ -147,7 +112,6 @@ export default function Background3DSlow() {
           <Suspense fallback={null}>
             <GreenFish centerTargetRef={mainFishRef} />
             <OrangeFlock />
-            <FixFish />
             <TrashSystem />
           </Suspense>
         </PerformanceMonitor>
@@ -158,4 +122,3 @@ export default function Background3DSlow() {
 
 useGLTF.preload('/models/green_fish.glb');
 useGLTF.preload('/models/orange_fish.glb');
-useGLTF.preload('/models/FIX_fish.glb');

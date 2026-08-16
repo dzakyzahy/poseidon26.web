@@ -3,14 +3,8 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Define the trash geometries we want to instance
-const trashTypes = [
-  'Can_1_RustyCans_0',
-  'GlassBottle_1_GlassBottles_0',
-  'CardboardBox_1_CardboardPaper_0',
-  'Soda_Cup_FastFoodTrash_0',
-  'TrashBag_1_TrashBag_0'
-];
+// Define the trash geometries we want to instance dynamically
+// The list will be populated inside the component
 
 interface TrashData {
   position: THREE.Vector3;
@@ -28,9 +22,16 @@ export const TrashSystem = ({ count = 3 }) => {
   // References to InstancedMesh for each type
   const meshRefs = useRef<(THREE.InstancedMesh | null)[]>([]);
 
+  // Extract actual mesh types from nodes
+  const trashTypes = useMemo(() => {
+    return Object.keys(nodes).filter(key => nodes[key].isMesh);
+  }, [nodes]);
+
   // Generate trash data
   const trashData = useMemo(() => {
     const data: TrashData[] = [];
+    if (trashTypes.length === 0) return data;
+
     for (let i = 0; i < count; i++) {
       // Random position across the screen
       const px = (Math.random() - 0.5) * 12;
@@ -50,7 +51,7 @@ export const TrashSystem = ({ count = 3 }) => {
       });
     }
     return data;
-  }, [count]);
+  }, [count, trashTypes]);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
@@ -99,7 +100,7 @@ export const TrashSystem = ({ count = 3 }) => {
     const c = new Array(trashTypes.length).fill(0);
     trashData.forEach(d => c[d.typeIndex]++);
     return c;
-  }, [trashData]);
+  }, [trashData, trashTypes]);
 
   // Pre-load geometries and materials
   return (

@@ -101,16 +101,21 @@ export function useFlock(count: number, centerTargetRef: React.RefObject<THREE.G
       centerFollow.add(new THREE.Vector3(Math.sin(Date.now() * 0.001) * 2, Math.cos(Date.now() * 0.001) * 2, 0));
       centerFollow.normalize().multiplyScalar(maxSpeed).sub(boid.velocity).clampLength(0, maxForce * 1.5);
 
+      // Periodically school (e.g., school for 3 seconds every 10 seconds)
+      const timeSecs = Date.now() * 0.001;
+      const isSchooling = (timeSecs % 10) < 3;
+      const schoolingMultiplier = isSchooling ? 1.0 : 0.0;
+
       // Apply forces
-      boid.velocity.add(separation.multiplyScalar(1.5));
-      boid.velocity.add(alignment.multiplyScalar(1.0));
-      boid.velocity.add(cohesion.multiplyScalar(1.0));
-      boid.velocity.add(centerFollow.multiplyScalar(1.2));
+      boid.velocity.add(separation.multiplyScalar(2.5)); // High separation for scattering
+      boid.velocity.add(alignment.multiplyScalar(1.0 * schoolingMultiplier));
+      boid.velocity.add(cohesion.multiplyScalar(1.5 * schoolingMultiplier));
+      boid.velocity.add(centerFollow.multiplyScalar(0.8)); // Weak center pull
       
       boid.velocity.clampLength(0, maxSpeed);
       
       // Update position
-      boid.position.add(boid.velocity.clone().multiplyScalar(delta * 10));
+      boid.position.add(boid.velocity.clone().multiplyScalar(delta * 5)); // Slower movement
 
       // Update mesh
       if (boid.meshRef.current) {

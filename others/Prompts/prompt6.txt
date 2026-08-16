@@ -1,0 +1,14 @@
+hapus saja ikan fish biasa, PERTAHANKAN GREEN FISH DAN ORANGE FISH
+2. orange fish sebarkan jangan bikin school of fish, buat school of fish tapi hanya beberapa waktu saja, untuk kekecepatan berenangnya juga masih terlalu cepat
+3. ini gerakan ikannya masih jelek kayanya masih ada fungsi sinenya coba perbaiki soalnya kaku banget
+4. lautan.. nya yang di landing page framenya kecepetan, mulai di frame:96, sedangkan yang sampah.. itu di frame 138
+
+tambahkan juga bar untuk mengetahui progres scroll nya itu sampai nmana (triggered setekah "scroll to explor" sudah sepenuhnya hialang textnya) pakai 2d ikan green fish untuk barnya biar bagus
+perbaiki bug saat balik lagi ke atas 3d nya tertinggal lagi, harusnya di disable saat image sequence aktif
+
+3d trash masih belum ter render mungkin ada masalah di pemisah 3d, opemanggil atau di trigger 3d trash nya
+POSEIDON ITB 2026 di landing page ubah jadi Persembahan Oseanografi untuk Indonesia dengan highligth di "Oseanografi" dan "Indonesia"nya
+dengan ukuran yang hurufnya dikecilkan sedikit
+security ny a diperbaiki terutama pada pengiriman form itu janga bisa di inject dan perbaiki logikanya
+yang paling penting utamakan ini keberhasilan render trash 
+kurangin jumlah orange fish di desktop juga agar tidak ngelag, ikan green fish tamabh juga yang berenean gbebas 1 ekor

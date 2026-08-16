@@ -39,10 +39,12 @@ Namun, masih terdapat beberapa *bug* visual dan penyesuaian logika yang perlu di
 ### Fitur Tambahan & Pembaruan (Phase 5 Lanjutan):
 1. **Perbaikan Build & Deploy**: Mengatasi kesalahan impor `useEffect` dan sisa variabel tidak terpakai yang memicu `npm run build` gagal di Cloudflare Pages.
 2. **Animasi Undulasi Berbasis Fisika (Spring-Damper)**: 
-   - Komponen **GreenFish** kini menggunakan *hook* khusus `useFishPhysicsSwim`.
-   - Menggunakan pendekatan rantai tulang virtual (*virtual bone chain*) di JavaScript yang menghitung posisi/kecepatan di koordinat lokal ikan menggunakan mekanisme *Spring-Damper* (meniru kelambatan nyata momentum ayunan ekor, bukan sekadar perulangan gelombang Sinus).
+   - Komponen **GreenFish** dan **OrangeFish** kini menggunakan *hook* khusus `useFishPhysicsSwim`.
+   - Menggunakan pendekatan rantai tulang virtual (*virtual bone chain*) di JavaScript yang menghitung posisi/kecepatan di koordinat lokal ikan menggunakan mekanisme *Spring-Damper* (meniru kelambatan nyata momentum ayunan ekor, bukan sekadar perulangan gelombang Sinus). Ikan terlihat mengayun jauh lebih mulus karena *stiffness* telah diturunkan.
    - Simpangan posisi ini dilempar ke *Vertex Shader* melalui array konstan/uniform `uWaveOffsets`.
-3. **Flock Berenang Bebas**: Ikan oren kawanan (`OrangeFlock`) dan ikan perbaikan (`FixFish`) tidak lagi dipaksa mengekor ke arah target kursor (GreenFish). Mereka kini dibebaskan mengitari titik pusat (*patrol and flock*) secara organik (dengan meneruskan `dummyRef = null` ke argumen target `useFlock`).
+3. **Flock Berenang Bebas & Disebar (Scattered)**: Ikan perbaikan (`FixFish`) telah dihapus secara permanen untuk menghemat performa. Ikan oren kawanan (`OrangeFlock`) tidak lagi mengekor ke arah kursor. Mereka menyebar secara natural (*high separation*) dan sesekali membentuk kelompok kecil (*schooling*) secara periodik.
+4. **Sinkronisasi Teks & Scroll Progress**: Teks narasi diatur agar muncul tepat pada *frame* gambar tertentu (Frame 96 untuk "Lautan", Frame 138 untuk "Sampah"). Selain itu, sebuah *loading bar* ditambahkan di bagian atas layar untuk memandu interaksi *scroll*.
+5. **Perbaikan Lag 3D saat Scroll Up**: Transisi mengaktifkan/menonaktifkan kanvas 3D tidak lagi menggunakan `IntersectionObserver` yang lambat respons, melainkan menggunakan pembacaan `window.scrollY` secara presisi.
 
 ## Rencana Fase Lanjutan (Jika Ada)
 - Memeriksa kembali opsi lazy-loading gambar urutan untuk meminimalkan beban memori lebih lanjut, meskipun saat ini performa rendering sudah ditingkatkan secara drastis melalui metode kontrol GPU.

@@ -13,8 +13,10 @@ const VideoScrollSequence = () => {
   const logoRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const scrollTextRef = useRef<HTMLDivElement>(null);
-
   const text3Ref = useRef<HTMLHeadingElement>(null);
+  const progressContainerRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const progressFishRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -125,6 +127,51 @@ const VideoScrollSequence = () => {
         }
       });
 
+      // Progress Bar visibility (fades in after Scroll To Explore fades out)
+      gsap.fromTo(progressContainerRef.current, 
+        { opacity: 0 },
+        {
+          opacity: 1,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "10% top",
+            end: "15% top",
+            scrub: true,
+          }
+        }
+      );
+
+      // Progress Bar scaling
+      gsap.fromTo(progressBarRef.current,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          }
+        }
+      );
+
+      // Progress Fish movement
+      gsap.fromTo(progressFishRef.current,
+        { left: "0%" },
+        {
+          left: "100%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          }
+        }
+      );
+
       // Video/Canvas blur & fade out at the end of scroll
       gsap.to(canvasRef.current, {
         opacity: 0,
@@ -138,26 +185,31 @@ const VideoScrollSequence = () => {
         }
       });
 
-      // 3. Text fading sequences - Using a timeline to prevent overlap
+      // 3. Text fading sequences - Synced to exact frames
       gsap.set([text1Ref.current, text2Ref.current, text3Ref.current], { y: 50, opacity: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "10% top",
-          end: "90% top",
+          start: "top top",
+          end: "bottom bottom",
           scrub: true,
         }
       });
 
-      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 1 })
-        .to(text1Ref.current, { opacity: 1, duration: 0.5 }) // Hold
-        .to(text1Ref.current, { opacity: 0, y: -50, duration: 1 })
-        .to(text2Ref.current, { opacity: 1, y: 0, duration: 1 }, "+=0.2")
-        .to(text2Ref.current, { opacity: 1, duration: 0.5 }) // Hold
-        .to(text2Ref.current, { opacity: 0, y: -50, duration: 1 })
-        .to(text3Ref.current, { opacity: 1, y: 0, duration: 1 }, "+=0.2")
-        .to(text3Ref.current, { opacity: 1, duration: 2 }); // Hold until end
+      // Dummy tween to force timeline duration to match frameCount (189)
+      tl.to({}, { duration: 189 });
+
+      // Frame 96: Lautan..
+      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 10 }, 96)
+        .to(text1Ref.current, { opacity: 0, y: -50, duration: 10 }, 116);
+
+      // Frame 138: Sampah mengancam..
+      tl.to(text2Ref.current, { opacity: 1, y: 0, duration: 10 }, 138)
+        .to(text2Ref.current, { opacity: 0, y: -50, duration: 10 }, 158);
+
+      // Frame 170: Selamat Datang..
+      tl.to(text3Ref.current, { opacity: 1, y: 0, duration: 10 }, 170);
 
 
     }, containerRef);
@@ -167,6 +219,25 @@ const VideoScrollSequence = () => {
 
   return (
     <section ref={containerRef} className="h-[500vh] relative" id="video-sequence">
+      {/* Progress Bar */}
+      <div 
+        ref={progressContainerRef}
+        className="fixed top-0 left-0 w-full h-1.5 z-[100] opacity-0 pointer-events-none mix-blend-difference"
+      >
+        <div className="absolute top-0 left-0 w-full h-full bg-white/20" />
+        <div 
+          ref={progressBarRef}
+          className="absolute top-0 left-0 h-full bg-bioluminescent-green w-full origin-left scale-x-0"
+        />
+        <img 
+          ref={progressFishRef}
+          src="/models/greenfish_2d.png" // We will assume there's a 2D icon, or we can use a generic fish shape. Wait, I will use CSS or an existing logo if it doesn't exist. Actually, let's just use the trident logo as fallback if greenfish_2d.png doesn't exist, but I'll set src to an emoji or standard icon for now. Let me use an emoji or fallback image. I'll use the greenfish_2d.png but fallback to emoji if it fails.
+          alt="Fish Progress"
+          onError={(e) => { e.currentTarget.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234ade80"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>'; e.currentTarget.className = "absolute top-1/2 -translate-y-1/2 -ml-3 w-6 h-6 drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]"; }}
+          className="absolute top-1/2 -translate-y-1/2 -ml-6 w-12 h-12 object-contain drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]"
+        />
+      </div>
+
       {/* Fixed Logo and Title */}
       <div 
         ref={logoRef}
@@ -185,10 +256,12 @@ const VideoScrollSequence = () => {
       </div>
       <h1 
         ref={titleRef}
-        className="fixed top-[22%] md:top-1/4 right-[5%] md:right-[10%] text-6xl md:text-[10rem] leading-none font-sans font-bold tracking-tighter text-white z-50 flex flex-col items-end text-right pointer-events-none mix-blend-difference"
+        className="fixed top-[22%] md:top-1/4 right-[5%] md:right-[10%] text-3xl md:text-[4.5rem] leading-none font-sans font-bold tracking-tighter text-white z-50 flex flex-col items-end text-right pointer-events-none mix-blend-difference"
       >
-        POSEIDON<br />
-        <span className="text-bioluminescent-blue font-serif italic text-5xl md:text-[7rem] mt-2">ITB 2026</span>
+        Persembahan<br />
+        <span className="text-bioluminescent-blue font-serif italic text-4xl md:text-[5.5rem] mt-2 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]">Oseanografi</span>
+        <span className="text-white">untuk</span>
+        <span className="text-bioluminescent-blue font-serif italic text-4xl md:text-[5.5rem] mt-1 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]">Indonesia</span>
       </h1>
 
       <div className="sticky top-0 h-screen w-full overflow-hidden">

@@ -8,18 +8,21 @@ export default function Home() {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShow3D(true);
-        } else if (window.scrollY < window.innerHeight * 3) {
-          setShow3D(false);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (contentRef.current) observer.observe(contentRef.current);
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      // The image sequence container is 500vh, so scroll distance is roughly 400vh to finish it.
+      // We turn on 3D only after scrolling past 400vh (4 * window.innerHeight).
+      if (window.scrollY > window.innerHeight * 3.8) {
+        setShow3D(true);
+      } else {
+        setShow3D(false);
+      }
+    };
+    
+    // Initial check
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
