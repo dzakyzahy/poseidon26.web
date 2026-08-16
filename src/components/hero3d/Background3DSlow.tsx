@@ -3,13 +3,14 @@ import { Canvas } from '@react-three/fiber';
 import { PerformanceMonitor, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useFishSwim } from '../../hooks/useFishSwim';
+import { useFishPhysicsSwim } from '../../hooks/useFishPhysicsSwim';
 import { useFishPatrol } from '../../hooks/useFishPatrol';
 import { useFlock } from '../../hooks/useFlock';
 import { TrashSystem } from './TrashSystem';
 
 const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
   const { nodes, materials } = useGLTF('/models/green_fish.glb') as any;
-  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 1.0, speed: 1.0, amplitude: 0.05 });
+  const { onBeforeCompile } = useFishPhysicsSwim(centerTargetRef, { stiffness: 0.08, damping: 0.8, boneNum: 8, boneLen: 0.25 });
   
   const customMaterial = useMemo(() => {
     const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
@@ -44,7 +45,7 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
   );
 };
 
-const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
+const OrangeFlock = () => {
   const { nodes, materials } = useGLTF('/models/orange_fish.glb') as any;
   const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 1.5, speed: 1.5, amplitude: 0.08 });
   
@@ -56,7 +57,8 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const boids = useFlock(5, centerTargetRef, { separationRadius: 4.0, maxSpeed: 1.5 }); // less fish to not be overwhelming
+  const dummyRef = useRef(null);
+  const boids = useFlock(5, dummyRef, { separationRadius: 4.0, maxSpeed: 1.5 }); // less fish to not be overwhelming
   
   return (
     <group>
@@ -83,7 +85,7 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
   );
 };
 
-const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
+const FixFish = () => {
   const { nodes, materials } = useGLTF('/models/FIX_fish.glb') as any;
   const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 1.5, speed: 1.5, amplitude: 0.08 });
   
@@ -95,7 +97,8 @@ const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.G
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const boids = useFlock(2, centerTargetRef, { maxSpeed: 1.5 }); // less fish
+  const dummyRef = useRef(null);
+  const boids = useFlock(2, dummyRef, { maxSpeed: 1.5 }); // less fish
   
   return (
     <group>
@@ -143,8 +146,8 @@ export default function Background3DSlow() {
           
           <Suspense fallback={null}>
             <GreenFish centerTargetRef={mainFishRef} />
-            <OrangeFlock centerTargetRef={mainFishRef} />
-            <FixFish centerTargetRef={mainFishRef} />
+            <OrangeFlock />
+            <FixFish />
             <TrashSystem />
           </Suspense>
         </PerformanceMonitor>

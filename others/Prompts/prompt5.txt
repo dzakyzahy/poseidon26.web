@@ -7,3 +7,296 @@ image sequence sudah aku update framenya kubanyakin di folder others\ImageSequen
 untuk yang tentang poseidon itb juga kasih kotak yan gsama dengan sponsor
 audit kenap abisa ngelag karena mengutamakan performa, diksusikan terlebih daulu dan buat implementaionplan (audit-->anailisis-->diskusi-->implementation plan-->eksekusi/revisi)
 bua yang di program poseidon itu yang kotak kotak bis adipencet trus muncul popup keterangan nya gitu kotak
+
+---
+selanjutnya ini perbaiki aku ingin agar ikan yan gmengikuti saya yang ikan biasa saja (fish) satu ekor, sisanya jangan ngikutin kursor bereangn bebas saja, lalu aku ingin agar kita menggunakan jangan sine function kaarena malah terlihat aneh kita akan coba implementasikan di green fish untuk gerakan ikan fisika:
+
+Main
+Portfolio
+Marketplace
+Articles
+Physics-Based Animation: Undulation
+August 4, 2026
+Physics-Based Animation: Undulation
+1. Overview
+Undulation is the wave-like follow-through you see in tails, ropes, antennae, hair chains, and similar setups. Instead of manually animating every bone, we can animate only the root and simulate the rest of the chain.
+In this example, every bone tip behaves like a small point mass attached to a spring. The spring pulls the tip toward where the bone would normally be if it followed its parent rigidly. The tip is then constrained back to the bone length, and the bone is rotated to point toward it.
+
+The whole system only needs a few things:
+
+The chain’s rest pose.
+A simulated tip position and velocity for each bone.
+A spring-damper.
+A length constraint.
+A rotation that aims each bone toward its simulated tip.
+The result is delayed motion, overshoot, and settling without needing a full physics solver.
+
+Input
+
+Simulation
+
+Output
+
+You can follow the tutorial by downloading and testing the script in 3ds Max to better understand the process.
+
+DOWNLOAD THE CODE HERE
+2. Chain Setup
+The example creates a chain using:
+
+_bone_num = 8
+_bone_len = 20
+chain = #()
+The root bone is animated manually in the setup_scene function, while the remaining bones are stored inside chain. The root is moved and rotated over a few frames
+
+3. Capturing the Rest Pose
+Before simulation starts, we store each bone’s transform relative to its parent. we call this rest pose and it is the state that the bone will try to get back to all the time but forces like gravity and the stiffness parameters will fight gainst it.
+
+This is done in initiate_data:
+
+_localRest = item.transform * inverse item.parent.transform
+append chain_rest _localRest
+The result is stored in:
+
+chain_rest
+Later, this lets us reconstruct where the bone would be if it followed its current parent without any simulation:
+
+rigidTM = chain_rest[i] * chain[i].parent.transform
+rigidTM is basically the bone’s rigid target transform. basically where the bone would be of it followed its parent perfectly without any delay or other forces fighting against it.
+
+4. Storing the Bone Tips
+We also need the tip of every bone. For most bones, the child’s position gives us the tip. We convert that position into the current bone’s local space:
+
+_tip = item.children[1].pos * inverse item.transform
+append chain_tips _tip
+These local tip offsets are stored in:
+
+chain_tips
+For the last bone, which has no child, the previous tip offset is reused. 
+Once we have chain_tips, the world-space tip of a bone can be calculated with:
+
+rigidTip = chain_tips[i] * rigidTM
+5. Simulation State
+Each bone has two values that persist between frames:
+
+simTips
+simVels
+simTips[i] is the simulated world-space tip position. 
+simVels[i] is its current velocity.
+
+They are initialized at frame 0:
+
+append simTips (chain_tips[i] * chain[i].transform)
+append simVels [0, 0, 0]
+That stored velocity simVels is what gives the chain momentum, overshoot, and follow-through. 
+
+6. The Spring-Damper
+The main simulation happens inside simulate function.
+
+For each bone, we first calculate its rigid target (again, just calculating where they would be in a perfect situation):
+
+rigidTM = chain_rest[i] * chain[i].parent.transform
+rigidTip = chain_tips[i] * rigidTM
+Then the simulated tip chases rigidTip:
+
+simVels[i] += (rigidTip - simTips[i]) * _stiffness
+simVels[i] *= _damping
+simTips[i] += simVels[i]
+If we don’t do anything to the simVels. the simTips stay where they are in the world space and don’t follow the parent, but we use this Spring-Damper to calculate velocity, which is a 3d vector that tells us how much and in what direction to move to reach the rigidTip, the velocity is effected by two main controls:
+
+_stiffness = .1
+_damping = .7
+_stiffness controls how strongly the tip is pulled toward rigidTip. 
+Higher stiffness makes the chain react faster. Lower stiffness gives more lag.
+
+_damping controls how much velocity survives each frame.
+Values closer to 1.0 keep the motion going longer, while lower values make it settle faster.
+
+7. Keeping the Bone Length Fixed
+The spring is free to move simTips[i] anywhere, which could stretch the bone.
+To prevent that, the tip is projected back to _bone_len from the bone position:
+
+simTips[i] = chain[i].pos + normalize(simTips[i] - chain[i].pos) * _bone_len
+This means the bone can rotate, but it cannot change length.
+The spring controls the direction of the motion, while the constraint keeps the skeleton rigid.
+
+8. Aiming the Bone
+Now we have two directions:
+
+rigidTip - chain[i].pos --> The direction of the rigid bone
+simTips[i] - chain[i].pos --> And the direction toward the simulated tip
+tsQuatFromTo calculates the rotation between those directions:
+
+q = tsQuatFromTo (rigidTip - chain[i].pos) (simTips[i] - chain[i].pos)
+The function uses the dot and cross products to build the shortest rotation from one direction to the other.
+
+local d = dot a b
+local ax = normalize (cross a b)
+local ang = acos (amin 1.0 (amax -1.0 d))
+It also handles the special cases where the directions are already aligned or point in opposite directions.
+
+The rotation is then applied around the bone’s own position:
+
+tm = tsRotateTMAboutPivot rigidTM q
+tm.pos = chain[i].pos
+chain[i].transform = tm
+tsRotateTMAboutPivot does this using:
+
+tm * (transMatrix -p) * (q as matrix3) * (transMatrix p)
+Starting from rigidTM also means we preserve the original bone orientation and only add the swing required by the simulation.
+
+This version does not simulate twist.
+
+9. Why the Chain Undulates
+The important part is the order of the loop:
+
+for i=1 to chain.count do
+The chain is evaluated from top to bottom. When bone 1 is simulated, bone 2 sees bone 1’s new transform. Bone 3 then sees bone 2’s new transform, and so on. Each bone adds a little spring delay and overshoot. As that delay accumulates down the hierarchy, the motion travels through the chain and forms a wave. There is no actual wave equation involved. The undulation appears naturally from each bone following the simulated result of the bone before it.
+
+10. The Core Loop
+The important part of the entire system is surprisingly small:
+
+rigidTM = chain_rest[i] * chain[i].parent.transform
+rigidTip = chain_tips[i] * rigidTM
+
+simVels[i] += (rigidTip - simTips[i]) * _stiffness
+simVels[i] *= _damping
+simTips[i] += simVels[i]
+
+simTips[i] = chain[i].pos + normalize(simTips[i] - chain[i].pos) * _bone_len
+
+q = tsQuatFromTo (rigidTip - chain[i].pos) (simTips[i] - chain[i].pos)
+
+tm = tsRotateTMAboutPivot rigidTM q
+tm.pos = chain[i].pos
+
+chain[i].transform = tm
+Everything else in the script is mostly setup.
+
+The bone finds where it should normally be, its simulated tip chases that position, the tip is constrained to the correct length, and the bone is rotated toward it. Repeating that process down the hierarchy is enough to produce convincing tail-style follow-through and undulation.
+
+Posted in DevLog by cgcenter.org@gmail.com
+Tags: 3ds MaxPhysics-Based AnimationProcedural Animation
+Share: 
+Write a comment
+Comment
+
+
+perbaiki juga build failed
+2026-08-16T02:06:38.435Z	Initializing build environment...
+2026-08-16T02:06:42.623Z	Success: Finished initializing build environment
+2026-08-16T02:06:43.529Z	Cloning repository...
+2026-08-16T02:06:51.573Z	Detected the following tools from environment: npm@10.9.2, nodejs@24.18.0
+2026-08-16T02:06:51.575Z	Restoring from dependencies cache
+2026-08-16T02:06:51.578Z	Restoring from build output cache
+2026-08-16T02:06:51.745Z	Installing project dependencies: npm clean-install --progress=false
+2026-08-16T02:07:07.745Z	
+2026-08-16T02:07:07.746Z	added 176 packages, and audited 177 packages in 14s
+2026-08-16T02:07:07.746Z	
+2026-08-16T02:07:07.746Z	30 packages are looking for funding
+2026-08-16T02:07:07.746Z	  run `npm fund` for details
+2026-08-16T02:07:07.748Z	
+2026-08-16T02:07:07.748Z	1 high severity vulnerability
+2026-08-16T02:07:07.749Z	
+2026-08-16T02:07:07.749Z	To address all issues, run:
+2026-08-16T02:07:07.749Z	  npm audit fix
+2026-08-16T02:07:07.749Z	
+2026-08-16T02:07:07.749Z	Run `npm audit` for details.
+2026-08-16T02:07:08.107Z	Executing user deploy command: npx wrangler deploy
+2026-08-16T02:07:09.522Z	npm warn exec The following package was not found and will be installed: wrangler@4.123.0
+2026-08-16T02:07:25.945Z	
+2026-08-16T02:07:25.945Z	 ⛅️ wrangler 4.123.0
+2026-08-16T02:07:25.946Z	────────────────────
+2026-08-16T02:07:26.172Z	
+2026-08-16T02:07:26.173Z	Detected Project Settings:
+2026-08-16T02:07:26.173Z	 - Worker Name: poseidon26-web
+2026-08-16T02:07:26.174Z	 - Framework: Vite
+2026-08-16T02:07:26.174Z	 - Build Command: npm run build
+2026-08-16T02:07:26.174Z	 - Output Directory: dist
+2026-08-16T02:07:26.174Z	
+2026-08-16T02:07:26.175Z	? Do you want to modify these settings?
+2026-08-16T02:07:26.175Z	🤖 Using fallback value in non-interactive context: no
+2026-08-16T02:07:26.184Z	
+2026-08-16T02:07:26.185Z	📦 Install packages:
+2026-08-16T02:07:26.186Z	 - wrangler (devDependency)
+2026-08-16T02:07:26.186Z	
+2026-08-16T02:07:26.186Z	📝 Update package.json scripts:
+2026-08-16T02:07:26.187Z	 - "deploy": "npm run build && wrangler deploy"
+2026-08-16T02:07:26.187Z	 - "preview": "npm run build && wrangler dev"
+2026-08-16T02:07:26.187Z	
+2026-08-16T02:07:26.188Z	📄 Create wrangler.jsonc:
+2026-08-16T02:07:26.188Z	  {
+2026-08-16T02:07:26.189Z	    "$schema": "node_modules/wrangler/config-schema.json",
+2026-08-16T02:07:26.189Z	    "name": "poseidon26-web",
+2026-08-16T02:07:26.189Z	    "compatibility_date": "2026-08-16",
+2026-08-16T02:07:26.189Z	    "observability": {
+2026-08-16T02:07:26.190Z	      "enabled": true
+2026-08-16T02:07:26.190Z	    },
+2026-08-16T02:07:26.190Z	    "assets": {
+2026-08-16T02:07:26.191Z	      "not_found_handling": "single-page-application"
+2026-08-16T02:07:26.191Z	    }
+2026-08-16T02:07:26.191Z	  }
+2026-08-16T02:07:26.191Z	
+2026-08-16T02:07:26.192Z	🛠️  Configuring project for Vite
+2026-08-16T02:07:26.193Z	
+2026-08-16T02:07:26.193Z	? Proceed with setup?
+2026-08-16T02:07:26.193Z	🤖 Using fallback value in non-interactive context: yes
+2026-08-16T02:07:39.134Z	├ Adding Wrangler files to the .gitignore file
+2026-08-16T02:07:39.134Z	│ updated .gitignore file
+2026-08-16T02:07:39.134Z	│
+2026-08-16T02:07:39.134Z	[build] Running: npm run build
+2026-08-16T02:07:39.395Z	[build] 
+2026-08-16T02:07:39.395Z	[build] > poseidonitb2026-v2@0.0.0 build
+2026-08-16T02:07:39.395Z	[build] > tsc -b && vite build
+2026-08-16T02:07:39.395Z	[build] 
+2026-08-16T02:07:39.395Z	[build] 
+2026-08-16T02:07:45.601Z	[build] src/components/hero3d/Background3D.tsx(24,3): error TS2304: Cannot find name 'useEffect'.
+2026-08-16T02:07:45.628Z	[build] src/components/hero3d/Background3D.tsx(138,10): error TS6133: 'isMobile' is declared but its value is never read.
+2026-08-16T02:07:45.630Z	[build] src/components/hero3d/Background3D.tsx(139,3): error TS2304: Cannot find name 'useEffect'.
+2026-08-16T02:07:45.630Z	[build] 
+2026-08-16T02:07:46.641Z	✘ [ERROR] Error: Command failed with exit code 2: npm run build
+2026-08-16T02:07:46.642Z	
+2026-08-16T02:07:46.642Z	  
+2026-08-16T02:07:46.643Z	  > poseidonitb2026-v2@0.0.0 build
+2026-08-16T02:07:46.643Z	  > tsc -b && vite build
+2026-08-16T02:07:46.643Z	  
+2026-08-16T02:07:46.643Z	  src/components/hero3d/Background3D.tsx(24,3): error TS2304: Cannot find name 'useEffect'.
+2026-08-16T02:07:46.643Z	  src/components/hero3d/Background3D.tsx(138,10): error TS6133: 'isMobile' is declared but its value is never read.
+2026-08-16T02:07:46.643Z	  src/components/hero3d/Background3D.tsx(139,3): error TS2304: Cannot find name 'useEffect'.
+2026-08-16T02:07:46.644Z	      at makeError (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:177493:20)
+2026-08-16T02:07:46.644Z	      at handlePromise (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:177960:29)
+2026-08-16T02:07:46.644Z	      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+2026-08-16T02:07:46.644Z	      at async runCommand (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:252923:5)
+2026-08-16T02:07:46.644Z	      at async Object.runCommand (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:360522:7)
+2026-08-16T02:07:46.646Z	      at async runAutoConfig (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:310130:5)
+2026-08-16T02:07:46.646Z	      at async runAutoConfigLogic (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:360460:21)
+2026-08-16T02:07:46.646Z	      at async maybeRunAutoConfig (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:360582:35)
+2026-08-16T02:07:46.646Z	      at async runDeployCommandHandler (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:360855:28)
+2026-08-16T02:07:46.646Z	      at async Object.handler (/opt/buildhome/.npm/_npx/32026684e21afda6/node_modules/wrangler/wrangler-dist/cli.js:361013:9) {
+2026-08-16T02:07:46.647Z	    shortMessage: 'Command failed with exit code 2: npm run build',
+2026-08-16T02:07:46.647Z	    command: 'npm run build',
+2026-08-16T02:07:46.647Z	    escapedCommand: 'npm run build',
+2026-08-16T02:07:46.647Z	    exitCode: 2,
+2026-08-16T02:07:46.647Z	    signal: undefined,
+2026-08-16T02:07:46.647Z	    signalDescription: undefined,
+2026-08-16T02:07:46.647Z	    stdout: '\n' +
+2026-08-16T02:07:46.648Z	      '> poseidonitb2026-v2@0.0.0 build\n' +
+2026-08-16T02:07:46.648Z	      '> tsc -b && vite build\n' +
+2026-08-16T02:07:46.648Z	      '\n' +
+2026-08-16T02:07:46.648Z	      "src/components/hero3d/Background3D.tsx(24,3): error TS2304: Cannot find name 'useEffect'.\n" +
+2026-08-16T02:07:46.652Z	      "src/components/hero3d/Background3D.tsx(138,10): error TS6133: 'isMobile' is declared but its value is never read.\n" +
+2026-08-16T02:07:46.653Z	      "src/components/hero3d/Background3D.tsx(139,3): error TS2304: Cannot find name 'useEffect'.",
+2026-08-16T02:07:46.653Z	    stderr: '',
+2026-08-16T02:07:46.653Z	    failed: true,
+2026-08-16T02:07:46.653Z	    timedOut: false,
+2026-08-16T02:07:46.653Z	    isCanceled: false,
+2026-08-16T02:07:46.653Z	    killed: false
+2026-08-16T02:07:46.654Z	  }
+2026-08-16T02:07:46.655Z	
+2026-08-16T02:07:46.655Z	
+2026-08-16T02:07:46.656Z	
+2026-08-16T02:07:46.656Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2026-08-16T02:07:46.659Z	
+2026-08-16T02:07:46.662Z	✘ [ERROR] Running custom build `npm run build` failed. There are likely more logs from your build command above.
+2026-08-16T02:07:46.662Z	
+2026-08-16T02:07:46.662Z	
+2026-08-16T02:07:46.864Z	Failed: error occurred while running deploy command

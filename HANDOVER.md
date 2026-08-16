@@ -14,7 +14,6 @@ Namun, masih terdapat beberapa *bug* visual dan penyesuaian logika yang perlu di
    - *Action*: Perbaiki CSS (misalnya `sticky`, `fixed`, atau `absolute`) atau logika `ScrollTrigger` di komponen `VideoScrollSequence.tsx` agar kanvas/gambar mengikuti layar (terkunci di *viewport*) selama pengguna melakukan *scroll*.
 
 2. **Hapus Background Biru Gelap di Landing Page**
-   - *Issue*: Terdapat *background* biru gelap yang menumpuk/stuck di bawah area *image sequence*.
    - *Action*: Cari elemen pembungkus (kemungkinan di `VideoScrollSequence.tsx` atau `Home.tsx`) yang memiliki warna background tersebut dan hapus agar transisi ke halaman bawah lebih bersih.
 
 3. **Periksa Rendering 3D Trash**
@@ -36,3 +35,22 @@ Namun, masih terdapat beberapa *bug* visual dan penyesuaian logika yang perlu di
 7. **Sistem Link Dinamis untuk IG Slider**
    - *Issue*: Saat ini otomatisasi Instagram hanya membaca gambar dari folder `public/images/instagram`, namun *link* (URL) menuju post aslinya masih statis atau menggunakan *mapping* manual di kode.
    - *Action*: Buat mekanisme agar *developer* juga dapat memasukkan/meng-update *link* IG terkait untuk masing-masing gambar. (Saran: developer dapat meletakkan file `.json` berdampingan dengan gambar, atau mengadopsi format penamaan file tertentu seperti `1___https-link.png`, atau membaca dari sebuah file `data/ig_posts.json` yang mudah diedit).
+
+### Fitur Tambahan & Pembaruan (Phase 5 Lanjutan):
+1. **Perbaikan Build & Deploy**: Mengatasi kesalahan impor `useEffect` dan sisa variabel tidak terpakai yang memicu `npm run build` gagal di Cloudflare Pages.
+2. **Animasi Undulasi Berbasis Fisika (Spring-Damper)**: 
+   - Komponen **GreenFish** kini menggunakan *hook* khusus `useFishPhysicsSwim`.
+   - Menggunakan pendekatan rantai tulang virtual (*virtual bone chain*) di JavaScript yang menghitung posisi/kecepatan di koordinat lokal ikan menggunakan mekanisme *Spring-Damper* (meniru kelambatan nyata momentum ayunan ekor, bukan sekadar perulangan gelombang Sinus).
+   - Simpangan posisi ini dilempar ke *Vertex Shader* melalui array konstan/uniform `uWaveOffsets`.
+3. **Flock Berenang Bebas**: Ikan oren kawanan (`OrangeFlock`) dan ikan perbaikan (`FixFish`) tidak lagi dipaksa mengekor ke arah target kursor (GreenFish). Mereka kini dibebaskan mengitari titik pusat (*patrol and flock*) secara organik (dengan meneruskan `dummyRef = null` ke argumen target `useFlock`).
+
+## Rencana Fase Lanjutan (Jika Ada)
+- Memeriksa kembali opsi lazy-loading gambar urutan untuk meminimalkan beban memori lebih lanjut, meskipun saat ini performa rendering sudah ditingkatkan secara drastis melalui metode kontrol GPU.
+- Pengujian lebih lanjut terkait bounce di sisi mobile untuk melihat apakah IntersectionObserver 100% mulus saat di-scroll dengan cepat.
+
+## Teknologi Terkait (Phase 5)
+- **Framer Motion**: Digunakan untuk modal detail Program (animasi popup).
+- **React Three Fiber (R3F) & Drei**: 
+  - `Canvas` diubah dengan `frameloop="never"` secara dinamis untuk menghentikan kalkulasi 3D saat tertutup objek/saat sequence berjalan.
+  - *Custom Shader Material*: Ikan tidak lagi menggunakan gelombang trigonometri (sinus) untuk GreenFish, melainkan membaca data array fisika *real-time*.
+- **Tailwind CSS**: Desain UI *glassmorphism* disempurnakan.

@@ -1,8 +1,9 @@
-import { Suspense, useRef, useState, useMemo } from 'react';
+import { Suspense, useRef, useState, useMemo, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { PerformanceMonitor, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import { useFishSwim } from '../../hooks/useFishSwim';
+import { useFishPhysicsSwim } from '../../hooks/useFishPhysicsSwim';
 import { useFishFollow } from '../../hooks/useFishFollow';
 import { useFishPatrol } from '../../hooks/useFishPatrol';
 import { useFlock } from '../../hooks/useFlock';
@@ -10,7 +11,7 @@ import { TrashSystem } from './TrashSystem';
 
 const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
   const { nodes, materials } = useGLTF('/models/green_fish.glb') as any;
-  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 2.0, speed: 2.0, amplitude: 0.1 });
+  const { onBeforeCompile } = useFishPhysicsSwim(centerTargetRef, { stiffness: 0.15, damping: 0.75, boneNum: 8, boneLen: 0.25 });
   
   const customMaterial = useMemo(() => {
     const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
@@ -52,7 +53,7 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
   );
 };
 
-const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
+const OrangeFlock = () => {
   const { nodes, materials } = useGLTF('/models/orange_fish.glb') as any;
   const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 2.5, speed: 2.5, amplitude: 0.15 });
   
@@ -64,7 +65,8 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const boids = useFlock(4, centerTargetRef, { separationRadius: 5.0, maxSpeed: 2.5 });
+  const dummyRef = useRef(null);
+  const boids = useFlock(4, dummyRef, { separationRadius: 5.0, maxSpeed: 2.5 });
   
   return (
     <group>
@@ -91,7 +93,7 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
   );
 };
 
-const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
+const FixFish = () => {
   const { nodes, materials } = useGLTF('/models/FIX_fish.glb') as any;
   const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 2.0, speed: 2.0, amplitude: 0.12 });
   
@@ -103,7 +105,8 @@ const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.G
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const boids = useFlock(1, centerTargetRef, { maxSpeed: 2.0 });
+  const dummyRef = useRef(null);
+  const boids = useFlock(1, dummyRef, { maxSpeed: 2.0 });
   
   return (
     <group>
@@ -133,15 +136,6 @@ const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.G
 export default function Background3D({ active = true }: { active?: boolean }) {
   const [dpr, setDpr] = useState(1.5);
   const mainFishRef = useRef<THREE.Group>(null);
-  
-  // Mobile detection
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
@@ -160,8 +154,8 @@ export default function Background3D({ active = true }: { active?: boolean }) {
           
           <Suspense fallback={null}>
             <GreenFish centerTargetRef={mainFishRef} />
-            <OrangeFlock centerTargetRef={mainFishRef} />
-            <FixFish centerTargetRef={mainFishRef} />
+            <OrangeFlock />
+            <FixFish />
             <TrashSystem />
           </Suspense>
         </PerformanceMonitor>
