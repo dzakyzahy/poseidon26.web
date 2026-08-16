@@ -125,7 +125,7 @@ export default function Background3D({ active = true }: { active?: boolean }) {
             <GreenFish centerTargetRef={dummyFreeFishRef} isFree={true} patrolOffsetX={freeFishOffsetX} />
             <GreenFish centerTargetRef={useRef<THREE.Group>(null)} isFree={true} patrolOffsetX={-freeFishOffsetX} />
             <OrangeFlock />
-            <TrashSystem count={15} />
+            <TrashSystem count={3} />
           </Suspense>
         </PerformanceMonitor>
       </Canvas>

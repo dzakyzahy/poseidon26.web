@@ -40,10 +40,10 @@ export const TrashSystem = ({ count = 3 }) => {
     if (trashMeshes.length === 0) return data;
 
     for (let i = 0; i < count; i++) {
-      // Random position across the screen
-      const px = (Math.random() - 0.5) * 12;
-      const py = Math.random() * 8 - 4; // Start within or slightly above the screen [-4, 4]
-      const pz = (Math.random() - 0.5) * 4 - 3; // depth -5 to -1
+      // Random position across the screen, clustered near center and in front of camera
+      const px = (Math.random() - 0.5) * 6;
+      const py = Math.random() * 4; // Start in view [0, 4]
+      const pz = 1; // depth 1 (closer to camera at z=5)
 
       // Fall speed
       const vy = -(Math.random() * 0.2 + 0.1); // slower fall
@@ -53,7 +53,7 @@ export const TrashSystem = ({ count = 3 }) => {
         velocity: new THREE.Vector3(0, vy, 0),
         rotation: new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
         angularVelocity: new THREE.Euler((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5),
-        scale: Math.random() * 0.4 + 0.6,
+        scale: (Math.random() * 0.4 + 0.6) * 10, // Increased scale 10x for debugging visibility
         typeIndex: Math.floor(Math.random() * trashMeshes.length)
       });
     }
