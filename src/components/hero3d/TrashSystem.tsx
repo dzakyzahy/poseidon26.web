@@ -34,11 +34,11 @@ export const TrashSystem = ({ count = 3 }) => {
     for (let i = 0; i < count; i++) {
       // Random position across the screen
       const px = (Math.random() - 0.5) * 12;
-      const py = Math.random() * 10 - 5; // Start inside the screen [-5, 5]
+      const py = Math.random() * 10 + 5; // Start slightly above the screen [5, 15]
       const pz = (Math.random() - 0.5) * 4 - 3; // depth -5 to -1
 
       // Fall speed
-      const vy = -(Math.random() * 0.8 + 0.3); // slightly faster
+      const vy = -(Math.random() * 0.2 + 0.1); // slower fall
 
       data.push({
         position: new THREE.Vector3(px, py, pz),

@@ -170,7 +170,7 @@ const VideoScrollSequence = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="h-[500vh] relative bg-ocean-900" id="video-sequence">
+    <section ref={containerRef} className="h-[500vh] relative" id="video-sequence">
       {/* Fixed Logo and Title */}
       <div 
         ref={logoRef}

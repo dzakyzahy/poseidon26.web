@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Background3D />
-      <main className="relative z-10 w-full overflow-hidden">
+      <main className="relative z-10 w-full overflow-x-clip">
         <VideoScrollSequence />
         
         {/* Sponsor Section directly follows the video sequence */}

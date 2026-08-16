@@ -8,7 +8,13 @@ interface Boid {
   meshRef: React.RefObject<THREE.Group | null>;
 }
 
-export function useFlock(count: number, centerTargetRef: React.RefObject<THREE.Group | null>) {
+export interface FlockOptions {
+  separationRadius?: number;
+  maxSpeed?: number;
+  maxForce?: number;
+}
+
+export function useFlock(count: number, centerTargetRef: React.RefObject<THREE.Group | null>, options?: FlockOptions) {
   // Initialize boids
   const boids = useMemo(() => {
     const list: Boid[] = [];
@@ -30,9 +36,9 @@ export function useFlock(count: number, centerTargetRef: React.RefObject<THREE.G
     return list;
   }, [count]);
 
-  const separationRadius = 2.0;
-  const maxSpeed = 3.0;
-  const maxForce = 0.05;
+  const separationRadius = options?.separationRadius ?? 2.0;
+  const maxSpeed = options?.maxSpeed ?? 3.0;
+  const maxForce = options?.maxForce ?? 0.05;
 
   useFrame((_, delta) => {
     const centerTarget = centerTargetRef.current?.position || new THREE.Vector3(0, 0, -5);

@@ -11,7 +11,7 @@ export interface Division {
 
 export const coreTeam: TeamMember[] = [
   { name: "Andi Saputra", role: "Ketua", image: "https://picsum.photos/seed/ketua/400/400" },
-  { name: "Budi Santoso", role: "Wakil Ketua", image: "https://picsum.photos/seed/wakil/400/400" },
+  { name: "Budi Santoso", role: "Sekretaris Jendral", image: "https://picsum.photos/seed/wakil/400/400" },
 ];
 
 export const divisions: Division[] = [

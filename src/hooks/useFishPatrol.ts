@@ -13,14 +13,14 @@ export function useFishPatrol(ref: React.RefObject<THREE.Group | null>) {
     if (!ref.current) return;
 
     // Slow oscillation left and right
-    const time = clock.getElapsedTime() * 0.15; // very slow
+    const time = clock.getElapsedTime() * 0.05; // very slow
     const x = Math.sin(time) * 5; // range -5 to 5
     const z = -5 + Math.cos(time * 1.5) * 1; // slight depth variation
     
     targetPosition.current.set(x, 0, z);
 
     // Calculate spring physics for movement
-    const stiffness = 0.3;
+    const stiffness = 0.05;
     const damping = 0.95;
 
     // Force = stiffness * (target - current)

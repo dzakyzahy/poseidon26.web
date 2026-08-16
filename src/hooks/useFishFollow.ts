@@ -35,8 +35,8 @@ export function useFishFollow(ref: React.RefObject<THREE.Group | null>) {
     targetPosition.current.copy(camera.position).add(dir.multiplyScalar(distance));
 
     // Calculate spring physics for movement (slowed down)
-    const stiffness = 0.5; // Reduced from 2.0
-    const damping = 0.90; // Increased slightly for smoother glide
+    const stiffness = 0.1; // Reduced further for slow relaxed movement
+    const damping = 0.95; // Increased slightly for smoother glide
 
     // Force = stiffness * (target - current)
     force.subVectors(targetPosition.current, ref.current.position).multiplyScalar(stiffness);

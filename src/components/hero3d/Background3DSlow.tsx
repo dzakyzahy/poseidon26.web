@@ -9,7 +9,7 @@ import { TrashSystem } from './TrashSystem';
 
 const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
   const { nodes, materials } = useGLTF('/models/green_fish.glb') as any;
-  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 2.0, speed: 2.0, amplitude: 0.05 });
+  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 1.0, speed: 1.0, amplitude: 0.05 });
   
   const customMaterial = useMemo(() => {
     const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
@@ -46,7 +46,7 @@ const GreenFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE
 
 const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
   const { nodes, materials } = useGLTF('/models/orange_fish.glb') as any;
-  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 3.0, speed: 3.0, amplitude: 0.08 });
+  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 1.5, speed: 1.5, amplitude: 0.08 });
   
   const customMaterial = useMemo(() => {
     const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
@@ -56,7 +56,7 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const boids = useFlock(5, centerTargetRef); // less fish to not be overwhelming
+  const boids = useFlock(5, centerTargetRef, { separationRadius: 4.0, maxSpeed: 1.5 }); // less fish to not be overwhelming
   
   return (
     <group>
@@ -85,7 +85,7 @@ const OrangeFlock = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THR
 
 const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.Group | null> }) => {
   const { nodes, materials } = useGLTF('/models/FIX_fish.glb') as any;
-  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 3.0, speed: 3.0, amplitude: 0.08 });
+  const { onBeforeCompile } = useFishSwim({ spineAxis: 'z', frequency: 1.5, speed: 1.5, amplitude: 0.08 });
   
   const customMaterial = useMemo(() => {
     const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
@@ -95,7 +95,7 @@ const FixFish = ({ centerTargetRef }: { centerTargetRef: React.RefObject<THREE.G
     return newMat;
   }, [materials, onBeforeCompile]);
 
-  const boids = useFlock(2, centerTargetRef); // less fish
+  const boids = useFlock(2, centerTargetRef, { maxSpeed: 1.5 }); // less fish
   
   return (
     <group>

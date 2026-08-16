@@ -9,15 +9,10 @@ const fallbackLinks = [
   "https://www.instagram.com/poseidonitb/",
 ];
 
+import igLinks from '../data/ig_posts.json';
+
 // Mapping of image filename (e.g. "6.png") to IG post link
-const linkMapping: Record<string, string> = {
-  "6.png": "https://www.instagram.com/p/DcEOprGmo-E/?img_index=1",
-  "5.png": "https://www.instagram.com/p/Db3V4V8Gltd/?img_index=1",
-  "4.png": "https://www.instagram.com/p/Dau1M2gmpHx/?img_index=1",
-  "3.png": "https://www.instagram.com/p/DaXmjnomsRP/?img_index=1",
-  "2.png": "https://www.instagram.com/p/DaXmejmM_7d/",
-  "1.png": "https://www.instagram.com/p/DaXmcv1M5G5/"
-};
+const linkMapping: Record<string, string> = igLinks;
 
 export function getInstagramUpdates(): IGPost[] {
   // Use Vite's glob import to get all images in the folder

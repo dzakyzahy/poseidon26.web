@@ -11,16 +11,23 @@ Website ini memiliki *slider* Instagram di halaman Program yang secara otomatis 
 2. Masukkan gambar tersebut ke dalam folder:
    `public/images/instagram/`
 3. Beri nama file menggunakan angka yang lebih besar dari file sebelumnya (contoh: jika file terakhir adalah `6.png`, beri nama file baru `7.png`). Sistem otomatis mengurutkan angka terbesar sebagai postingan paling baru di sebelah kiri *slider*.
-4. *Commit* dan *Push* perubahan folder `public/images/instagram/` ke repositori GitHub. Vercel akan secara otomatis melakukan proses *build* ulang dan memperbarui website.
+4. Buka file `src/data/ig_posts.json` dan tambahkan pemetaan (*mapping*) nama file gambar ke *link* URL Instagram spesifik. Contoh:
+   ```json
+   {
+     "7.png": "https://www.instagram.com/p/NEW_POST_LINK/"
+   }
+   ```
+5. *Commit* dan *Push* perubahan ke repositori GitHub. Vercel akan secara otomatis melakukan proses *build* ulang dan memperbarui website.
 
-> **Catatan:** Saat ini URL *redirect* post masih mengandalkan mekanisme statis atau *fallback*. Untuk menautkan gambar ke URL IG spesifik, sistem sedang dalam pengembangan untuk membaca data tambahan (seperti JSON metadata) pada tahap *handover* selanjutnya.
+> **Catatan:** Pemetaan link sekarang sepenuhnya dikelola melalui `ig_posts.json`. Jika nama file gambar tidak memiliki entri di file JSON, maka sistem akan menggunakan URL cadangan (*fallback*).
 
 ## 2. Pengelolaan 3D Assets
 
 Website ini menggunakan React Three Fiber untuk *rendering* 3D (ikan, lautan, sampah).
 - Model-model (.glb) tersimpan di `public/models/`.
 - Komponen Three.js (seperti *Boids flocking*, *Fish swim/undulation shader*, dan *Trash InstancedMesh*) berada di folder `src/components/hero3d/` dan logika animasinya di `src/hooks/`.
-- Performa 3D dioptimalkan dengan `PerformanceMonitor` dari `@react-three/drei` yang menurunkan rasio piksel secara dinamis (DPR) jika FPS perangkat menurun.
+- **Kalibrasi Kecepatan**: Parameter kecepatan berenang, *stiffness* gerakan, serta *spawn rate* sampah dapat disesuaikan secara mandiri melalui *hooks* seperti `useFishFollow.ts`, `useFlock.ts`, dan `useFishPatrol.ts`.
+- Performa 3D dioptimalkan dengan `PerformanceMonitor` dari `@react-three/drei` yang menurunkan rasio piksel secara dinamis (DPR) jika FPS perangkat menurun. Selain itu, kecepatan dan jumlah render ikan (boids) telah disesuaikan agar tidak *lagging*.
 
 ## 3. Image Sequence Scroll (Landing Page)
 
