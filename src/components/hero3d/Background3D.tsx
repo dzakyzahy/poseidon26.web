@@ -8,7 +8,7 @@ import { useFishPatrol } from '../../hooks/useFishPatrol';
 import { useFlock } from '../../hooks/useFlock';
 import { TrashSystem } from './TrashSystem';
 
-const GreenFish = ({ centerTargetRef, isFree = false }: { centerTargetRef: React.RefObject<THREE.Group | null>, isFree?: boolean }) => {
+const GreenFish = ({ centerTargetRef, isFree = false, patrolOffsetX = 0 }: { centerTargetRef: React.RefObject<THREE.Group | null>, isFree?: boolean, patrolOffsetX?: number }) => {
   const { nodes, materials } = useGLTF('/models/green_fish.glb') as any;
   const { onBeforeCompile } = useFishPhysicsSwim(centerTargetRef, { stiffness: 0.05, damping: 0.9, boneNum: 8, boneLen: 0.25 });
   
@@ -27,7 +27,7 @@ const GreenFish = ({ centerTargetRef, isFree = false }: { centerTargetRef: React
 
   // Use patrol on mobile, follow on desktop (unless isFree is true)
   useFishFollow(centerTargetRef, !isMobile && !isFree);
-  useFishPatrol(centerTargetRef, isMobile || isFree);
+  useFishPatrol(centerTargetRef, isMobile || isFree, patrolOffsetX);
 
   return (
     <group ref={centerTargetRef}>
@@ -54,7 +54,7 @@ const GreenFish = ({ centerTargetRef, isFree = false }: { centerTargetRef: React
 
 const OrangeFish = ({ boid }: { boid: any }) => {
   const { nodes, materials } = useGLTF('/models/orange_fish.glb') as any;
-  const { onBeforeCompile } = useFishPhysicsSwim(boid.meshRef, { stiffness: 0.05, damping: 0.9, boneNum: 6, boneLen: 0.2 });
+  const { onBeforeCompile } = useFishPhysicsSwim(boid.meshRef, { stiffness: 0.02, damping: 0.95, boneNum: 8, boneLen: 0.25 });
 
   const customMaterial = useMemo(() => {
     const mat = Object.values(materials)[0] as THREE.MeshStandardMaterial;
@@ -102,6 +102,11 @@ export default function Background3D({ active = true }: { active?: boolean }) {
   const [dpr, setDpr] = useState(1.5);
   const mainFishRef = useRef<THREE.Group>(null);
   const dummyFreeFishRef = useRef<THREE.Group>(null);
+  // Random offset between -6 and 6, but excluding -3 to 3 (so it's not strictly center)
+  const freeFishOffsetX = useMemo(() => {
+    const isLeft = Math.random() > 0.5;
+    return isLeft ? -4 - Math.random() * 2 : 4 + Math.random() * 2;
+  }, []);
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none">
@@ -120,7 +125,7 @@ export default function Background3D({ active = true }: { active?: boolean }) {
           
           <Suspense fallback={null}>
             <GreenFish centerTargetRef={mainFishRef} />
-            <GreenFish centerTargetRef={dummyFreeFishRef} isFree={true} />
+            <GreenFish centerTargetRef={dummyFreeFishRef} isFree={true} patrolOffsetX={freeFishOffsetX} />
             <OrangeFlock />
             <TrashSystem />
           </Suspense>

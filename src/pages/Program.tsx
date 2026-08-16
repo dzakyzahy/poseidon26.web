@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import { getInstagramUpdates } from '../utils/getInstagramUpdates';
+import { getInstagramUpdates, type IGPost } from '../utils/getInstagramUpdates';
 
 const programs = [
   {
@@ -80,6 +80,7 @@ const programs = [
 
 export default function Program() {
   const [selectedProgram, setSelectedProgram] = useState<typeof programs[0] | null>(null);
+  const [selectedPost, setSelectedPost] = useState<IGPost | null>(null);
 
   return (
     <main className="pt-32 pb-24 px-6 max-w-7xl mx-auto min-h-screen">
@@ -139,26 +140,79 @@ export default function Program() {
         {/* IG Feed Slider (Manual / Auto Generated) */}
         <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 hide-scrollbar">
           {getInstagramUpdates().map((post, i) => (
-            <a 
+            <button 
               key={i} 
-              href={post.link} 
-              target="_blank" 
-              rel="noreferrer"
-              className="snap-start shrink-0 w-[280px] md:w-[320px] aspect-square rounded-2xl overflow-hidden relative group border border-white/10"
+              onClick={() => setSelectedPost(post)}
+              className="snap-start shrink-0 w-[280px] md:w-[320px] aspect-square rounded-2xl overflow-hidden relative group border border-white/10 text-left"
             >
               <img src={post.img} alt={`IG Post ${i+1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 bg-neutral-900" />
               <div className="absolute inset-0 bg-gradient-to-t from-ocean-900/90 via-ocean-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
               <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
                 <img src="/images/LogoIG.png" alt="Instagram" className="w-8 h-8 object-contain mb-3 drop-shadow-md" />
-                <p className="text-white font-sans text-sm font-medium">Buka di Instagram</p>
+                <p className="text-white font-sans text-sm font-medium">Buka Pratinjau</p>
               </div>
               <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 text-xs text-white font-sans font-medium">
                 {post.date}
               </div>
-            </a>
+            </button>
           ))}
         </div>
       </section>
+
+      {/* IG Post Modal */}
+      <AnimatePresence>
+        {selectedPost && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setSelectedPost(null)}
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-ocean-900/95 backdrop-blur-xl border border-white/20 rounded-[2rem] max-w-2xl w-full shadow-2xl flex flex-col md:flex-row overflow-hidden"
+            >
+              <button 
+                onClick={() => setSelectedPost(null)}
+                className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors bg-black/40 rounded-full p-2 z-10"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              
+              <div className="w-full md:w-1/2 aspect-square md:aspect-auto">
+                <img src={selectedPost.img} alt="Post Preview" className="w-full h-full object-cover" />
+              </div>
+              
+              <div className="w-full md:w-1/2 p-6 flex flex-col">
+                <div className="flex items-center gap-3 mb-4">
+                  <img src="/images/LogoIG.png" alt="Instagram" className="w-6 h-6 object-contain filter brightness-0 invert" />
+                  <span className="font-sans font-bold text-white">@poseidonitb</span>
+                </div>
+                
+                <p className="text-white/80 font-sans text-sm leading-relaxed mb-6 flex-grow">
+                  Lihat postingan dan update terbaru mengenai program-program POSEIDON ITB 2026 langsung di Instagram resmi kami!
+                </p>
+                
+                <a 
+                  href={selectedPost.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full text-center bg-bioluminescent-blue hover:bg-white text-ocean-900 font-bold py-3 rounded-full transition-colors flex items-center justify-center gap-2 mt-auto"
+                >
+                  Lihat Post di Instagram
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Program Detail Modal */}
       <AnimatePresence>

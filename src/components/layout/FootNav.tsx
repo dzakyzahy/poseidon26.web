@@ -45,11 +45,11 @@ export const FootNav = () => {
           <div>
             <h4 className="font-bold mb-6 font-sans text-white">Ikuti Kami</h4>
             <div className="flex gap-4">
-              <a href="https://www.instagram.com/poseidonitb/" target="_blank" rel="noreferrer" className="p-3 glass rounded-xl hover:bg-bioluminescent-blue hover:text-ocean-900 transition-colors">
-                <img src="/images/LogoIG.png" alt="Instagram" className="w-5 h-5 object-contain" />
+              <a href="https://www.instagram.com/poseidonitb/" target="_blank" rel="noreferrer" className="p-3 glass rounded-xl hover:bg-bioluminescent-blue hover:text-ocean-900 transition-colors flex items-center justify-center">
+                <img src="/images/LogoIG.png" alt="Instagram" className="w-7 h-7 object-contain" />
               </a>
-              <a href="#" className="p-3 glass rounded-xl hover:bg-bioluminescent-blue hover:text-ocean-900 transition-colors">
-                <Globe className="w-5 h-5" />
+              <a href="#" className="p-3 glass rounded-xl hover:bg-bioluminescent-blue hover:text-ocean-900 transition-colors flex items-center justify-center">
+                <Globe className="w-7 h-7" />
               </a>
             </div>
           </div>

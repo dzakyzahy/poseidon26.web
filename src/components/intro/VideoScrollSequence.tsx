@@ -127,26 +127,24 @@ const VideoScrollSequence = () => {
         }
       });
 
-      // Progress Bar visibility (fades in after Scroll To Explore fades out)
-      gsap.fromTo(progressContainerRef.current, 
-        { opacity: 0 },
-        {
-          opacity: 1,
-          ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "10% top",
-            end: "15% top",
-            scrub: true,
-          }
+      // Progress Bar visibility (fades in after Scroll To Explore fades out, fades out at the end)
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "10% top",
+          end: "95% bottom",
+          scrub: true,
         }
-      );
+      })
+      .fromTo(progressContainerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.05 }) // fade in at 10%
+      .to(progressContainerRef.current, { opacity: 1, duration: 0.9 }) // hold
+      .to(progressContainerRef.current, { opacity: 0, duration: 0.05 }); // fade out at 95%
 
       // Progress Bar scaling
       gsap.fromTo(progressBarRef.current,
-        { scaleX: 0 },
+        { scaleY: 0 },
         {
-          scaleX: 1,
+          scaleY: 1,
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
@@ -157,11 +155,11 @@ const VideoScrollSequence = () => {
         }
       );
 
-      // Progress Fish movement
+      // Progress Fish movement (moving down)
       gsap.fromTo(progressFishRef.current,
-        { left: "0%" },
+        { top: "0%" },
         {
-          left: "100%",
+          top: "100%",
           ease: "none",
           scrollTrigger: {
             trigger: containerRef.current,
@@ -219,22 +217,25 @@ const VideoScrollSequence = () => {
 
   return (
     <section ref={containerRef} className="h-[500vh] relative" id="video-sequence">
-      {/* Progress Bar */}
+      {/* Vertical Progress Bar */}
       <div 
         ref={progressContainerRef}
-        className="fixed top-0 left-0 w-full h-1.5 z-[100] opacity-0 pointer-events-none mix-blend-difference"
+        className="fixed top-[20%] left-4 md:left-12 h-[60%] w-8 z-[100] opacity-0 pointer-events-none mix-blend-difference flex flex-col items-center"
       >
-        <div className="absolute top-0 left-0 w-full h-full bg-white/20" />
-        <div 
-          ref={progressBarRef}
-          className="absolute top-0 left-0 h-full bg-bioluminescent-green w-full origin-left scale-x-0"
-        />
+        <div className="absolute top-0 w-[2px] h-full bg-white/20 overflow-hidden border-l border-dashed border-white/50">
+          <div 
+            ref={progressBarRef}
+            className="absolute top-0 w-full bg-bioluminescent-green origin-top scale-y-0"
+            style={{ height: '100%' }}
+          />
+        </div>
         <img 
           ref={progressFishRef}
-          src="/models/greenfish_2d.png" // We will assume there's a 2D icon, or we can use a generic fish shape. Wait, I will use CSS or an existing logo if it doesn't exist. Actually, let's just use the trident logo as fallback if greenfish_2d.png doesn't exist, but I'll set src to an emoji or standard icon for now. Let me use an emoji or fallback image. I'll use the greenfish_2d.png but fallback to emoji if it fails.
+          src="/models/greenfish_2d.png"
           alt="Fish Progress"
-          onError={(e) => { e.currentTarget.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234ade80"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>'; e.currentTarget.className = "absolute top-1/2 -translate-y-1/2 -ml-3 w-6 h-6 drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]"; }}
-          className="absolute top-1/2 -translate-y-1/2 -ml-6 w-12 h-12 object-contain drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]"
+          onError={(e) => { e.currentTarget.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234ade80"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>'; }}
+          className="absolute top-0 w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]"
+          style={{ transform: "translateY(-50%) rotate(90deg)" }}
         />
       </div>
 

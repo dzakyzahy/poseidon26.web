@@ -12,3 +12,15 @@ dengan ukuran yang hurufnya dikecilkan sedikit
 security ny a diperbaiki terutama pada pengiriman form itu janga bisa di inject dan perbaiki logikanya
 yang paling penting utamakan ini keberhasilan render trash 
 kurangin jumlah orange fish di desktop juga agar tidak ngelag, ikan green fish tamabh juga yang berenean gbebas 1 ekor
+
+---
+
+trash tidak ada tidak ke render 
+scroll bar nya itu harusnyadi kiri dengan garis lucu gitu terpisah dengan samping layars terus ada ikan makan makan garisnya kebawah gitu 2 dimensi (hanya untuk image sequence) setelah keluar dari image sequence maka bar ny ahapus
+untuk yang post instagram, jika di klik, sebelum langsung ke linknya ,buat pop up dulu di sana trus di beri keterangan dan preview postnya, disitu ada klik tombol lihat post baru nanti link ke post instagram nya new tab  
+dibawah latest updates itu kan ada @poseidonitb nah di kiri tulisan nama akun itu beri logo instagram
+ini gerakan ikan yang green untuk yang ngikutin cursor masih goyang goyang kaya pusing gitu gerakaknnya coba perbaiki
+buat handover untuk ai berikut nya di handover.md serta konteks dan kesalahan yang terjadi pada sesi kode saat ini 
+setelah itu build dan push 
+dan juga untuk ikan yang berenang bebas yang oren itu masih terlihat kaku gitu kayanya ada yang salah dalam pengukuran model atau dalam logikanya coba analisis kode kode yang berhubungan juga
+default yang logo ig agak kecil jadi dibesarkan terutam pada kontak CP, trus pada logo Ikuti kami di foot nav juga agak bearkan sedikit

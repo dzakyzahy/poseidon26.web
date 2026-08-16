@@ -60,19 +60,6 @@ export function useFishFollow(ref: React.RefObject<THREE.Group | null>, active: 
       
       // Slerp for smooth rotation
       ref.current.quaternion.slerp(dummy.quaternion, 0.05);
-
-      // --- UNDULATION EFFECT ---
-      // Rotate around the local Y axis using a sine wave based on time and velocity
-      // The faster the fish, the stronger and faster the wiggle
-      const time = performance.now() * 0.001;
-      const wiggleSpeed = 15; // frequency
-      const wiggleMagnitude = Math.min(0.3, velLength * 2.0); // clamp max wiggle
-      
-      // We apply the wiggle directly to the rotation AFTER the slerp
-      // We do this by multiplying a temporary quaternion
-      const wiggleQuat = new THREE.Quaternion();
-      wiggleQuat.setFromAxisAngle(new THREE.Vector3(0, 1, 0), Math.sin(time * wiggleSpeed) * wiggleMagnitude);
-      ref.current.quaternion.multiply(wiggleQuat);
     }
   });
 }

@@ -126,7 +126,7 @@ export function useFlock(count: number, centerTargetRef: React.RefObject<THREE.G
           const dummy = new THREE.Object3D();
           dummy.position.copy(boid.position);
           dummy.lookAt(lookAtTarget);
-          boid.meshRef.current.quaternion.slerp(dummy.quaternion, 0.1);
+          boid.meshRef.current.quaternion.slerp(dummy.quaternion, 0.05);
         }
       }
     });

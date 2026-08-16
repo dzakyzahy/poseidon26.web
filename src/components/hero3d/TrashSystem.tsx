@@ -16,21 +16,28 @@ interface TrashData {
 }
 
 export const TrashSystem = ({ count = 3 }) => {
-  // Load the model
-  const { nodes } = useGLTF('/models/trash_and_debris.glb') as any;
+  const { scene } = useGLTF('/models/trash_and_debris.glb') as any;
 
   // References to InstancedMesh for each type
   const meshRefs = useRef<(THREE.InstancedMesh | null)[]>([]);
 
-  // Extract actual mesh types from nodes
-  const trashTypes = useMemo(() => {
-    return Object.keys(nodes).filter(key => nodes[key].isMesh);
-  }, [nodes]);
+  // Extract actual mesh types from scene
+  const trashMeshes = useMemo(() => {
+    const meshes: THREE.Mesh[] = [];
+    if (scene) {
+      scene.traverse((child: any) => {
+        if (child.isMesh && child.geometry && child.material) {
+          meshes.push(child);
+        }
+      });
+    }
+    return meshes;
+  }, [scene]);
 
   // Generate trash data
   const trashData = useMemo(() => {
     const data: TrashData[] = [];
-    if (trashTypes.length === 0) return data;
+    if (trashMeshes.length === 0) return data;
 
     for (let i = 0; i < count; i++) {
       // Random position across the screen
@@ -47,16 +54,16 @@ export const TrashSystem = ({ count = 3 }) => {
         rotation: new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
         angularVelocity: new THREE.Euler((Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5, (Math.random()-0.5)*0.5),
         scale: Math.random() * 0.4 + 0.6,
-        typeIndex: Math.floor(Math.random() * trashTypes.length)
+        typeIndex: Math.floor(Math.random() * trashMeshes.length)
       });
     }
     return data;
-  }, [count, trashTypes]);
+  }, [count, trashMeshes]);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
   useFrame((_, delta) => {
-    const countsPerType = new Array(trashTypes.length).fill(0);
+    const countsPerType = new Array(trashMeshes.length).fill(0);
 
     for (let i = 0; i < trashData.length; i++) {
       const data = trashData[i];
@@ -97,23 +104,20 @@ export const TrashSystem = ({ count = 3 }) => {
 
   // Calculate instance counts per type
   const counts = useMemo(() => {
-    const c = new Array(trashTypes.length).fill(0);
+    const c = new Array(trashMeshes.length).fill(0);
     trashData.forEach(d => c[d.typeIndex]++);
     return c;
-  }, [trashData, trashTypes]);
+  }, [trashData, trashMeshes]);
 
   // Pre-load geometries and materials
   return (
     <group>
-      {trashTypes.map((type, index) => {
-        const node = nodes[type];
-        if (!node) return null; // Fallback if node doesn't exist
-        
+      {trashMeshes.map((mesh, index) => {
         return (
           <instancedMesh 
-            key={type}
+            key={index}
             ref={(el) => (meshRefs.current[index] = el)}
-            args={[node.geometry, node.material, counts[index]]}
+            args={[mesh.geometry, mesh.material, counts[index]]}
             castShadow
             receiveShadow
           />
