@@ -1,4 +1,11 @@
-# React + TypeScript + Vite
+# POSEIDON ITB 2026 Website
+Website resmi untuk kegiatan Pengabdian Masyarakat POSEIDON ITB 2026.
+
+> [!IMPORTANT]
+> Untuk panduan pengelolaan konten dinamis (seperti Instagram slider dan 3D Assets), silakan baca [MAINTENANCE.md](file:///d:/ITB2/HMOTRITON/POSEIDON/WebsitePoseidon/POSEIDONITB2026_V3/MAINTENANCE.md).
+> Bagi tim developer yang akan meneruskan pengerjaan, silakan merujuk pada [HANDOVER.md](file:///d:/ITB2/HMOTRITON/POSEIDON/WebsitePoseidon/POSEIDONITB2026_V3/HANDOVER.md) untuk daftar tugas (*to-do list*) dan *bug fixes* yang harus diselesaikan.
+
+---
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 

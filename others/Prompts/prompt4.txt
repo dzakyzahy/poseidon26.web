@@ -201,3 +201,20 @@ buat agar yang di web yang foto ig nya di update dengan foto terbaru di folder :
 permudah juga agar nanti developer mudah untuk memperbarui update instagram melalu apa gitu
 misal kalau developer masukan gambar ke 7 di githubnya maka  nanti otomatis terdeploy ke vercel dengan yang terbaruny adalah gamabr tersebut dan sebagainya
 
+--------
+buat handover untuk agent selanjutnya, beserta fix yanharus diperbaiki:
+frame image sequence harus mengikuti kebawah agar tidak stuck diatas,
+2. hapus background biru gelap di landing page yang stuck dibawh aframe image sequence
+3. 
+NOT IMPLEMENTED:
+
+- Trash tidak ke render mungkin ada msalah?
+- 
+
+4. bedakan trajektori ikan orang dan fish biasa jangan sama semua dibedakan agar menarik dan agak disebarkan kadang terutama yang orange fish
+5. masih kurang lambat semua ikan kecepatannya mau itu yang dibelakang maupun yang mengkuti cursor
+6. wakil ketua ubah jadi sekretaris jendral
+7. buat agar developerjuga bisa input link update ig terbaru (tidak hanya foto saja
+8. buat instruksi untuk maintenace web ini beserta konteksnya di md terpisah dan berikan hint di readme agar membaca md tersebut
+langsung up saja ke github perubahannya
+ini aadalah buat prompt bukan untuk diekesuki kecuali bikin md dan readme
