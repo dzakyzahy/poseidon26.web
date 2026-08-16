@@ -1,48 +1,26 @@
-# Handover & Task List untuk Agent Selanjutnya
+# Handover & Catatan Untuk AI Agent Selanjutnya (Phase 7)
 
-Dokumen ini berisi konteks dan daftar perbaikan (bug fixes & fitur) yang harus dieksekusi oleh agent selanjutnya. **Mohon jadikan daftar ini sebagai prioritas eksekusi utama Anda.**
+Website POSEIDON ITB 2026 telah melewati Phase 6. Sesi ini telah menyelesaikan perbaikan besar terkait bug visual 3D dan transisi *image sequence*. 
 
-## Konteks Saat Ini
-Website POSEIDON ITB 2026 telah mencapai Phase 6. Implementasi *Image Sequence* untuk animasi scroll, integrasi model 3D, serta slider Instagram dinamis yang memuat foto dari folder `public/images/instagram` beserta *mapping JSON* sudah berjalan dengan baik. Semua visual *bug* dan isu performa render 3D dari Phase 5 beserta `prompt6.txt` telah diperbaiki.
+Tugas ini merupakan serah terima (handover) agar Agent berikutnya dapat melanjutkan pekerjaan (Phase 7) tanpa kebingungan terkait *state* saat ini.
 
-## Daftar Tugas yang Telah Diselesaikan (Sesi Ini)
+## Apa Saja yang Baru Diselesaikan?
+1. **Perbaikan *InstancedMesh* (Trash 3D)**: File `trash_and_debris.glb` memiliki skala geometri mikroskopis. Penggunaan *InstancedMesh* sebelumnya menghilangkan rasio skalanya. Telah diganti menggunakan `<Clone>` dari *drei* di dalam `TrashSystem.tsx`, dan sekarang sampah sukses muncul secara dinamis di layar jatuh dari atas ke bawah.
+2. **Pengurangan Jumlah Sampah**: Sesuai masukan terakhir, jumlah objek sampah yang di-*render* dikurangi secara drastis menjadi hanya 2 buah agar layar tidak penuh (`count={2}` di `Background3D.tsx`).
+3. **Pembaruan *Image Sequence* Baru**: Aset gambar sekuensial di `public/images/sequence` telah diganti ke dataset gambar `.jpg` terbaru yang berjumlah 246 *frame* (*ImageOceanScroll*). Logika *ScrollTrigger* di `VideoScrollSequence.tsx` telah disesuaikan agar cocok dengan durasi 246 frame, beserta proporsi kemunculan teks ("Lautan...", "Sampah...", "Selamat Datang...").
 
-1. **Perbaikan Image Sequence (Stuck di atas)**
-   - *Status*: Selesai. Dihapus `overflow-x-clip` di komponen `Home.tsx` agar kanvas `VideoScrollSequence` mengikuti layar selama pengguna melakukan *scroll*. Waktu durasi teks juga telah disesuaikan agar tidak terlalu cepat.
+## Tantangan & Tugas Berikutnya (Next Build & Optimization)
 
-2. **Hapus Background Biru Gelap di Landing Page**
-   - *Status*: Selesai. Komponen `<color>` dan `<fog>` pada `Background3D.tsx` telah dihapus sehingga 3D canvas transparan.
+Sebagai AI berikutnya, fokuslah pada hal-hal berikut:
 
-3. **Perbaikan Rendering 3D Trash**
-   - *Status*: Selesai. Koordinat Y spawn 3D Trash telah direndahkan agar langsung muncul dalam *viewport* kamera. Jumlah sampah ditingkatkan menjadi 15.
+1. **Optimalisasi Memori (Lag Reduction)**
+   - Saat ini kita me-load 246 frame gambar (resolusi tinggi) sekaligus di `VideoScrollSequence.tsx` ke dalam array memori. Ini dapat membebani RAM *browser* atau perangkat *mobile* kelas menengah ke bawah.
+   - **Tugas**: Terapkan metode *lazy loading* dinamis, melepaskan gambar yang sudah dilewati dari memori, atau menggunakan elemen `<video>` dengan kontrol *currentTime* (*scrubbing*) sebagai pengganti array gambar, yang jauh lebih ramah memori.
+   
+2. **Kalibrasi Teks Landing Page (*Mobile View*)**
+   - Pastikan teks animasi di `VideoScrollSequence` yang baru disesuaikan penempatannya (Frame 125, Frame 180, dsb) muncul dengan responsif dan rapi di semua rasio layar.
 
-4. **Trajektori Ikan & Pelambatan (Boids/Flocking & Patrol)**
-   - *Status*: Selesai. Radius sebaran ditingkatkan pada `OrangeFlock`. Kecepatan maksimal, gaya, serta stiffness pada *hooks* `useFlock`, `useFishPatrol`, dan `useFishFollow` diturunkan drastis agar pergerakan tidak "pusing" dan lebih organik. Ditambahkan 1 *GreenFish* berenang bebas.
+3. **Uji Coba Formulir Kontak (Secara Produksi)**
+   - Sistem HCaptcha dan Web3Forms pada `Kontak.tsx` telah selesai. Jika ada permintaan penguatan, mungkin menambahkan sistem validasi limitasi (*rate-limiting*) statis sederhana dari sisi *client* sebelum *deploy* akhir.
 
-5. **Penyesuaian Visual dan UI (Prompt 6)**
-   - *Status*: Selesai. Ukuran logo Instagram pada navigasi diperbesar. Teks *Persembahan Oseanografi untuk Indonesia* telah dikecilkan. Bug pembekuan (*freeze*) frame 3D saat *scroll up* telah ditangani dengan menonaktifkan transisi durasi panjang. Teks jabatan kepanitiaan "Wakil Ketua" diganti menjadi "Sekretaris Jendral".
-
-## Rencana Fase Lanjutan (Jika Ada)
-
-
-
-### Fitur Tambahan & Pembaruan (Phase 5 Lanjutan):
-1. **Perbaikan Build & Deploy**: Mengatasi kesalahan impor `useEffect` dan sisa variabel tidak terpakai yang memicu `npm run build` gagal di Cloudflare Pages.
-2. **Hapus FixFish**: Seluruh komponen 3D yang lamban memori, termasuk `<FixFish>`, telah dihapus agar rendering tidak ngelag.
-3. **Migrasi Animasi Fisika**: `OrangeFish` di migrasi ke `useFishPhysicsSwim` tanpa fungsi *sine wave* manual (yang menyebabkan gerak goyang pusing).
-4. **Perbaikan Scroll Bar**: Penambahan *Progress Bar* vertikal lucu di sebelah kiri layar pada `<VideoScrollSequence>` beserta ikan yang berenang ke bawah.
-5. **Pop-up Instagram**: Mengubah tautan langsung Instagram di `Program.tsx` menjadi *modal pop-up* preview.
-6. **Perbaikan 3D Lag Scroll-up**: Mengganti `IntersectionObserver` yang cacat dengan pendekatan *event listener* `window.scrollY` di `Home.tsx` agar 3D seketika hilang saat kembali ke *image sequence*.
-7. **Pencarian Mesh Otomatis**: Mengganti akses dictionary manual pada `TrashSystem.tsx` dengan `scene.traverse()` untuk menelusuri semua komponen `isMesh` secara aman tanpa bergantung pada nama *node*.
-8. **Catatan Penting**: Model 3D sampah (`trash_and_debris.glb`) saat ini masih belum ter-render dengan sempurna. Silakan cari tahu apakah masalahnya ada di skala model, posisi koordinat kamera, *lighting*, atau di `instancedMesh` materialnya.
-
-## Rencana Fase Lanjutan (Jika Ada)
-- Memeriksa kembali opsi lazy-loading gambar urutan untuk meminimalkan beban memori lebih lanjut, meskipun saat ini performa rendering sudah ditingkatkan secara drastis melalui metode kontrol GPU.
-- Pengujian lebih lanjut terkait bounce di sisi mobile untuk melihat apakah IntersectionObserver 100% mulus saat di-scroll dengan cepat.
-
-## Teknologi Terkait (Phase 5)
-- **Framer Motion**: Digunakan untuk modal detail Program (animasi popup).
-- **React Three Fiber (R3F) & Drei**: 
-  - `Canvas` diubah dengan `frameloop="never"` secara dinamis untuk menghentikan kalkulasi 3D saat tertutup objek/saat sequence berjalan.
-  - *Custom Shader Material*: Ikan tidak lagi menggunakan gelombang trigonometri (sinus) untuk GreenFish, melainkan membaca data array fisika *real-time*.
-- **Tailwind CSS**: Desain UI *glassmorphism* disempurnakan.
+Silakan pelajari *codebase* dan pastikan *build* sukses pada pekerjaan selanjutnya!

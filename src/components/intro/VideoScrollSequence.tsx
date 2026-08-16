@@ -24,7 +24,7 @@ const VideoScrollSequence = () => {
       const canvas = canvasRef.current;
       if (canvas) {
         const context = canvas.getContext('2d');
-        const frameCount = 189;
+        const frameCount = 246;
         const currentFrame = (index: number) => 
           `/images/sequence/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
         
@@ -195,19 +195,19 @@ const VideoScrollSequence = () => {
         }
       });
 
-      // Dummy tween to force timeline duration to match frameCount (189)
-      tl.to({}, { duration: 189 });
+      // Dummy tween to force timeline duration to match frameCount (246)
+      tl.to({}, { duration: 246 });
 
-      // Frame 96: Lautan..
-      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 15 }, 96)
-        .to(text1Ref.current, { opacity: 0, y: -50, duration: 10 }, 125);
+      // Frame 125: Lautan..
+      tl.to(text1Ref.current, { opacity: 1, y: 0, duration: 15 }, 125)
+        .to(text1Ref.current, { opacity: 0, y: -50, duration: 10 }, 155);
 
-      // Frame 138: Sampah mengancam..
-      tl.to(text2Ref.current, { opacity: 1, y: 0, duration: 15 }, 138)
-        .to(text2Ref.current, { opacity: 0, y: -50, duration: 10 }, 160);
+      // Frame 180: Sampah mengancam..
+      tl.to(text2Ref.current, { opacity: 1, y: 0, duration: 15 }, 180)
+        .to(text2Ref.current, { opacity: 0, y: -50, duration: 10 }, 210);
 
-      // Frame 170: Selamat Datang..
-      tl.to(text3Ref.current, { opacity: 1, y: 0, duration: 10 }, 170);
+      // Frame 221: Selamat Datang..
+      tl.to(text3Ref.current, { opacity: 1, y: 0, duration: 10 }, 221);
 
 
     }, containerRef);
