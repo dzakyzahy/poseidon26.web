@@ -1,4 +1,4 @@
-import { Globe, Instagram } from 'lucide-react';
+import { Camera, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const FootNav = () => {
@@ -46,7 +46,7 @@ export const FootNav = () => {
             <h4 className="font-bold mb-6 font-sans text-white">Ikuti Kami</h4>
             <div className="flex gap-4">
               <a href="https://www.instagram.com/poseidonitb/" target="_blank" rel="noreferrer" className="p-3 glass rounded-xl hover:bg-bioluminescent-blue hover:text-ocean-900 transition-colors">
-                <Instagram className="w-5 h-5" />
+                <Camera className="w-5 h-5" />
               </a>
               <a href="#" className="p-3 glass rounded-xl hover:bg-bioluminescent-blue hover:text-ocean-900 transition-colors">
                 <Globe className="w-5 h-5" />

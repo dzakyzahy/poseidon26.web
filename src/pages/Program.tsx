@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Instagram } from 'lucide-react';
+import { ExternalLink, Camera } from 'lucide-react';
 
 const programs = [
   {
@@ -122,7 +122,7 @@ export default function Program() {
           <div>
             <span className="text-bioluminescent-blue uppercase tracking-widest text-sm mb-4 block font-sans">Latest Updates</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white flex items-center gap-3">
-              <Instagram className="w-8 h-8 text-bioluminescent-blue" />
+              <Camera className="w-8 h-8 text-bioluminescent-blue" />
               @poseidonitb
             </h2>
           </div>
@@ -177,7 +177,7 @@ export default function Program() {
               <img src={post.img} alt={`IG Post ${i+1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-ocean-900/90 via-ocean-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
               <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
-                <Instagram className="w-8 h-8 text-white mb-3 drop-shadow-md" />
+                <Camera className="w-8 h-8 text-white mb-3 drop-shadow-md" />
                 <p className="text-white font-sans text-sm font-medium">Buka di Instagram</p>
               </div>
               <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20 text-xs text-white font-sans font-medium">
